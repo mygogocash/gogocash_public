@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Cross2Icon } from '@radix-ui/react-icons';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { IProp } from './interface';
 
 const Component = ({
@@ -27,12 +28,20 @@ const Component = ({
       <Dialog.Content
         className={`${cssContent} rounded-[16px] z-[20] bg-white fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2  bg-gray1 p-[25px] shadow-[var(--shadow-6)] focus:outline-none data-[state=open]:animate-contentShow`}
       >
-        <Dialog.Title className="m-0 text-[20px] font-medium text-[var(--black-5)] text-center flex items-center justify-center">
-          {title}
-        </Dialog.Title>
-        <Dialog.Description className="mb-5 mt-2.5 text-[20px] leading-normal text-[var(--black-5)] text-center">
-          {description}
-        </Dialog.Description>
+        {title ? (
+          <Dialog.Title className="m-0 text-[20px] font-medium text-[var(--black-5)] text-center flex items-center justify-center">
+            {title}
+          </Dialog.Title>
+        ) : (
+          <VisuallyHidden asChild>
+            <Dialog.Title>Dialog</Dialog.Title>
+          </VisuallyHidden>
+        )}
+        {description && (
+          <Dialog.Description className="mb-5 mt-2.5 text-[20px] leading-normal text-[var(--black-5)] text-center">
+            {description}
+          </Dialog.Description>
+        )}
         {content}
         {showClose && (
           <Dialog.Close asChild>
