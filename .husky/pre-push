@@ -10,9 +10,7 @@ yarn test
 # Build the project
 yarn build
 
-# อัพเดท patch version
-yarn version --patch --no-git-tag-version
-
-# เพิ่มการเปลี่ยนแปลง version เข้าไปใน commit
+# อัพเดท patch version และสร้าง commit ใหม่
+VERSION=$(npm version patch --no-git-tag-version)
 git add package.json
-git commit -m "chore: bump version [skip ci]"
+git commit -m "chore: bump version to $VERSION [skip ci]"
