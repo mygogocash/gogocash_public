@@ -4,6 +4,10 @@
 # Add PATH
 export PATH="/usr/local/bin:$PATH"
 
+# Set git config
+git config --local user.name "GoGoCash Bot"
+git config --local user.email "bot@gogocash.co"
+
 # Lint the project
 yarn lint
 
@@ -14,6 +18,6 @@ yarn test
 yarn build
 
 # อัพเดท patch version และสร้าง commit ใหม่
-npm version patch --no-git-tag-version
+npm --no-git-tag-version version patch
 git add package.json
 git commit -m "chore: bump version [skip ci]"
