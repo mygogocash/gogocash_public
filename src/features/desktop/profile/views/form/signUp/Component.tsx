@@ -11,7 +11,7 @@ import BeforeLogin from '../beforeLogin';
 
 const Component = () => {
   const [showPassword, setShowPassword] = React.useState(false);
-  const [checked,] = React.useState<boolean>(false);
+  const [checked] = React.useState<boolean>(false);
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (

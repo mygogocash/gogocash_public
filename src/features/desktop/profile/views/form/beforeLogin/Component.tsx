@@ -10,7 +10,14 @@ import { IProps } from './interface';
 import { signIn } from 'next-auth/react';
 import { useAuth } from '@crossmint/client-sdk-react-ui';
 
-const Component = ({ title, subTitle, isLogin, setIsOpen, isOpen, handleModal }: IProps) => {
+const Component = ({
+  title,
+  subTitle,
+  isLogin,
+  setIsOpen,
+  _isOpen,
+  handleModal,
+}: IProps) => {
   const router = useRouter();
   const { login } = useAuth();
 

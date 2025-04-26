@@ -1,5 +1,5 @@
 export interface IProp {
-    min: number;
-    max: number;
-    onClick?:() => boolean;
+  min: number;
+  max: number;
+  onClick?: () => boolean;
 }

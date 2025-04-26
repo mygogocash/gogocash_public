@@ -4,8 +4,7 @@ import React from 'react';
 import { ChevronRight } from 'lucide-react';
 
 export default function Component({ list }: IProp) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [activeTab, setActiveTab] = React.useState<string>('1');
+  const [_activeTab, setActiveTab] = React.useState<string>('1');
   return (
     <>
       <div className="block md:hidden w-full space-y-2">
@@ -41,8 +40,8 @@ export default function Component({ list }: IProp) {
               key={item.id}
               value={`${item.id}`}
               //
-              className={`px-4 py-2 text-[16px] md:text-[24px] font-semibold text-[var(--black-5)] 
-                data-[state=active]:border-b-2 data-[state=active]:border-b-[var(--primary-4)] 
+              className={`px-4 py-2 text-[16px] md:text-[24px] font-semibold text-[var(--black-5)]
+                data-[state=active]:border-b-2 data-[state=active]:border-b-[var(--primary-4)]
                 data-[state=active]:text-[var(--primary-4)] md:data-[state=active]:text-[24px] data-[state=active]:text-[16px]`}
             >
               {item.title}

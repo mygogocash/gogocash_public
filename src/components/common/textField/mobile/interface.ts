@@ -1,4 +1,4 @@
-import { ChangeEventHandler, ReactNode } from "react";
+import { ChangeEventHandler, ReactNode } from 'react';
 
 export interface IProp {
   placeholder: string;
@@ -7,7 +7,7 @@ export interface IProp {
   disabled?: boolean;
   required?: boolean;
   label?: string;
-  message?: string;
+  _message?: string;
   name: string;
   startIcon?: ReactNode;
   endIcon?: ReactNode;

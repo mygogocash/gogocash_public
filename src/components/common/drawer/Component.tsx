@@ -15,7 +15,7 @@ const Component = ({ children, isOpen, setIsOpen, direction }: IProp) => {
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40 z-[9]" />
         <Drawer.Content
-          className=" max-h-[80vh] overflow-y-auto overflow-x-hidden bg-white min-h-screen max-w-[555px] w-full md:w-[555px] fixed top-0 right-0 
+          className=" max-h-[80vh] overflow-y-auto overflow-x-hidden bg-white min-h-screen max-w-[555px] w-full md:w-[555px] fixed top-0 right-0
         outline-none z-[9] rounded-l-[40px]"
         >
           <X

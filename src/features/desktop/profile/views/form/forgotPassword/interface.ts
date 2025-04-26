@@ -1,6 +1,6 @@
-import { TypeOpen } from "../interface";
+import { TypeOpen } from '../interface';
 
 export interface IProp {
-  isOpen?: TypeOpen;
+  _isOpen?: TypeOpen;
   setIsOpen?: React.Dispatch<React.SetStateAction<TypeOpen>>;
-};
+}

@@ -1,1 +1,1 @@
-export { default as History } from './Component'
+export { default as History } from './Component';

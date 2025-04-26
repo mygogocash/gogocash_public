@@ -1,2 +1,2 @@
-import CarouselThumb from "./Component";
+import CarouselThumb from './Component';
 export default CarouselThumb;

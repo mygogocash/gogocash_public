@@ -1,3 +1,3 @@
-import CardSlideProductMobile from "./Component";
+import CardSlideProductMobile from './Component';
 
 export default CardSlideProductMobile;

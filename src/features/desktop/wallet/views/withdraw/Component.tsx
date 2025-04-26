@@ -43,7 +43,11 @@ const Component = () => {
             <TextField
               placeholder={'Fee'}
               name={'fee'}
-              startIcon={<p className='text-[14px] md:text-[24px] text-[var(--black-5)]'>Withdraw Fee</p>}
+              startIcon={
+                <p className="text-[14px] md:text-[24px] text-[var(--black-5)]">
+                  Withdraw Fee
+                </p>
+              }
               defaultValue="20"
               textRight
               onChange={(e) => methods.setValue('fee', e.target.value)}

@@ -1,12 +1,12 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 export interface IProps {
-    list: Ilist[];
-    vertical?: boolean;
+  list: Ilist[];
+  vertical?: boolean;
 }
 
 export interface Ilist {
-    icon: ReactNode;
-    title: string;
-    subTitle: string;
+  icon: ReactNode;
+  title: string;
+  subTitle: string;
 }

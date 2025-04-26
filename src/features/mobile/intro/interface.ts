@@ -1,5 +1,5 @@
-import React from "react";
+import React from 'react';
 
 export interface IProp {
-    setIntro?: React.Dispatch<React.SetStateAction<boolean>>;
+  setIntro?: React.Dispatch<React.SetStateAction<boolean>>;
 }

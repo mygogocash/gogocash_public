@@ -6,10 +6,10 @@ export default function Component() {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % 3);
-    }, 500); 
+    }, 500);
     return () => clearInterval(interval);
   }, []);
-  
+
   return (
     <div className="flex items-center justify-center space-x-4">
       {[0, 1, 2].map((index) => (

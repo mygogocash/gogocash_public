@@ -10,7 +10,7 @@ import { IProp } from './interface';
 import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 
-const Component = ({ isOpen, setIsOpen }: IProp) => {
+const Component = ({ _isOpen, setIsOpen }: IProp) => {
   const [showPassword, setShowPassword] = React.useState(false);
 
   const router = useRouter();

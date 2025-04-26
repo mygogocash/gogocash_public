@@ -5,7 +5,6 @@ import { PaymentMethod } from './constant';
 const Component = () => {
   return (
     <div className="space-y-3 my-[88px] px-5 md:px-10">
-    
       <Title
         title={'Add Withdrawal Methods'}
         subTitle={'Add a Method to Receive Your Cashback'}

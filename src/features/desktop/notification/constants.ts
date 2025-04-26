@@ -1,5 +1,5 @@
 import {
-    CoinsIcon,
+  CoinsIcon,
   ComponentIcon,
   MessageSquare,
   TagsIcon,

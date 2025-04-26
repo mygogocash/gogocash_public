@@ -49,4 +49,4 @@ logs
 *.log
 
 # cache
-.cache/ 
+.cache/

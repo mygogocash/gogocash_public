@@ -4,7 +4,7 @@ import PlayStoreIcon from '@/components/icons/PlayStoreIcon';
 const BannerPocket = () => {
   return (
     <div
-      className="relative bg-[var(--primary-4)] rounded-[24px] w-full flex items-center 
+      className="relative bg-[var(--primary-4)] rounded-[24px] w-full flex items-center
     justify-between md:px-[64px] md:py-[40px] p-5 xl:h-[325px] overflow-hidden xl:flex-row flex-col"
     >
       <div className="max-w-[763px] flex w-full flex-col space-y-5">

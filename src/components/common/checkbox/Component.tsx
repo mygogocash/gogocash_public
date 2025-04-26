@@ -12,7 +12,7 @@ const Component = ({
   name,
   required,
   message,
-  onChange
+  onChange,
 }: IProp) => {
   return (
     <Form.Field name={name}>
@@ -20,7 +20,7 @@ const Component = ({
         <Form.Control asChild>
           <Checkbox.Root
             required={required}
-            className={`flex size-[20px] appearance-none  items-center justify-center rounded-[4px] 
+            className={`flex size-[20px] appearance-none  items-center justify-center rounded-[4px]
               hover:bg-violet3 outline outline-[var(--primary-4)] focus:shadow-[0_0_0_2px_var(--primary-4)]
               ${!defaultChecked ? 'bg-white' : 'bg-[var(--primary-4)]'}`}
             defaultChecked={defaultChecked}
@@ -38,9 +38,12 @@ const Component = ({
         </Form.Control>
         <span>{label}</span>
       </label>
-      <Form.Message match={(value, formData) => {
-        
-        return value == "on"}} className="text-red-500 text-xs">
+      <Form.Message
+        match={(value, _formData) => {
+          return value == 'on';
+        }}
+        className="text-red-500 text-xs"
+      >
         {message}
       </Form.Message>
     </Form.Field>

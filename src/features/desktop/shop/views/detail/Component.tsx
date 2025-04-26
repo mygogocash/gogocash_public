@@ -122,9 +122,9 @@ const Component = () => {
           title={'Grab your Deals'}
           button={{
             text: 'View More',
-            
+
             onClick: () => {
-                router.push('/product');
+              router.push('/product');
             },
           }}
         />
@@ -145,9 +145,9 @@ const Component = () => {
               {[1, 2, 3, 4, 5, 6, 7].map((item, index) => (
                 <CardProduct
                   key={index}
-                  image={''}
-                  productName={''}
-                  shopName={''}
+                  _image={''}
+                  _productName={''}
+                  _shopName={''}
                   percent={0}
                   link={'/product/1'}
                 />

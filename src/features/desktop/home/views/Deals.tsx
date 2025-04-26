@@ -6,8 +6,7 @@ import { useRouter } from 'next/navigation';
 const OPTIONS: EmblaOptionsType = { slidesToScroll: 'auto' };
 
 const Deals = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS);
+  const [emblaRef, _emblaApi] = useEmblaCarousel(OPTIONS);
   const router = useRouter();
   return (
     <>

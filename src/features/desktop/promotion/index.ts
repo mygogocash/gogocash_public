@@ -1,3 +1,3 @@
-import Promotion from "./Component";
+import Promotion from './Component';
 
 export default Promotion;

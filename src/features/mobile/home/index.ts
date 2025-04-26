@@ -1,1 +1,1 @@
-export { default as HomeMobile } from './Component'
+export { default as HomeMobile } from './Component';

@@ -1,3 +1,3 @@
-import Dialog from "./Component";
+import Dialog from './Component';
 
 export default Dialog;

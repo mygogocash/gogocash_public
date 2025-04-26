@@ -1,4 +1,11 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+# Lint the project
+yarn lint
+
+# Run tests
 yarn test
+
+# Build the project
+yarn build

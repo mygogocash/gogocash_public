@@ -1,3 +1,3 @@
-import { Component as TitleSeparator } from "./Component";
+import { Component as TitleSeparator } from './Component';
 
 export default TitleSeparator;

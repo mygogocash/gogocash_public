@@ -1,1 +1,1 @@
-export { default as TitleMobile } from "./Component";
+export { default as TitleMobile } from './Component';

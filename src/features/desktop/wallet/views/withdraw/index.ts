@@ -1,3 +1,3 @@
-import Withdraw from "./Component";
+import Withdraw from './Component';
 
 export default Withdraw;

@@ -6,8 +6,7 @@ import { useRouter } from 'next/navigation';
 const OPTIONS: EmblaOptionsType = { slidesToScroll: 'auto' };
 
 const Deals = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS);
+  const [emblaRef, _emblaApi] = useEmblaCarousel(OPTIONS);
   const router = useRouter();
   return (
     <>
@@ -23,7 +22,12 @@ const Deals = () => {
                 }}
               >
                 <div className="deals__slide__number space-y-5">
-                  <CardBannerImage image={''} time={''} promotionName={''} height={'h-[170px]'} />
+                  <CardBannerImage
+                    image={''}
+                    time={''}
+                    promotionName={''}
+                    height={'h-[170px]'}
+                  />
                 </div>
               </div>
             ))}

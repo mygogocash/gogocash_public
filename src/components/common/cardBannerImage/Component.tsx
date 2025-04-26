@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { IProp } from './interface';
 
-const Component = ({ image, promotionName, time, height }: IProp) => {
+const Component = ({ image, height }: IProp) => {
   return (
     <div className="w-full space-y-4">
       <div

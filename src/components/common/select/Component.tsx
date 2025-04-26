@@ -8,7 +8,7 @@ export default function Component({
   name,
   onOpenChange,
   options,
-  optionInModal
+  _optionInModal,
 }: IProp) {
   return (
     <Form.Field name={name}>

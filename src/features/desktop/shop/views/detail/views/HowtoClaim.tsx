@@ -1,4 +1,3 @@
-
 import { howToClaim } from '@/features/desktop/shop/constant';
 import Image from 'next/image';
 
@@ -32,7 +31,7 @@ const HowtoClaim = () => {
         Still got question?{' '}
         <span className=" underline-offset-1 underline">Click Here</span>
       </p>
-    
+
       <Image
         src={'/money.png'}
         alt={'money'}

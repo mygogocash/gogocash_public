@@ -1,3 +1,3 @@
-import CardBannerImage from "./Component";
+import CardBannerImage from './Component';
 
 export default CardBannerImage;

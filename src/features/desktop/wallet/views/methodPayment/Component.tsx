@@ -18,8 +18,7 @@ const Component = ({
   isOpenEditWithdraw,
   setIsOpenEditWithdraw,
 }: IProp) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS);
+  const [emblaRef, _emblaApi] = useEmblaCarousel(OPTIONS);
   const [defaultData, setDefaultData] = React.useState<string>();
   const [, setDataEdit] = React.useState<string>();
 
@@ -62,7 +61,9 @@ const Component = ({
                 <Switch
                   name={'default'}
                   isChecked={defaultData === 'default'}
-                  setIsChecked={() => setDefaultData(defaultData === 'default' ? '' : 'default')}
+                  setIsChecked={() =>
+                    setDefaultData(defaultData === 'default' ? '' : 'default')
+                  }
                 />
               </div>
             </div>
@@ -126,9 +127,12 @@ const Component = ({
                 </div>
               </div>
             ))}
-            <div className="embla__slide" onClick={() => {
-              setIsOpenAddWithdraw(true);
-            }}>
+            <div
+              className="embla__slide"
+              onClick={() => {
+                setIsOpenAddWithdraw(true);
+              }}
+            >
               <div className="embla__slide__number">
                 <div className="bg_green_gradient w-[400px] h-[214px] rounded-[16px] from-[#244340] via-transparent to-[#83DC9A] shadow-[0px_4px_25px_0px_rgba(0,0,0,0.25)]">
                   <div className="p-[20px] md:p-[40px] h-full flex flex-col justify-center items-center gap-2">

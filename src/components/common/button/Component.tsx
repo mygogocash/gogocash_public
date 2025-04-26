@@ -18,7 +18,7 @@ const Component = ({
         disabled ? '!bg-[var(--black-1)] !text-[var(--black-3)]' : ''
       } ${backgroundColor} ${
         fullWidth ? 'w-full' : ''
-      } px-[32px] py-[16px] rounded-[8px] 
+      } px-[32px] py-[16px] rounded-[8px]
         hover:scale-105 transition-all duration-75 flex items-center ${
           center ? 'justify-center' : ''
         }`}
@@ -29,7 +29,9 @@ const Component = ({
           {icon || ''}
         </div>
       )}
-      <p className={`text-[14px] font-semibold truncate ${icon ? 'ml-5' : ''} `}>
+      <p
+        className={`text-[14px] font-semibold truncate ${icon ? 'ml-5' : ''} `}
+      >
         {text}
       </p>
     </button>

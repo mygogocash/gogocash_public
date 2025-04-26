@@ -10,7 +10,7 @@ const Component = ({
   content,
   open,
   onOpenChange,
-  cssContent = `max-h-[85vh] w-[90vw] max-w-[500px]`
+  cssContent = `max-h-[85vh] w-[90vw] max-w-[500px]`,
 }: IProp) => (
   <Dialog.Root
     open={open}
@@ -24,7 +24,9 @@ const Component = ({
   >
     <Dialog.Portal>
       <Dialog.Overlay className="fixed inset-0 bg-black/30 data-[state=open]:animate-overlayShow z-10" />
-      <Dialog.Content className={`${cssContent} rounded-[16px] z-[20] bg-white fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2  bg-gray1 p-[25px] shadow-[var(--shadow-6)] focus:outline-none data-[state=open]:animate-contentShow`}>
+      <Dialog.Content
+        className={`${cssContent} rounded-[16px] z-[20] bg-white fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2  bg-gray1 p-[25px] shadow-[var(--shadow-6)] focus:outline-none data-[state=open]:animate-contentShow`}
+      >
         <Dialog.Title className="m-0 text-[20px] font-medium text-[var(--black-5)] text-center flex items-center justify-center">
           {title}
         </Dialog.Title>

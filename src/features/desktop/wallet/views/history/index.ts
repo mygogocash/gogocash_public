@@ -1,3 +1,3 @@
-import History from "./Component";
+import History from './Component';
 
 export default History;

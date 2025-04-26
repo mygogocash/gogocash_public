@@ -1,3 +1,3 @@
-import BadgeList from "./Component";
+import BadgeList from './Component';
 
-export default BadgeList
+export default BadgeList;

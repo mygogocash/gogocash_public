@@ -1,8 +1,6 @@
 'use client';
 
-import {  ChevronRightIcon, ChevronLeftIcon } from 'lucide-react';
-
-
+import { ChevronRightIcon, ChevronLeftIcon } from 'lucide-react';
 
 import { IProp } from './interface';
 import { memo } from 'react';
@@ -27,7 +25,9 @@ const Component = ({ totalPages = 10, currentPage, setCurrentPage }: IProp) => {
           <button
             key={i}
             className={`w-[24px] h-[24px] rounded-full ${
-              i === currentPage ? 'bg-[var(--primary-5)] text-white' : 'text-gray-700'
+              i === currentPage
+                ? 'bg-[var(--primary-5)] text-white'
+                : 'text-gray-700'
             }`}
             onClick={() => goToPage(i)}
           >

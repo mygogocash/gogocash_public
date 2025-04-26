@@ -14,16 +14,16 @@ const Component = ({
   return (
     <>
       {isOpen === 'login' ? (
-        <LoginEmail setIsOpen={setIsOpen} isOpen={isOpen} />
+        <LoginEmail setIsOpen={setIsOpen} _isOpen={isOpen} />
       ) : isOpen === 'forgot' ? (
-        <ForgotPassword setIsOpen={setIsOpen} isOpen={isOpen} />
+        <ForgotPassword setIsOpen={setIsOpen} _isOpen={isOpen} />
       ) : (
         <BeforeLogin
           title={'Log In'}
           subTitle={'Enter login details to access your account'}
           isLogin={true}
           setIsOpen={setIsOpen}
-          isOpen={isOpen}
+          _isOpen={isOpen}
           handleModal={handleModal}
         />
       )}

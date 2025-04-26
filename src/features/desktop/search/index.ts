@@ -1,3 +1,3 @@
-import Search from "./Component";
+import Search from './Component';
 
 export default Search;

@@ -1,8 +1,7 @@
-
 export interface IProp {
-  image: string; 
-  productName: string; 
-  shopName: string; 
+  _image: string;
+  _productName: string;
+  _shopName: string;
   percent: number;
-  link: string
+  link: string;
 }

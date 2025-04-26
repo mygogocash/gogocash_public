@@ -35,8 +35,8 @@ const Component = () => {
         {`Tired of lugging heavy bags and fighting crowds at the grocery store? 🛒
         Let Shopee Thailand bring the fresh produce to you! 🥦🍎 We offer a wide
         selection of fruits, vegetables, and healthy food options, all delivered
-        right to your doorstep. 🏡 
-        
+        right to your doorstep. 🏡
+
         What's more? We're having a special offer! 🎉
         Enjoy a whopping 30% OFF on all items! 💰 That's right, stock up on your
         favorites without breaking the bank! 💰`}
@@ -99,9 +99,9 @@ const Component = () => {
               {[1, 2, 3, 4, 5, 6, 7].map((item, index) => (
                 <CardProduct
                   key={index}
-                  image={''}
-                  productName={''}
-                  shopName={''}
+                  _image={''}
+                  _productName={''}
+                  _shopName={''}
                   percent={0}
                   link="/product/1"
                 />

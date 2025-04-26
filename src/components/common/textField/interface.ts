@@ -1,4 +1,4 @@
-import { ChangeEventHandler, ReactNode } from "react";
+import { ChangeEventHandler, ReactNode } from 'react';
 
 export interface IProp {
   placeholder: string;

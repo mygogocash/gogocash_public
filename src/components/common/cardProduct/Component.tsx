@@ -4,20 +4,23 @@ import { HeartFilledIcon } from '@radix-ui/react-icons';
 import { useRouter } from 'next/navigation';
 
 const CardProduct = ({
-  image,
-  productName,
-  shopName,
+  _image,
+  _productName,
+  _shopName,
   percent,
   link,
 }: IProp) => {
   const router = useRouter();
   return (
-    <div className="space-y-1 w-[180px] md:w-[200px] bg-white rounded-[8px]" onClick={() => {
-      router.push(link)
-    }}>
+    <div
+      className="space-y-1 w-[180px] md:w-[200px] bg-white rounded-[8px]"
+      onClick={() => {
+        router.push(link);
+      }}
+    >
       <div className="rounded-t-[8px] relative ">
         <div
-          className={`w-[88px] h-[34px] bg-[var(--primary-4)] rounded-tl-[8px] rounded-br-[8px] 
+          className={`w-[88px] h-[34px] bg-[var(--primary-4)] rounded-tl-[8px] rounded-br-[8px]
           absolute top-0 left-0 text-[15px] fotn-semoibold text-white flex items-center justify-center`}
         >
           sss
@@ -35,7 +38,7 @@ const CardProduct = ({
           className="w-full h-full rounded-t-[8px]"
         />
       </div>
-      <div className=' p-[8px] md:p-0'>
+      <div className=" p-[8px] md:p-0">
         <h3 className="text-[18px] font-bold text-black max-w-[200px] w-full">
           Product Name
         </h3>

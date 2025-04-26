@@ -3,8 +3,7 @@ import { EmblaOptionsType } from 'embla-carousel';
 import CardImage from '../cardImage';
 const OPTIONS: EmblaOptionsType = { slidesToScroll: 'auto' };
 const Component = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS);
+  const [emblaRef, _emblaApi] = useEmblaCarousel(OPTIONS);
 
   return (
     <div className="w-full">

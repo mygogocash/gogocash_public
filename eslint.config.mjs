@@ -3,7 +3,8 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import js from '@eslint/js';
 import { fixupConfigRules } from '@eslint/compat';
-import baseConfig from '../../eslint.config.mjs';
+import tseslint from 'typescript-eslint';
+
 const compat = new FlatCompat({
   baseDirectory: dirname(fileURLToPath(import.meta.url)),
   recommendedConfig: js.configs.recommended,
@@ -12,8 +13,22 @@ const compat = new FlatCompat({
 export default [
   ...fixupConfigRules(compat.extends('next')),
   ...fixupConfigRules(compat.extends('next/core-web-vitals')),
-  ...baseConfig,
-  ...nx.configs['flat/react-typescript'],
+  ...tseslint.configs.recommended,
+  {
+    files: ['**/*.{ts,tsx}'],
+    rules: {
+      '@typescript-eslint/no-unused-vars': ['warn', {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_'
+      }]
+    }
+  },
+  {
+    files: ['**/__tests__/**/*.{ts,tsx}'],
+    rules: {
+      '@next/next/no-img-element': 'off'
+    }
+  },
   {
     ignores: ['.next/**/*'],
   },

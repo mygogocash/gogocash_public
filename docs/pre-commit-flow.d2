@@ -1,0 +1,80 @@
+direction: right
+
+# กำหนดสไตล์
+styles: {
+  process: {
+    style: {
+      stroke: "#1a73e8"
+      fill: "#e8f0fe"
+      border-radius: 8
+      stroke-width: 2
+    }
+  }
+  decision: {
+    style: {
+      stroke: "#188038"
+      fill: "#e6f4ea"
+      border-radius: 8
+      stroke-width: 2
+    }
+  }
+  fail: {
+    style: {
+      stroke: "#d93025"
+      fill: "#fce8e6"
+      border-radius: 8
+      stroke-width: 2
+    }
+  }
+}
+
+# กระบวนการทำงาน
+git commit: "git commit" {
+  class: process
+}
+
+pre-commit: "pre-commit hooks" {
+  class: process
+}
+
+hooks: {
+  trailing: "ตรวจสอบช่องว่างท้ายบรรทัด" {
+    class: process
+  }
+  eof: "ตรวจสอบการจบไฟล์" {
+    class: process
+  }
+  yaml: "ตรวจสอบ YAML" {
+    class: process
+  }
+  large: "ตรวจสอบไฟล์ขนาดใหญ่" {
+    class: process
+  }
+  conflict: "ตรวจสอบ merge conflicts" {
+    class: process
+  }
+}
+
+check: "ผ่านทุก hooks?" {
+  class: decision
+}
+
+fail: "commit ไม่สำเร็จ" {
+  class: fail
+}
+
+success: "commit สำเร็จ" {
+  class: process
+}
+
+# ความสัมพันธ์
+git commit -> pre-commit
+pre-commit -> hooks.trailing
+hooks.trailing -> hooks.eof
+hooks.eof -> hooks.yaml
+hooks.yaml -> hooks.large
+hooks.large -> hooks.conflict
+hooks.conflict -> check
+
+check -> fail: "ไม่ผ่าน"
+check -> success: "ผ่าน"

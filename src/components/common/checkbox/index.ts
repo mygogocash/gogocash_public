@@ -1,3 +1,3 @@
-import CaardSlide from "./Component";
+import CaardSlide from './Component';
 
 export default CaardSlide;

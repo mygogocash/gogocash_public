@@ -10,7 +10,7 @@ import { MailSearchIcon } from 'lucide-react';
 import Link from 'next/link';
 import { IProp } from './interface';
 
-const Component = ({ isOpen, setIsOpen }: IProp) => {
+const Component = ({ _isOpen, setIsOpen }: IProp) => {
   const [isOpenModal, setIsOpenModal] = React.useState(false);
 
   return (

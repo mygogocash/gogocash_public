@@ -1,3 +1,3 @@
-import { Component as Drawer } from "./Component";
+import { Component as Drawer } from './Component';
 
 export default Drawer;

@@ -1,3 +1,3 @@
-import CardSlideImage from "./Component";
+import CardSlideImage from './Component';
 
 export default CardSlideImage;

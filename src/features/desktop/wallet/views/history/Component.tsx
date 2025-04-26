@@ -59,7 +59,7 @@ const Component = () => {
 
   return (
     <div
-      className="text-[var(--black-3)] text-[12px] 
+      className="text-[var(--black-3)] text-[12px]
     font-semibold shadow-[0px_4px_25px_0px_rgba(0,0,0,0.25)] rounded-[16px] p-5 md:p-[40px] space-y-10"
     >
       <h1 className="text-[var(--black-5)] text-[36px] font-medium">

@@ -1,1 +1,1 @@
-export { default as IntroMobile } from './Component'
+export { default as IntroMobile } from './Component';

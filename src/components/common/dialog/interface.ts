@@ -7,5 +7,5 @@ export interface IProp {
   content?: string | ReactNode;
   onOpenChange?: (val: boolean) => void;
   open: boolean;
-  cssContent?: string
+  cssContent?: string;
 }

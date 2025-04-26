@@ -1,3 +1,3 @@
-import Switch from "./Component";
+import Switch from './Component';
 
 export default Switch;

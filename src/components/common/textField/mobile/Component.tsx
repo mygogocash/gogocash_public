@@ -10,7 +10,7 @@ const Component = ({
   disabled,
   required,
   label,
-  message,
+  _message,
   name,
   startIcon,
   endIcon,
@@ -33,7 +33,11 @@ const Component = ({
               disabled={disabled}
               type={type}
               required={required}
-              className={`${textRight ? 'text-right': ''} text-[16px] text-[var(--black-5)] w-full h-[56px] ${startIcon ? 'pl-14' : 'pl-3'} ${
+              className={`${
+                textRight ? 'text-right' : ''
+              } text-[16px] text-[var(--black-5)] w-full h-[56px] ${
+                startIcon ? 'pl-14' : 'pl-3'
+              } ${
                 endIcon ? 'pr-14' : 'pr-3'
               } py-2 focus-visible:outline-none focus:outline-none  `}
               // box-shadow: 0px -4px 15px 0px rgba(0, 0, 0, 0.08);

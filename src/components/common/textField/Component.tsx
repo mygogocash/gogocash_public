@@ -33,7 +33,11 @@ const Component = ({
               disabled={disabled}
               type={type}
               required={required}
-              className={`${textRight ? 'text-right': ''} text-[16px] text-[var(--black-5)] w-full h-[56px] ${startIcon ? 'pl-14' : 'pl-3'} ${
+              className={`${
+                textRight ? 'text-right' : ''
+              } text-[16px] text-[var(--black-5)] w-full h-[56px] ${
+                startIcon ? 'pl-14' : 'pl-3'
+              } ${
                 endIcon ? 'pr-14' : 'pr-3'
               } py-2 border border-[var(--grey-2)] rounded-[8px] focus:outline-none focus:ring-2 focus:ring-blue-500`}
               placeholder={placeholder}

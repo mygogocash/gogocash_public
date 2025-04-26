@@ -1,3 +1,3 @@
-import MethodPayment from "./Component";
+import MethodPayment from './Component';
 
 export default MethodPayment;

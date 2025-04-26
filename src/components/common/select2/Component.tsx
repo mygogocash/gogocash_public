@@ -24,7 +24,7 @@ export default function Component({
       </div>
       {open && (
         <ul className="absolute z-[9] top-[3rem] w-full mt-2 shadow-lg flex items-center flex-col  justify-between   border border-[var(--grey-1)] rounded-[8px] bg-white max-h-[200px] h-auto overflow-y-scroll">
-          {options.map((option, index) => (
+          {options.map((option, _index) => (
             <li
               key={option.value}
               onClick={() => {
@@ -34,7 +34,9 @@ export default function Component({
               className={`flex items-center justify-between border-b w-full border-[var(--grey-1)] h-[52px] px-3 hover:bg-[var(--black-1)]`}
             >
               {option.label}
-              {watch(name)?.value === option.value && <CheckIcon className='text-[var(--primary-4)]' />}
+              {watch(name)?.value === option.value && (
+                <CheckIcon className="text-[var(--primary-4)]" />
+              )}
             </li>
           ))}
         </ul>

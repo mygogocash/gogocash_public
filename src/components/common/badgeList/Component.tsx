@@ -5,7 +5,9 @@ const Component = ({ list, vertical }: IProps) => {
     <div
       className={`flex ${
         vertical ? 'flex-col' : 'md:flex-row flex-col'
-      } items-center ${vertical ? ' justify-evenly gap-1' : 'justify-between gap-5'}  w-full  `}
+      } items-center ${
+        vertical ? ' justify-evenly gap-1' : 'justify-between gap-5'
+      }  w-full  `}
     >
       {list.map((item, index) => (
         <div
@@ -22,7 +24,9 @@ const Component = ({ list, vertical }: IProps) => {
                 ? 'rounded-b-[24px]'
                 : 'rounded-r-[100px]'
               : ''
-          }  bg-[var(--black-1)]  ${vertical ? ' h-auto w-[150px] p-3': 'w-full h-[76px]'}  flex items-center justify-center gap-3 `}
+          }  bg-[var(--black-1)]  ${
+            vertical ? ' h-auto w-[150px] p-3' : 'w-full h-[76px]'
+          }  flex items-center justify-center gap-3 `}
         >
           {item.icon}
           <div className="flex  flex-col ">
