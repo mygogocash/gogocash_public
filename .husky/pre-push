@@ -10,5 +10,9 @@ yarn test
 # Build the project
 yarn build
 
-# Increment the version
-yarn version --patch
+# อัพเดท patch version
+yarn version --patch --no-git-tag-version
+
+# เพิ่มการเปลี่ยนแปลง version เข้าไปใน commit
+git add package.json
+git commit -m "chore: bump version [skip ci]"
