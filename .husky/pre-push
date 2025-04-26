@@ -14,7 +14,6 @@ yarn test
 yarn build
 
 # อัพเดท patch version และสร้าง commit ใหม่
-yarn config set version-git-tag false
-yarn version --patch
+npm version patch --no-git-tag-version
 git add package.json
 git commit -m "chore: bump version [skip ci]"
