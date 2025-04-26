@@ -9,3 +9,6 @@ yarn test
 
 # Build the project
 yarn build
+
+# Increment the version
+yarn version --patch
