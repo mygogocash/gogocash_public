@@ -14,10 +14,12 @@ import { useSession } from 'next-auth/react';
 import { useAuth } from '@crossmint/client-sdk-react-ui';
 import { Notification } from '@/features/desktop/notification';
 import NotificationIcon from '@/components/icons/NotificationIcon';
+import Help from '@/features/desktop/help';
 
 const Component = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [isOpenNotification, setIsOpenNotification] = React.useState(false);
+  const [isOpenHelpCenter, setIsOpenHelpCenter] = React.useState(false);
 
   const { data } = useSession();
   const { user } = useAuth();
@@ -31,6 +33,9 @@ const Component = () => {
       </Drawer>
       <Drawer isOpen={isOpenNotification} setIsOpen={setIsOpenNotification}>
         <Notification />
+      </Drawer>
+      <Drawer isOpen={isOpenHelpCenter} setIsOpen={setIsOpenHelpCenter}>
+        <Help />
       </Drawer>
       <div className="container-inner flex items-center justify-between ">
         <Link href="/">
@@ -60,7 +65,12 @@ const Component = () => {
                 setIsOpenNotification(true);
               }}
             />
-            <IconButton icon={<InfoIcon />} />
+            <IconButton
+              onClick={function (): void {
+                setIsOpenHelpCenter(true);
+              }}
+              icon={<InfoIcon />}
+            />
             <MenuProfile />
           </div>
         ) : (
