@@ -1,3 +1,3 @@
 import { Component as BeforeLogin } from './Component';
 
-export { BeforeLogin };
+export default BeforeLogin;

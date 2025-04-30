@@ -3,14 +3,10 @@ import { memo, useState } from 'react';
 import { LogOutIcon } from 'lucide-react';
 import BoxProfile from '../boxProfile';
 import { signOut } from 'next-auth/react';
-import { useAuth } from '@crossmint/client-sdk-react-ui';
 import { useRouter } from 'next/navigation';
 const Component = () => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const { logout, user, jwt } = useAuth();
-  console.log('user', user);
-  console.log('jwt', jwt);
 
   return (
     <>
@@ -45,7 +41,6 @@ const Component = () => {
               className="flex items-center gap-2 p-2  hover:bg-gray-100 cursor-pointer"
               onClick={() => {
                 signOut();
-                logout();
               }}
             >
               <LogOutIcon />

@@ -1,17 +1,16 @@
 import Image from 'next/image';
 import InfoIcon from '../../../icons/InfoIcon';
 import Button from '@/components/common/button';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { MenuHeader } from './constants';
 import WalletIcon from '@/components/icons/WalletIcon';
 import IconButton from '@/components/common/IconButton';
 import Link from 'next/link';
 import Drawer from '@/components/common/drawer';
-import { BeforeLogin } from '@/features/desktop/profile/views/form';
+import BeforeLogin from '@/features/desktop/profile/views/form';
 import { AlignJustifyIcon } from 'lucide-react';
 import MenuProfile from '@/features/desktop/profile/views/menuProfile';
 import { useSession } from 'next-auth/react';
-import { useAuth } from '@crossmint/client-sdk-react-ui';
 import { Notification } from '@/features/desktop/notification';
 import NotificationIcon from '@/components/icons/NotificationIcon';
 import Help from '@/features/desktop/help';
@@ -22,8 +21,9 @@ const Component = () => {
   const [isOpenHelpCenter, setIsOpenHelpCenter] = React.useState(false);
 
   const { data } = useSession();
-  const { user } = useAuth();
-  console.log('user', user);
+  const checkLogIn = useCallback(() => {
+    return data?.user;
+  }, [data?.user]);
   console.log('data', data);
 
   return (
@@ -41,7 +41,7 @@ const Component = () => {
         <Link href="/">
           <Image src="/logo.svg" alt="logo" width={84} height={50} />
         </Link>
-        {(data?.user || user) && (
+        {checkLogIn() && (
           <div className="md:flex items-center gap-2 hidden">
             <ul className="flex items-center gap-3">
               {MenuHeader.map((item) => {
@@ -56,9 +56,19 @@ const Component = () => {
             </ul>
           </div>
         )}
-        {data?.user || user ? (
+        {checkLogIn() ? (
           <div className="hidden md:flex items-center gap-2">
-            <IconButton icon={<WalletIcon />} />
+            <IconButton
+              onClick={() => {
+                // const connect = new CrossmintEVMWalletAdapter({
+                //   chain: BlockchainTypes.ETHEREUM,
+                //   projectId: process.env.NEXT_PUBLIC_CROSSMINT_API_KEY
+                // });
+                // console.log('connect', connect.publicKey);
+                // console.log('connect', connect.publicKeys);
+              }}
+              icon={<WalletIcon />}
+            />
             <IconButton
               icon={<NotificationIcon />}
               onClick={function (): void {

@@ -13,11 +13,13 @@ const Provider = ({ children }: { children: ReactNode }) => {
         apiKey={process.env.NEXT_PUBLIC_CROSSMINT_API_KEY ?? ''}
       >
         <CrossmintAuthProvider
-          // embeddedWallets={{
-          //   type: 'evm-smart-wallet',
-          //   defaultChain: 'polygon',
-          //   createOnLogin: 'all-users',
-          // }}
+          embeddedWallets={{
+            type: 'evm-smart-wallet',
+            createOnLogin: 'all-users',
+          }}
+          onLoginSuccess={() => {
+            console.log('onLoginSuccess');
+          }}
           loginMethods={['web3']} // Only show email, Google, and Farcaster login methods
         >
           <>{children}</>

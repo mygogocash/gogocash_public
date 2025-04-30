@@ -20,14 +20,16 @@ export const authOptions: AuthOptions = {
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
         type: { label: 'Type', type: 'type' },
+        wallet: { label: 'Wallet', type: 'wallet' },
       },
       async authorize(credentials) {
-        // console.log('credentials', credentials);
+        console.log('credentials', credentials);
         const user = {
           id: '1',
           name: 'John Doe',
-          email: credentials?.email,
+          email: credentials?.email || '',
           image: '',
+          wallet: credentials?.wallet || '',
         };
         // const user = await prisma.user.findUnique({ where: { email: credentials.email } });
         // if (!user || !bcrypt.compareSync(credentials.password, user.password)) {
@@ -41,12 +43,12 @@ export const authOptions: AuthOptions = {
   session: { strategy: 'jwt' },
   callbacks: {
     async jwt({ token, user }) {
-      // console.log('jwt', token, user);
+      console.log('jwt', token, user);
       if (user) token.id = user.id;
       return token;
     },
     async session({ session, token }) {
-      // console.log('session', token, session);
+      console.log('session', token, session);
       //   if (token) session.user.id = token.id;
       return session;
     },
