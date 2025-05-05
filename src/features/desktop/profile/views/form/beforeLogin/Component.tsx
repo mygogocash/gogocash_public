@@ -3,7 +3,7 @@ import TitleSeparator from '@/components/common/titleSeparator';
 import Facebook2Icon from '@/components/icons/Facebook2Icon';
 import GoogleIcon from '@/components/icons/GoogleIcon';
 import { Mail, Wallet } from 'lucide-react';
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 import { Title } from '@/features/desktop/profile/views/form/title';
 import { useRouter } from 'next/navigation';
 import { IProps } from './interface';
@@ -22,6 +22,7 @@ const Component = ({
   const router = useRouter();
   const { login } = useAuth();
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async function handleLoginWallet() {
     const crossmintConnect = new CrossmintEVMWalletAdapter({
       projectId: process.env.NEXT_PUBLIC_CROSSMINT_PROJECT_ID,
@@ -33,10 +34,10 @@ const Component = ({
       console.log('walletAddress', walletAddress);
 
       if (walletAddress) {
-        // signIn('credentials', {
-        //   wallet: walletAddress,
-        //   redirect: true,
-        // });
+        signIn('credentials', {
+          wallet: walletAddress,
+          redirect: true,
+        });
       } else {
         console.log('User declined to connect the wallet.');
       }
@@ -88,9 +89,6 @@ const Component = ({
               handleModal?.(false);
               // handleLoginWallet();
               login();
-              // console.log('>>>>', wallet?.address?.toString());
-              // handleLoginWallet();
-              // throw new Error('Function not implemented.');
             }}
             fullWidth
           />

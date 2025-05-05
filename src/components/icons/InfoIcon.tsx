@@ -2,8 +2,10 @@ const InfoIcon = ({
   width = 32,
   height = 32,
   stroke = '#404040',
+  ...props
 }: React.SVGProps<SVGSVGElement>) => (
   <svg
+    {...props}
     width={width}
     height={height}
     viewBox="0 0 32 32"

@@ -42,15 +42,26 @@ export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET as string,
   session: { strategy: 'jwt' },
   callbacks: {
-    async jwt({ token, user }) {
-      console.log('jwt', token, user);
-      if (user) token.id = user.id;
+    async jwt({ token, user, account, profile }) {
+      console.log('jwt', token, user, account, profile);
+      const users = user as unknown as { wallet: string; type: string };
+      if (user) {
+        token.id = user.id;
+        token.name = user.name;
+        token.email = user.email;
+        token.image = user.image;
+        token.wallet = users.wallet;
+        token.type = users.type;
+      }
       return token;
     },
     async session({ session, token }) {
       console.log('session', token, session);
       //   if (token) session.user.id = token.id;
-      return session;
+      return {
+        ...session,
+        ...token
+      };
     },
   },
   pages: {
