@@ -1,9 +1,12 @@
 import { ArrowLeftIcon, CircleHelp } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 interface IProps {
   onBack?: () => void;
 }
 const Component = ({ onBack }: IProps) => {
+  const router = useRouter();
+
   return (
     <div className="w-full">
       <div className="flex items-center gap-3">
@@ -20,10 +23,16 @@ const Component = ({ onBack }: IProps) => {
       </div>
 
       <div className="bg-[var(--primary-4)] rounded-lg flex items-center justify-center flex-col gap-3 my-5 p-3">
-        <CircleHelp stroke="white" width={24} height={24} color="white" />
+        <CircleHelp
+          stroke="white"
+          width={24}
+          height={24}
+          color="white"
+          onClick={() => router.push(`/help-center`)}
+        />
         <p className="text-white font-bold text-[14px]"> What is GoGoCash?</p>
       </div>
-      <div className='space-y-3 mt-5'>
+      <div className="space-y-3 mt-5">
         <p className="text-[var(--black-5)] font-semibold text-[16px]">
           What is GoGoCash?
         </p>

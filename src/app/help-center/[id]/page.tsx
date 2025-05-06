@@ -1,13 +1,11 @@
-'use client';
-
+"use client";
 import { HeaderMobile } from '@/components/layouts/mobile/header';
-import ShopDetail from '@/features/desktop/shop/views/detail';
+import HelpDetail from '@/features/desktop/help/detail';
 import { CircleHelp } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
-const ProductPage = () => {
+const Index = () => {
   const router = useRouter();
-
   return (
     <>
       <HeaderMobile
@@ -22,9 +20,9 @@ const ProductPage = () => {
           />
         }
       />
-      <ShopDetail />
+      <HelpDetail />
     </>
   );
 };
 
-export default ProductPage;
+export default Index;

@@ -1,3 +1,3 @@
-import { Component as Wallet } from './Component';
+import Wallet from './Component';
 
 export default Wallet;

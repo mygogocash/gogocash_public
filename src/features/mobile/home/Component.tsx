@@ -21,6 +21,7 @@ const Component = () => {
   const {
     formatTime: { hours, minutes, seconds, days },
   } = useCountdown('2025-04-30');
+
   return (
     <div
       className={`w-full ${
@@ -30,7 +31,14 @@ const Component = () => {
       <div className="bg-[var(--primary-4)]">
         <HeaderMobile
           background="bg-[var(--primary-4)]"
-          iconRight={<CircleHelp stroke="white" width={24} height={24} />}
+          iconRight={
+            <CircleHelp
+              stroke="white"
+              width={24}
+              height={24}
+              onClick={() => router.push(`/help-center`)}
+            />
+          }
         />
         <div className="relative bg-[var(--primary-4)] h-[180px] w-full px-[16px] pb-[16px]">
           {data ? (
