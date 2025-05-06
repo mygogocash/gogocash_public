@@ -57,7 +57,7 @@ const Component = () => {
       </Form.Root>
       {search && (
         <div className="relative">
-          <div className="z-[9] absolute top-[10px] w-full h-[300px] overflow-auto bg-white rounded-[8px] shadow-2xl py-4 px-[8px]">
+          <div className="z-[99] absolute top-[10px] w-full h-[300px] overflow-auto bg-white rounded-[8px] shadow-2xl py-4 px-[8px]">
             {list.map((item, index) => {
               return (
                 <div key={index}>

@@ -85,7 +85,7 @@ const Component = () => {
               </p>
             </>
           )}
-          <div className="absolute bottom-[-26px] w-full left-1/2 -translate-x-1/2 px-[16px]">
+          <div className="absolute bottom-[-26px] w-full left-1/2 -translate-x-1/2 px-[16px] z-[99]">
             <Search />
           </div>
         </div>
@@ -132,7 +132,7 @@ const Component = () => {
         })}
       </div>
       {/* countdown */}
-      <div className="bg-[--primary-4] relative rounded-[8px] min-h-[60px] m-[16px] flex items-center justify-between px-[13px] py-[5px]">
+      <div className="relative bg-[--primary-4] relative rounded-[8px] min-h-[60px] m-[16px] flex items-center justify-between px-[13px] py-[5px]">
         <Image
           src={'/Coin.svg'}
           alt="Coin"
@@ -192,7 +192,13 @@ const Component = () => {
       <div className="px-[16px] space-y-2">
         {[1, 2, 3, 4].map((ele, index) => {
           return (
-            <div className="flex items-center gap-3" key={index}>
+            <div
+              className="flex items-center gap-3"
+              key={index}
+              onClick={() => {
+                router.push('/product/1');
+              }}
+            >
               <div className="w-[100px] h-[100px] rounded-[8px] flex items-center">
                 <Image
                   src={`/iphone.png`}
