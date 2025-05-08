@@ -56,7 +56,7 @@ const Component = () => {
                   if (res.data) {
                     signIn('credentials', {
                       email: user.email,
-                      password: pass,
+                      // password: pass,
                       name: user.username,
                       id: user.id,
                       type: 'email',
