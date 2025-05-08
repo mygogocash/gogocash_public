@@ -5,6 +5,7 @@ import {
   CrossmintProvider,
   CrossmintAuthProvider,
 } from '@crossmint/client-sdk-react-ui';
+import { Toaster } from 'react-hot-toast';
 
 const Provider = ({ children }: { children: ReactNode }) => {
   return (
@@ -22,6 +23,7 @@ const Provider = ({ children }: { children: ReactNode }) => {
           }}
           loginMethods={['web3']} // Only show email, Google, and Farcaster login methods
         >
+          <Toaster />
           <>{children}</>
         </CrossmintAuthProvider>
       </CrossmintProvider>

@@ -9,6 +9,7 @@ import { Eye, EyeClosed } from 'lucide-react';
 import { IProp } from './interface';
 import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
+import { signinEmail } from '@/lib/services/auth';
 
 const Component = ({ _isOpen, setIsOpen }: IProp) => {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -23,15 +24,28 @@ const Component = ({ _isOpen, setIsOpen }: IProp) => {
       />
       <Form.Root
         className="w-full space-y-4"
-        onSubmit={(event) => {
+        onSubmit={async (event) => {
           event.preventDefault();
           const formData = new FormData(event.currentTarget);
-          const dt = {
-            email: formData.get('email'),
-            password: formData.get('password'),
-            redirect: true,
-          };
-          signIn('credentials', dt);
+          const res = await signinEmail({
+            identity: formData.get('email') as string,
+            password: formData.get('password') as string,
+          });
+
+          if (res.data) {
+            signIn('credentials', {
+              email: res.data.user.email,
+              name: res.data.user.username,
+              id: res.data.user.id,
+              type: 'email',
+              user: res.data.user,
+              access_token: res.data.access_token,
+              expires: res.data.expires,
+              refresh_token: res.data.refresh_token,
+              redirect: true,
+              callbackUrl: '/',
+            });
+          }
         }}
       >
         {/* Label + Input */}

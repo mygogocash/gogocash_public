@@ -39,12 +39,13 @@ const Component = ({
         <span>{label}</span>
       </label>
       <Form.Message
-        match={(value, _formData) => {
-          return value == 'on';
-        }}
+        match={'valueMissing'}
+        // match={(value, _formData) => {
+        //   return value == 'on';
+        // }}
         className="text-red-500 text-xs"
       >
-        {message}
+        {message || "Please select an option"}
       </Form.Message>
     </Form.Field>
   );
