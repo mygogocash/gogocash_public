@@ -4,6 +4,7 @@ import FacebookProvider from 'next-auth/providers/facebook';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { JWT } from 'next-auth/jwt';
 import axios from 'axios';
+import { IDataSignUp } from '@/features/desktop/profile/views/form/signUp/interface';
 
 declare module 'next-auth' {
   interface JWT {
@@ -66,24 +67,6 @@ export const authOptions: AuthOptions = {
       console.log('jwt account', account);
       console.log('jwt profile', profile);
 
-      // const users = user as unknown as { wallet: string; type: string, password: string };
-      //   if (token) session.user.id = token.id;
-      // const response = await axios.post(
-      //   `${process.env.NEXT_PUBLIC_API}/auth/signin`,
-      //   {
-      //     identity: 'yui',
-      //     password: '1234',
-      //   }
-      // );
-      // if (user) {
-      //   token.id = token.id;
-      //   token.name = token.name;
-      //   token.email = token.email;
-      //   token.image = token.image;
-      //   token.wallet = token.wallet;
-      //   token.type = token.type;
-      // }
-
       return {
         ...token,
         user: token.user || user,
@@ -95,12 +78,18 @@ export const authOptions: AuthOptions = {
       };
     },
     async session({ session, token }) {
-      console.log('token', token, session);
-      console.log('session ', token, session);
+      console.log('token', token);
+      console.log('session ', session);
 
       return {
         ...session,
-        ...token,
+        user: {
+          ...token,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          user: (token.user as any).user ? JSON.parse((token.user as any).user?.toString()) : null,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          expires: (token.user as any).expires ? JSON.parse((token.user as any).expires?.toString()): null,
+        },
       };
     },
   },

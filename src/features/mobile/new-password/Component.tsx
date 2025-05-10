@@ -24,7 +24,6 @@ const Component = () => {
             event.preventDefault();
             const formData = new FormData(event.currentTarget);
             console.log('formData', formData);
-            //   signIn('credentials', dt);
           }}
         >
           <div className="shadow-[1px_4px_18px_rgba(224,224,224,1)] rounded-[20px] overflow-hidden my-10 w-full">
