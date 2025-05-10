@@ -66,7 +66,7 @@ const Component = () => {
             ))}
           </div>
         </div>
-        <hr className="border-b-[0.5] border-[var(--grey-1)] w-full my-[24px]" />
+        <hr className="border-b-[0.5px] border-[var(--grey-1)] w-full my-[24px]" />
         <div className="flex justify-between flex-wrap my-[24px]">
           <p className="text-[var(--black-5)] text-normal text-[12px]">
             © 2024 GoGoCash

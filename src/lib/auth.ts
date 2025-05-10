@@ -4,34 +4,17 @@ import FacebookProvider from 'next-auth/providers/facebook';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { JWT } from 'next-auth/jwt';
 import axios from 'axios';
-import { IDataSignUp } from '@/features/desktop/profile/views/form/signUp/interface';
+import { IDataSignIn } from '@/features/desktop/profile/views/form/signUp/interface';
 
 declare module 'next-auth' {
-  interface JWT {
-    access_token: string;
-    id: string;
-    name: string;
-    email: string;
-    image: string;
-    wallet: string;
+  interface JWT extends IDataSignIn {
+    firstName: string;
   }
-  interface User {
-    access_token: string;
-    id: string;
-    name: string;
-    email: string;
-    image: string;
-    wallet: string;
+  interface User extends IDataSignIn {
+    firstName: string;
   }
   interface Session {
-    user: {
-      access_token: string;
-      id: string;
-      name: string;
-      email: string;
-      image: string;
-      wallet: string;
-    };
+    user: IDataSignIn
   }
 }
 export const authOptions: AuthOptions = {
@@ -83,6 +66,7 @@ export const authOptions: AuthOptions = {
 
       return {
         ...session,
+        access_token: token.access_token ,
         user: {
           ...token,
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
