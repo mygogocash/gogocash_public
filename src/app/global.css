@@ -427,7 +427,12 @@ summary svg {
     --pad-inner: 52px;
     --innerWidth: 1816px;
   }
-  @media only screen and (max-width: 640px) {
+@media only screen and (max-width: 1200px) and (min-width: 768px) {
+    :root {
+      --pad-inner: 15px;
+    }
+  }
+  @media only screen and (max-width: 767px) {
     :root {
       --pad-inner: 10px;
     }

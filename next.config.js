@@ -14,6 +14,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'platform-lookaside.fbsbx.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'example.com',
+      },
     ],
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 60,

@@ -9,6 +9,7 @@ const CardProduct = ({
   _shopName,
   percent,
   link,
+  type,
 }: IProp) => {
   const router = useRouter();
   return (
@@ -23,7 +24,7 @@ const CardProduct = ({
           className={`w-[88px] h-[34px] bg-[var(--primary-4)] rounded-tl-[8px] rounded-br-[8px]
           absolute top-0 left-0 text-[15px] fotn-semoibold text-white flex items-center justify-center`}
         >
-          sss
+          {type}
         </div>
         <div
           className={`absolute bottom-3 right-3 bg-white/70 rounded-full w-[30px] h-[30px] flex items-center justify-center`}
@@ -31,8 +32,8 @@ const CardProduct = ({
           <HeartFilledIcon color="red" />
         </div>
         <Image
-          src="/iphone.png"
-          alt="slide"
+          src={_image || '/iphone.png'}
+          alt={_productName}
           width={200}
           height={200}
           className="w-full h-full rounded-t-[8px]"
@@ -40,10 +41,10 @@ const CardProduct = ({
       </div>
       <div className=" p-[8px] md:p-0">
         <h3 className="text-[18px] font-bold text-black max-w-[200px] w-full">
-          Product Name
+          {_productName}
         </h3>
         <p className="text-[var(--black-3)] text-[14px] font-normal">
-          Shop Name
+          {_shopName}
         </p>
       </div>
       <p className="flex items-center justify-between mb-[16px] w-full max-w-[200px] px-[8px] md:px-0">
@@ -51,7 +52,6 @@ const CardProduct = ({
           Cashback up to
         </span>
         <span className="text-[20px] text-black font-semibold ">
-          {' '}
           {percent}%
         </span>
       </p>

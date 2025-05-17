@@ -2,8 +2,8 @@ import Button from '@/components/common/button';
 import useEmblaCarousel from 'embla-carousel-react';
 import { EmblaOptionsType } from 'embla-carousel';
 import { IProp } from './interface';
-import CardProduct from '../cardProduct';
 import { useRouter } from 'next/navigation';
+import CardImage from '../cardImage';
 const OPTIONS: EmblaOptionsType = { slidesToScroll: 'auto' };
 const Component = ({ title, onClick, icon, list }: IProp) => {
   const [emblaRef, _emblaApi] = useEmblaCarousel(OPTIONS);
@@ -21,32 +21,31 @@ const Component = ({ title, onClick, icon, list }: IProp) => {
           text={'View More'}
         />
       </div>
+
       <div className="md:w-[calc(100%-282px)] w-full">
         <section className="embla">
           <div className="embla__viewport" ref={emblaRef}>
             <div className="embla__container">
-              {list && list?.map((ele, index) => (
-                <div
-                  className="embla__slide"
-                  key={index}
-                  onClick={() => {
-                    router.push(`${ele}`);
-                  }}
-                >
-                  <div className="embla__slide__number">
-                    <div className="w-full  flex items-center justify-center flex-col h-[272px]">
-                      <CardProduct
-                        _image={ele.pic}
-                        _productName={ele.name}
-                        _shopName={ele.shopName}
-                        percent={ele.percent}
-                        link={ele.link}
-                        type={ele.type}
-                      />
+              {list &&
+                list?.map((ele, index) => (
+                  <div
+                    className="embla__slide"
+                    key={index}
+                    onClick={() => {
+                      router.push(`${ele}`);
+                    }}
+                  >
+                    <div className="embla__slide__number">
+                      <div className="w-full  flex items-center justify-center flex-col h-[272px]">
+                        <CardImage
+                          image={ele.pic}
+                          percent={ele.percent}
+                          link={ele.link}
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
         </section>
@@ -55,4 +54,4 @@ const Component = ({ title, onClick, icon, list }: IProp) => {
   );
 };
 
-export { Component };
+export default Component;

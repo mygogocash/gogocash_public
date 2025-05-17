@@ -7,6 +7,8 @@ const Component = ({ image, percent, link }: IProp) => {
   return (
     <div
       onClick={() => {
+        console.log('link', link);
+        
         router.push(link);
       }}
       className="w-[180px] md:w-[200px] h-[272px] rounded-[8px] bg-[#EE4D2D] flex items-center justify-between flex-col"

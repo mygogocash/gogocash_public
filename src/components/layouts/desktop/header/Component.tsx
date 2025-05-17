@@ -37,7 +37,6 @@ const Component = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
-  console.log('data', data);
 
   return (
     <header className="h-[82px] bg-white py-[16px] shadow-lg sticky top-0 z-[9] w-full md:block hidden">

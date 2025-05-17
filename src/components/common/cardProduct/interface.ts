@@ -4,4 +4,5 @@ export interface IProp {
   _shopName: string;
   percent: number;
   link: string;
+  type: string;
 }

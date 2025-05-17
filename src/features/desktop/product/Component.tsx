@@ -35,6 +35,7 @@ const Component = () => {
                   _shopName={''}
                   percent={0}
                   link={'/product/1'}
+                  type={''}
                 />
               ))}
             </div>

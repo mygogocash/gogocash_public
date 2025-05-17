@@ -45,10 +45,10 @@ export const authOptions: AuthOptions = {
   session: { strategy: 'jwt' },
   callbacks: {
     async jwt({ token, user, account, profile }) {
-      console.log('jwt', token);
-      console.log('jwt user', user);
-      console.log('jwt account', account);
-      console.log('jwt profile', profile);
+      // console.log('jwt', token);
+      // console.log('jwt user', user);
+      // console.log('jwt account', account);
+      // console.log('jwt profile', profile);
 
       return {
         ...token,
@@ -61,8 +61,8 @@ export const authOptions: AuthOptions = {
       };
     },
     async session({ session, token }) {
-      console.log('token', token);
-      console.log('session ', session);
+      // console.log('token', token);
+      // console.log('session ', session);
 
       return {
         ...session,

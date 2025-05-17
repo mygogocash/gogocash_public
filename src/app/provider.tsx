@@ -6,28 +6,32 @@ import {
   CrossmintAuthProvider,
 } from '@crossmint/client-sdk-react-ui';
 import { Toaster } from 'react-hot-toast';
+import { SWRConfig } from 'swr';
 
+export const customCache = new Map();
 const Provider = ({ children }: { children: ReactNode }) => {
   return (
-    <SessionProvider>
-      <CrossmintProvider
-        apiKey={process.env.NEXT_PUBLIC_CROSSMINT_API_KEY ?? ''}
-      >
-        <CrossmintAuthProvider
-          embeddedWallets={{
-            type: 'evm-smart-wallet',
-            createOnLogin: 'all-users',
-          }}
-          onLoginSuccess={() => {
-            console.log('onLoginSuccess');
-          }}
-          loginMethods={['web3']} // Only show email, Google, and Farcaster login methods
+    <SWRConfig value={{ provider: () => customCache }}>
+      <SessionProvider>
+        <CrossmintProvider
+          apiKey={process.env.NEXT_PUBLIC_CROSSMINT_API_KEY ?? ''}
         >
-          <Toaster />
-          <>{children}</>
-        </CrossmintAuthProvider>
-      </CrossmintProvider>
-    </SessionProvider>
+          <CrossmintAuthProvider
+            embeddedWallets={{
+              type: 'evm-smart-wallet',
+              createOnLogin: 'all-users',
+            }}
+            onLoginSuccess={() => {
+              console.log('onLoginSuccess');
+            }}
+            loginMethods={['web3']} // Only show email, Google, and Farcaster login methods
+          >
+            <Toaster />
+            <>{children}</>
+          </CrossmintAuthProvider>
+        </CrossmintProvider>
+      </SessionProvider>
+    </SWRConfig>
   );
 };
 

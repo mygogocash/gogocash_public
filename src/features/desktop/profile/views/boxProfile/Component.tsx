@@ -10,7 +10,7 @@ const Component = ({ src, open }: IProp) => {
     <div className="flex items-center gap-2">
       <div className="w-[24px] h-[24px] rounded-full flex items-center justify-center">
         <Image
-          src={data?.user?.image || src}
+          src={src}
           alt="profile"
           className="rounded-full w-full h-auto"
           width={24}
@@ -18,7 +18,7 @@ const Component = ({ src, open }: IProp) => {
         />
       </div>
       <p className="text-[var(--black-5)] text-[14px]">
-        {data?.user?.name || ''}
+        {data?.user?.user?.username || ''}
       </p>
       <IconButton
         icon={
