@@ -10,7 +10,7 @@ import { IProp } from './interface';
 import { useRouter } from 'next/navigation';
 import useSignIn from './hook/useSignin';
 
-const Component = ({ _isOpen, setIsOpen }: IProp) => {
+const Component = ({ _isOpen, setIsOpen, handleModal }: IProp) => {
   const { signInEmail, showPassword, setShowPassword } = useSignIn();
   const router = useRouter();
   return (
@@ -77,6 +77,7 @@ const Component = ({ _isOpen, setIsOpen }: IProp) => {
           backgroundColor="bg-white text-black border-[var(--primary-4)] border rounded-full h-[56px]"
           text="Sign Up"
           onClick={function (): void {
+            handleModal?.(false);
             router.push('/sign-up');
           }}
           fullWidth

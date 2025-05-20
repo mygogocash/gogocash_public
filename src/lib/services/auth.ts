@@ -1,4 +1,6 @@
 import {
+  IRequestSignIGoogle,
+  IRequestSignInWeb3,
   IRequestSignUp,
   IResponseLogin,
   IResponseMe,
@@ -40,6 +42,30 @@ export const me = (id: string) =>
   new Promise<IResponseMe>((resolve, reject) => {
     client
       .get<IResponseMe>(`/auth/me?userID=${id}`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((_error) => {
+        reject(_error);
+      });
+  });
+
+export const signInWeb3 = (formData: IRequestSignInWeb3) =>
+  new Promise<IResponseLogin>((resolve, reject) => {
+    client
+      .post<IResponseLogin>(`/auth/web3/login`, formData)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((_error) => {
+        reject(_error);
+      });
+  });
+
+export const signInGoogleCrossmint = (formData: IRequestSignIGoogle) =>
+  new Promise<IResponseLogin>((resolve, reject) => {
+    client
+      .post(`/auth/google/signin`, formData)
       .then((response) => {
         resolve(response.data);
       })

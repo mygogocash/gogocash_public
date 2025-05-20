@@ -107,6 +107,7 @@ const Component = ({
             if (!isLogin) {
               setIsOpen?.(isLogin ? 'login' : 'default');
             } else {
+              handleModal?.(false);
               router.push('/sign-up');
             }
           }}

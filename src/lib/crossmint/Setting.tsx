@@ -16,7 +16,8 @@ const Setting = ({ children }: { children: ReactNode }) => {
         }}
         onLoginSuccess={() => {
           console.log('onLoginSuccess');
-        //   setIsAfterLogin(true);
+          //   setIsAfterLogin(true);
+          window.sessionStorage.setItem('isAfterLogin', 'true');
         }}
         loginMethods={['web3', 'google']} // Only show email, Google, and Farcaster login methods
       >

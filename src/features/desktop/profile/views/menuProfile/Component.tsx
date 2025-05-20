@@ -2,12 +2,12 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { memo, useState } from 'react';
 import { LogOutIcon } from 'lucide-react';
 import BoxProfile from '../boxProfile';
-import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { useCrossmintLoginContext } from '@/providers/CrossmintLoginContext';
 const Component = () => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
-
+  const { signOutAuth } = useCrossmintLoginContext();
   return (
     <>
       <DropdownMenu.Root open={open} onOpenChange={setOpen}>
@@ -40,7 +40,7 @@ const Component = () => {
             <DropdownMenu.Item
               className="flex items-center gap-2 p-2  hover:bg-gray-100 cursor-pointer"
               onClick={() => {
-                signOut();
+                signOutAuth();
               }}
             >
               <LogOutIcon />

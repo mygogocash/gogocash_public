@@ -1,6 +1,6 @@
 export interface IResponseLogin {
   success: boolean;
-  error: null;
+  error: IError | null;
   data: IDataSignIn;
 }
 
@@ -58,4 +58,15 @@ export interface RequestSignup {
   phoneNumber: string;
   password: string;
   condition: string;
+}
+
+export interface IRequestSignInWeb3 {
+  crossmintToken: string;
+  message: string;
+  provider: string;
+  signature: string;
+  walletAddress: string;
+}
+export interface IRequestSignIGoogle {
+  idToken: string;
 }
