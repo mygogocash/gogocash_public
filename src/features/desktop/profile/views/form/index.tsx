@@ -1,3 +1,3 @@
-import { Component as BeforeLogin } from './Component';
+import { Component as LoginAll } from './Component';
 
-export default BeforeLogin;
+export default LoginAll;

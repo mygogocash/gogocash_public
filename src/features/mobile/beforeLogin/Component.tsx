@@ -1,11 +1,10 @@
 'use client';
 import Button from '@/components/common/button';
 import TitleSeparator from '@/components/common/titleSeparator';
-import Facebook2Icon from '@/components/icons/Facebook2Icon';
 import GoogleIcon from '@/components/icons/GoogleIcon';
 import { useAuth } from '@crossmint/client-sdk-react-ui';
 import { ArrowLeftIcon, Mail, Wallet } from 'lucide-react';
-import { signIn } from 'next-auth/react';
+// import { signIn } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
@@ -37,11 +36,12 @@ const Component = () => {
           backgroundColor="bg-white text-black border-[var(--grey-2)] border"
           text={`Login with Google`}
           onClick={function (): void {
-            signIn('google', { redirect: true, callbackUrl: '/' });
+            login();
+            // signIn('google', { redirect: true, callbackUrl: '/' });
           }}
           fullWidth
         />
-        <Button
+        {/* <Button
           icon={<Facebook2Icon />}
           backgroundColor="bg-white text-black border-[var(--grey-2)] border"
           text={`Login with Facebook`}
@@ -49,7 +49,7 @@ const Component = () => {
             signIn('facebook', { redirect: true, callbackUrl: '/' });
           }}
           fullWidth
-        />
+        /> */}
         <Button
           icon={<Mail />}
           backgroundColor="bg-white text-black border-[var(--grey-2)] border"

@@ -17,7 +17,7 @@ const Component = ({
   return (
     <Form.Field name={name}>
       <label className={`flex items-center gap-2`}>
-        <Form.Control asChild>
+        <Form.Control asChild required>
           <Checkbox.Root
             required={required}
             className={`flex size-[20px] appearance-none  items-center justify-center rounded-[4px]
@@ -25,6 +25,7 @@ const Component = ({
               ${!defaultChecked ? 'bg-white' : 'bg-[var(--primary-4)]'}`}
             defaultChecked={defaultChecked}
             id={id}
+            name={name}
             onChange={onChange}
           >
             <Checkbox.Indicator className="text-violet11">
@@ -35,17 +36,21 @@ const Component = ({
               />
             </Checkbox.Indicator>
           </Checkbox.Root>
+          {/* Native input used by Form.Control for validation */}
         </Form.Control>
         <span>{label}</span>
       </label>
       <Form.Message
-        match={'valueMissing'}
+        match="valueMissing"
         // match={(value, _formData) => {
+        //   console.log('value', value);
+        //   console.log('value', _formData);
+
         //   return value == 'on';
         // }}
         className="text-red-500 text-xs"
       >
-        {message || "Please select an option"}
+        {message || 'Please select an option'}
       </Form.Message>
     </Form.Field>
   );

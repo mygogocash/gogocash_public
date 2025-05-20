@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import InfoIcon from '../../../icons/InfoIcon';
 import Button from '@/components/common/button';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { MenuHeader } from './constants';
 import WalletIcon from '@/components/icons/WalletIcon';
 import IconButton from '@/components/common/IconButton';
@@ -10,33 +10,20 @@ import Drawer from '@/components/common/drawer';
 import BeforeLogin from '@/features/desktop/profile/views/form';
 import { AlignJustifyIcon } from 'lucide-react';
 import MenuProfile from '@/features/desktop/profile/views/menuProfile';
-import { signIn, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { Notification } from '@/features/desktop/notification';
 import NotificationIcon from '@/components/icons/NotificationIcon';
 import Help from '@/features/desktop/help';
-import { useWallet } from '@crossmint/client-sdk-react-ui';
 
 const Component = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [isOpenNotification, setIsOpenNotification] = React.useState(false);
   const [isOpenHelpCenter, setIsOpenHelpCenter] = React.useState(false);
-  const { wallet, status } = useWallet();
   const { data } = useSession();
 
   const checkLogIn = useCallback(() => {
     return data?.user;
   }, [data?.user]);
-
-  useEffect(() => {
-    if (status === 'loaded') {
-      console.log('wallet', wallet, status);
-      signIn('credentials', {
-        wallet: wallet.address,
-        redirect: true,
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [status]);
 
   return (
     <header className="h-[82px] bg-white py-[16px] shadow-lg sticky top-0 z-[9] w-full md:block hidden">

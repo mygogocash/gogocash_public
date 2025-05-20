@@ -13,4 +13,6 @@ export interface IProp {
   endIcon?: ReactNode;
   textRight?: boolean;
   onChange?: ChangeEventHandler<HTMLInputElement>;
+  pattern?: string;
+  minLength?: number;
 }

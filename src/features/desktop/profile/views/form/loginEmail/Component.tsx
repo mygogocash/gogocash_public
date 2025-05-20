@@ -8,12 +8,10 @@ import * as Form from '@radix-ui/react-form';
 import { Eye, EyeClosed } from 'lucide-react';
 import { IProp } from './interface';
 import { useRouter } from 'next/navigation';
-import { signIn } from 'next-auth/react';
-import { signinEmail } from '@/lib/services/auth';
+import useSignIn from './hook/useSignin';
 
 const Component = ({ _isOpen, setIsOpen }: IProp) => {
-  const [showPassword, setShowPassword] = React.useState(false);
-
+  const { signInEmail, showPassword, setShowPassword } = useSignIn();
   const router = useRouter();
   return (
     <div className="p-[48px] flex items-start justify-center flex-col w-full h-full space-y-10">
@@ -27,25 +25,7 @@ const Component = ({ _isOpen, setIsOpen }: IProp) => {
         onSubmit={async (event) => {
           event.preventDefault();
           const formData = new FormData(event.currentTarget);
-          const res = await signinEmail({
-            identity: formData.get('email') as string,
-            password: formData.get('password') as string,
-          });
-
-          if (res.data) {
-            signIn('credentials', {
-              email: res.data.user.email,
-              name: res.data.user.username,
-              id: res.data.user.id,
-              type: 'email',
-              user: JSON.stringify(res.data.user),
-              access_token: res.data.access_token,
-              expires: JSON.stringify(res.data.expires),
-              refresh_token: res.data.refresh_token,
-              redirect: true,
-              callbackUrl: '/',
-            });
-          }
+          signInEmail(formData);
         }}
       >
         {/* Label + Input */}

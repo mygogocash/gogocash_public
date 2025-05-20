@@ -49,3 +49,13 @@ export interface IDataSignUp {
 }
 
 export type IResponseMe = IResponseSignUp;
+
+export interface RequestSignup {
+  username: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  password: string;
+  condition: string;
+}

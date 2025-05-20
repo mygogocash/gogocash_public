@@ -1,26 +1,32 @@
+'use client';
 import React, { memo } from 'react';
 import { Title } from '../title';
 import * as Form from '@radix-ui/react-form';
 import TextField from '@/components/common/textField';
 import Button from '@/components/common/button';
 import TitleSeparator from '@/components/common/titleSeparator';
-import { Eye, EyeClosed } from 'lucide-react';
+import { Eye, EyeClosed, LoaderCircle } from 'lucide-react';
 import Checkbox from '@/components/common/checkbox';
 import Drawer from '@/components/common/drawer';
-import BeforeLogin from '../beforeLogin';
-import { signinEmail, signup } from '@/lib/services/auth';
-import toast from 'react-hot-toast';
-import { signIn } from 'next-auth/react';
+import useSignUp from './hook/useSignup';
+import LoginAll from '..';
 
 const Component = () => {
-  const [showPassword, setShowPassword] = React.useState(false);
-  const [checked] = React.useState<boolean>(false);
-  const [isOpen, setIsOpen] = React.useState(false);
+  const {
+    isOpen,
+    setIsOpen,
+    signUp,
+    showPassword,
+    setShowPassword,
+    checked,
+    isSubmitting,
+    setChecked,
+  } = useSignUp();
   // const { data, error, isLoading, mutate } = useSWR(`/auth/signup`, fetcherPost);
   return (
     <div className="container-inner md:space-y-20 space-y-8 md:my-[88px] my-[10px]">
       <Drawer isOpen={isOpen} setIsOpen={setIsOpen}>
-        <BeforeLogin title={''} subTitle={''} />
+        <LoginAll handleModal={setIsOpen} />
       </Drawer>
       <div className="grid md:grid-cols-2  justify-between">
         <Title
@@ -38,46 +44,7 @@ const Component = () => {
               // formData.
               delete formData.condition;
               const pass = formData.get('password');
-              try {
-                const response = await signup(formData);
-                console.log('response', response);
-                if (response.success) {
-                  toast.success('Create account successfully');
-                  const user = response.data;
-                  console.log('user', user);
-                  console.log('formData.password', pass);
-                  // setIsOpen(true);
-                  const res = await signinEmail({
-                    identity: user.email,
-                    password: pass,
-                  });
-
-                  console.log('res', res);
-                  if (res.data) {
-                    signIn('credentials', {
-                      email: user.email,
-                      // password: pass,
-                      name: user.username,
-                      id: user.id,
-                      type: 'email',
-                      user: JSON.stringify(res.data.user),
-                      access_token: res.data.access_token,
-                      expires: JSON.stringify(res.data.expires),
-                      refresh_token: res.data.refresh_token,
-                      redirect: true,
-                      callbackUrl: '/',
-                    });
-                  }
-                  
-                } else {
-                  toast.error(
-                    response.error?.message || 'Create account failed'
-                  );
-                }
-              } catch (error) {
-                console.log('error', error);
-                toast.error('Create account failed');
-              }
+              signUp(formData, pass);
             }}
           >
             {/* Label + Input */}
@@ -130,6 +97,8 @@ const Component = () => {
                 label="Password"
                 placeholder="Password"
                 required
+                minLength={8}
+                pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
                 endIcon={
                   showPassword ? (
                     <Eye onClick={() => setShowPassword(!showPassword)} />
@@ -145,13 +114,28 @@ const Component = () => {
               name="condition"
               id="condition"
               label="I have read and understand Privacy Policy"
-              required
+              required={true}
+              message='Please check "I have read and understand Privacy Policy"'
+              onChange={function (): void {
+                setChecked(!checked);
+              }}
             />
+            {/* {checked ? null : (
+              <span className="text-red-500 text-xs">
+                {'Please select an option'}
+              </span>
+            )} */}
+
             {/* Submit Button */}
             <Form.Submit asChild>
               <Button
+                icon={
+                  isSubmitting ? (
+                    <LoaderCircle className="animate-spin" />
+                  ) : null
+                }
                 type="submit"
-                disabled={false}
+                disabled={isSubmitting}
                 backgroundColor="bg-[var(--primary-4)] text-white rounded-full h-[56px]"
                 text="Sign Up"
                 fullWidth

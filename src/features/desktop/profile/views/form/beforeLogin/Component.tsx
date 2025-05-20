@@ -1,6 +1,6 @@
 import Button from '@/components/common/button';
 import TitleSeparator from '@/components/common/titleSeparator';
-import Facebook2Icon from '@/components/icons/Facebook2Icon';
+// import Facebook2Icon from '@/components/icons/Facebook2Icon';
 import GoogleIcon from '@/components/icons/GoogleIcon';
 import { Mail, Wallet } from 'lucide-react';
 import React, { memo } from 'react';
@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { IProps } from './interface';
 import { signIn } from 'next-auth/react';
 import { BlockchainTypes, CrossmintEVMWalletAdapter } from '@crossmint/connect';
+import { useCrossmintLoginContext } from '@/providers/CrossmintLoginContext';
 import { useAuth } from '@crossmint/client-sdk-react-ui';
 
 const Component = ({
@@ -20,8 +21,7 @@ const Component = ({
   handleModal,
 }: IProps) => {
   const router = useRouter();
-  const { login } = useAuth();
-
+  const { login } = useCrossmintLoginContext();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async function handleLoginWallet() {
     const crossmintConnect = new CrossmintEVMWalletAdapter({
@@ -55,11 +55,14 @@ const Component = ({
           backgroundColor="bg-white text-black border-[var(--grey-2)] border"
           text={`${isLogin ? 'Login' : 'Sign up'} with Google`}
           onClick={function (): void {
-            signIn('google');
+            // signIn('google');
+            handleModal?.(false);
+            // handleLoginWallet();
+            login();
           }}
           fullWidth
         />
-        <Button
+        {/* <Button
           icon={<Facebook2Icon />}
           backgroundColor="bg-white text-black border-[var(--grey-2)] border"
           text={`${isLogin ? 'Login' : 'Sign up'} with Facebook`}
@@ -67,7 +70,7 @@ const Component = ({
             signIn('facebook');
           }}
           fullWidth
-        />
+        /> */}
         <Button
           icon={<Mail />}
           backgroundColor="bg-white text-black border-[var(--grey-2)] border"

@@ -16,6 +16,8 @@ const Component = ({
   endIcon,
   textRight,
   onChange,
+  pattern,
+  minLength,
 }: IProp) => {
   return (
     <Form.Field name={name}>
@@ -29,6 +31,8 @@ const Component = ({
           </div>
           <Form.Control asChild>
             <input
+              pattern={pattern}
+              minLength={minLength}
               defaultValue={defaultValue}
               disabled={disabled}
               type={type}
@@ -56,6 +60,9 @@ const Component = ({
             Please enter a valid email.
           </Form.Message>
         )}
+        <Form.Message match="patternMismatch" className="text-red-500 text-xs">
+          Password must include at least one number and be 8+ characters long.
+        </Form.Message>
       </div>
     </Form.Field>
   );
