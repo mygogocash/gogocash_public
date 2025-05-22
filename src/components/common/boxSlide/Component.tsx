@@ -25,28 +25,29 @@ const Component = ({ title, onClick, icon, list }: IProp) => {
         <section className="embla">
           <div className="embla__viewport" ref={emblaRef}>
             <div className="embla__container">
-              {list && list?.map((ele, index) => (
-                <div
-                  className="embla__slide"
-                  key={index}
-                  onClick={() => {
-                    router.push(`${ele}`);
-                  }}
-                >
-                  <div className="embla__slide__number">
-                    <div className="w-full  flex items-center justify-center flex-col h-[272px]">
-                      <CardProduct
-                        _image={ele.pic}
-                        _productName={ele.name}
-                        _shopName={ele.shopName}
-                        percent={ele.percent}
-                        link={ele.link}
-                        type={ele.type}
-                      />
+              {list &&
+                list?.map((ele, index) => (
+                  <div
+                    className="embla__slide"
+                    key={index}
+                    onClick={() => {
+                      router.push(`${ele}`);
+                    }}
+                  >
+                    <div className="embla__slide__number">
+                      <div className="w-full  flex items-center justify-center flex-col h-[272px]">
+                        <CardProduct
+                          _image={ele.pic}
+                          _productName={ele.name}
+                          _shopName={ele.shopName}
+                          percent={ele.percent}
+                          link={ele.link}
+                          type={ele.type}
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
         </section>

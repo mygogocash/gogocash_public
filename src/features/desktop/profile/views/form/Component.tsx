@@ -14,7 +14,11 @@ const Component = ({
   return (
     <>
       {isOpen === 'login' ? (
-        <LoginEmail setIsOpen={setIsOpen} _isOpen={isOpen} handleModal={handleModal} />
+        <LoginEmail
+          setIsOpen={setIsOpen}
+          _isOpen={isOpen}
+          handleModal={handleModal}
+        />
       ) : isOpen === 'forgot' ? (
         <ForgotPassword setIsOpen={setIsOpen} _isOpen={isOpen} />
       ) : (

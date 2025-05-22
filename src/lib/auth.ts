@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { AuthOptions, User } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import FacebookProvider from 'next-auth/providers/facebook';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { JWT } from 'next-auth/jwt';
+// import { JWT } from 'next-auth/jwt';
 import { IDataSignIn } from '@/features/desktop/profile/views/form/signUp/interface';
 
 declare module 'next-auth' {
@@ -69,11 +70,9 @@ export const authOptions: AuthOptions = {
         access_token: token.access_token,
         user: {
           ...token,
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           user: (token.user as any).user
             ? JSON.parse((token.user as any).user?.toString())
             : null,
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           expires: (token.user as any).expires
             ? JSON.parse((token.user as any).expires?.toString())
             : null,

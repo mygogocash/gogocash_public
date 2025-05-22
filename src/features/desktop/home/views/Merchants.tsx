@@ -13,24 +13,24 @@ const Merchants = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const cacheMerchants = customCache.get('/merchants');
   // console.log('cacheMerchants', cacheMerchants);
-  
-  const { data: dataMerchants, error, isLoading } = useSWR<IResponseMerchants>(
-    `/merchants`,
-    fetcher,
-    {
-      revalidateOnFocus: false,
-    }
-  );
+
+  const {
+    data: dataMerchants,
+    error,
+    isLoading,
+  } = useSWR<IResponseMerchants>(`/merchants`, fetcher, {
+    revalidateOnFocus: false,
+  });
   const merchants = useMemo(() => {
     return (
-      dataMerchants?.data?.items?.map((item) => ({
+      (dataMerchants?.data?.items?.map((item) => ({
         pic: item.logo,
         percent: Number(item.cashbackPercent.toFixed(2)),
         name: item.name,
         shopName: item.name,
         link: `/shop/${item.slug}`,
         type: item.type?.toUpperCase(),
-      })) as IList[] || []
+      })) as IList[]) || []
     );
   }, [dataMerchants]);
 

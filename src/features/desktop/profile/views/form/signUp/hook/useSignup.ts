@@ -61,7 +61,7 @@ const useSignUp = () => {
     setIsOpen,
     isSubmitting,
     setIsSubmitting,
-    setChecked
+    setChecked,
   };
 };
 

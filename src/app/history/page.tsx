@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 // });
 const HistoryPage = () => {
   const router = useRouter();
-  
+
   return (
     <>
       <HeaderMobile

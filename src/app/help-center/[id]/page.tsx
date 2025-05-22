@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { HeaderMobile } from '@/components/layouts/mobile/header';
 import HelpDetail from '@/features/desktop/help/detail';
 import { CircleHelp } from 'lucide-react';
