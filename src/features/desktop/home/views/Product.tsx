@@ -8,13 +8,14 @@ import { useMemo } from 'react';
 import { IList } from '@/components/common/boxSlide/interface';
 const Product = () => {
   const router = useRouter();
-  const { data: dataCampaigns, error, isLoading } = useSWR<IResponseCampaigns>(
+  const { data: dataCampaigns } = useSWR<IResponseCampaigns>(
     `/campaigns`,
     fetcher,
     {
       revalidateOnFocus: false,
     }
   );
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const campaigns = useMemo(() => {
     return (
       (dataCampaigns?.data?.map((item) => ({
@@ -28,7 +29,7 @@ const Product = () => {
     );
   }, [dataCampaigns]);
 
-  const { data: dataMerchants} = useSWR<IResponseMerchants>(
+  const { data: dataMerchants } = useSWR<IResponseMerchants>(
     `/merchants`,
     fetcher,
     {
@@ -37,17 +38,17 @@ const Product = () => {
   );
   const merchants = useMemo(() => {
     return (
-      dataMerchants?.data?.items?.map((item) => ({
+      (dataMerchants?.data?.items?.map((item) => ({
         pic: item.logo,
         percent: Number(item.cashbackPercent.toFixed(2)),
         name: item.name,
         shopName: item.name,
         link: `/shop/${item.slug}`,
         type: item.type?.toUpperCase(),
-      })) as IList[] || []
+      })) as IList[]) || []
     );
   }, [dataMerchants]);
-  
+
   return (
     <>
       <BoxSlide

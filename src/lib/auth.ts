@@ -1,9 +1,9 @@
-import { AuthOptions, Session, User } from 'next-auth';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { AuthOptions, User } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import FacebookProvider from 'next-auth/providers/facebook';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { JWT } from 'next-auth/jwt';
-import axios from 'axios';
 import { IDataSignIn } from '@/features/desktop/profile/views/form/signUp/interface';
 
 declare module 'next-auth' {
@@ -14,7 +14,7 @@ declare module 'next-auth' {
     firstName: string;
   }
   interface Session {
-    user: IDataSignIn
+    user: IDataSignIn;
   }
 }
 export const authOptions: AuthOptions = {
@@ -66,13 +66,17 @@ export const authOptions: AuthOptions = {
 
       return {
         ...session,
-        access_token: token.access_token ,
+        access_token: token.access_token,
         user: {
           ...token,
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          user: (token.user as any).user ? JSON.parse((token.user as any).user?.toString()) : null,
+          user: (token.user as any).user
+            ? JSON.parse((token.user as any).user?.toString())
+            : null,
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          expires: (token.user as any).expires ? JSON.parse((token.user as any).expires?.toString()): null,
+          expires: (token.user as any).expires
+            ? JSON.parse((token.user as any).expires?.toString())
+            : null,
         },
       };
     },

@@ -10,7 +10,6 @@ import { IProps } from './interface';
 import { signIn } from 'next-auth/react';
 import { BlockchainTypes, CrossmintEVMWalletAdapter } from '@crossmint/connect';
 import { useCrossmintLoginContext } from '@/providers/CrossmintLoginContext';
-import { useAuth } from '@crossmint/client-sdk-react-ui';
 
 const Component = ({
   title,
