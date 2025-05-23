@@ -3,12 +3,15 @@ import { signIn } from 'next-auth/react';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { RequestSignup } from '../interface';
+import { useCrossmintLoginContext } from '@/providers/CrossmintLoginContext';
 
 const useSignUp = () => {
   const [showPassword, setShowPassword] = React.useState(false);
   const [checked, setChecked] = React.useState<boolean>(false);
   const [isOpen, setIsOpen] = React.useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { login } = useCrossmintLoginContext();
+
   const signUp = async (formData: RequestSignup, pass: string) => {
     try {
       setIsSubmitting(true);
@@ -62,6 +65,7 @@ const useSignUp = () => {
     isSubmitting,
     setIsSubmitting,
     setChecked,
+    login
   };
 };
 

@@ -10,6 +10,7 @@ import Checkbox from '@/components/common/checkbox';
 import Drawer from '@/components/common/drawer';
 import useSignUp from './hook/useSignup';
 import LoginAll from '..';
+import Image from 'next/image';
 
 const Component = () => {
   const {
@@ -21,7 +22,9 @@ const Component = () => {
     checked,
     isSubmitting,
     setChecked,
+    login,
   } = useSignUp();
+
   // const { data, error, isLoading, mutate } = useSWR(`/auth/signup`, fetcherPost);
   return (
     <div className="container-inner md:space-y-20 space-y-8 md:my-[88px] my-[10px]">
@@ -143,6 +146,27 @@ const Component = () => {
               />
             </Form.Submit>
           </Form.Root>
+          <div className="w-full space-y-8">
+            <TitleSeparator text={`Sign up with`} />
+            <Button
+              icon={
+                <Image
+                  src={`/crossmint/logo.png`}
+                  alt="crossmint"
+                  className={`crossmint_logo`}
+                  width={24}
+                  height={24}
+                />
+              }
+              backgroundColor="bg-white text-black border-[var(--grey-2)] border"
+              text="Connect with Crossmint"
+              onClick={async function (): Promise<void> {
+                // handleLoginWallet();
+                login();
+              }}
+              fullWidth
+            />
+          </div>
           <div className="w-full space-y-8">
             <TitleSeparator text="You already have an account?" />
 
