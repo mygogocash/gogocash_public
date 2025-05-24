@@ -1,5 +1,6 @@
 import {
   IRequestSignIGoogle,
+  IRequestSignInCrossmint,
   IRequestSignInWeb3,
   IRequestSignUp,
   IResponseLogin,
@@ -66,6 +67,18 @@ export const signInGoogleCrossmint = (formData: IRequestSignIGoogle) =>
   new Promise<IResponseLogin>((resolve, reject) => {
     client
       .post(`/auth/google/signin`, formData)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((_error) => {
+        reject(_error);
+      });
+  });
+
+export const signInCrossmint = (formData: IRequestSignInCrossmint) =>
+  new Promise<IResponseLogin>((resolve, reject) => {
+    client
+      .post(`/auth/web3/crossmint/validate`, formData)
       .then((response) => {
         resolve(response.data);
       })

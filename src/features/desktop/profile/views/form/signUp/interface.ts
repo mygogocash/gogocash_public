@@ -70,3 +70,7 @@ export interface IRequestSignInWeb3 {
 export interface IRequestSignIGoogle {
   idToken: string;
 }
+
+export interface IRequestSignInCrossmint {
+  token: string;
+}
