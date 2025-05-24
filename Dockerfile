@@ -3,12 +3,18 @@ FROM node:20-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
-RUN apk add --no-cache libc6-compat curl
+RUN apk add --no-cache \
+    libc6-compat \
+    curl \
+    python3 \
+    make \
+    g++ \
+    && rm -rf /var/cache/apk/*
 WORKDIR /app
 
 # Configure yarn for better performance and network handling
-RUN yarn config set network-timeout 300000 && \
-    yarn config set network-concurrency 8 && \
+RUN yarn config set network-timeout 600000 && \
+    yarn config set network-concurrency 1 && \
     yarn config set registry https://registry.npmjs.org/ && \
     yarn config set cache-folder /usr/local/share/.cache/yarn
 
@@ -16,9 +22,10 @@ RUN yarn config set network-timeout 300000 && \
 COPY package.json yarn.lock ./
 
 # Install dependencies with yarn and enable caching
+# Use legacy peer deps to handle dependency conflicts
 RUN --mount=type=cache,target=/usr/local/share/.cache/yarn \
     echo "Installing dependencies with yarn..." && \
-    yarn install --frozen-lockfile --prefer-offline --silent
+    yarn install --frozen-lockfile --prefer-offline --legacy-peer-deps
 
 # Development stage
 FROM base AS development
