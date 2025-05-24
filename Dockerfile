@@ -3,17 +3,22 @@ FROM node:20-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
-RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache libc6-compat curl
 WORKDIR /app
 
-# Install dependencies based on the preferred package manager
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
-RUN \
-    if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-    elif [ -f package-lock.json ]; then npm ci; \
-    elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \
-    else echo "Lockfile not found." && exit 1; \
-    fi
+# Configure yarn for better performance and network handling
+RUN yarn config set network-timeout 300000 && \
+    yarn config set network-concurrency 8 && \
+    yarn config set registry https://registry.npmjs.org/ && \
+    yarn config set cache-folder /usr/local/share/.cache/yarn
+
+# Copy package files first for better Docker layer caching
+COPY package.json yarn.lock ./
+
+# Install dependencies with yarn and enable caching
+RUN --mount=type=cache,target=/usr/local/share/.cache/yarn \
+    echo "Installing dependencies with yarn..." && \
+    yarn install --frozen-lockfile --prefer-offline --silent
 
 # Development stage
 FROM base AS development
@@ -29,7 +34,7 @@ EXPOSE 3000
 ENV PORT 3000
 
 # Start development server
-CMD ["npm", "run", "dev"]
+CMD ["yarn", "dev"]
 
 # Rebuild the source code only when needed
 FROM base AS builder
@@ -40,13 +45,8 @@ COPY . .
 # Disable Next.js telemetry during build
 ENV NEXT_TELEMETRY_DISABLED 1
 
-# Build application
-RUN \
-    if [ -f yarn.lock ]; then yarn run build; \
-    elif [ -f package-lock.json ]; then npm run build; \
-    elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm run build; \
-    else echo "Lockfile not found." && exit 1; \
-    fi
+# Build application with output optimization
+RUN yarn build
 
 # Production image, copy all the files and run next
 FROM base AS production
