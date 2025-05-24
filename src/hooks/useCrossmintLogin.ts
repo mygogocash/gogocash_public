@@ -14,7 +14,6 @@ const useCrossmintLogin = () => {
     console.log('user', user);
     console.log('statusAuth', statusAuth);
     // @TODO signin crossmint  ======= signin to backend and signIn next-auth ======
-
     if (
       window.sessionStorage.getItem('isAfterLogin') === 'true' &&
       statusAuth === 'logged-in' &&
