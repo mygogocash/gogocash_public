@@ -1,9 +1,5 @@
-import { signInGoogleCrossmint, signInWeb3 } from '@/lib/services/auth';
-import {
-  EVMSmartWallet,
-  useAuth,
-  useWallet,
-} from '@crossmint/client-sdk-react-ui';
+import { signInCrossmint } from '@/lib/services/auth';
+import { useAuth, useWallet } from '@crossmint/client-sdk-react-ui';
 import { signIn, signOut } from 'next-auth/react';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
@@ -25,15 +21,15 @@ const useCrossmintLogin = () => {
       user
     ) {
       console.log('wallet', wallet, status);
-      signInGG();
+      signInCrossmin();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
-  const signInGG = async () => {
+  const signInCrossmin = async () => {
     if (jwt)
-      signInGoogleCrossmint({
-        idToken: jwt,
+      signInCrossmint({
+        token: jwt,
       })
         .then((response) => {
           console.log('response', response);
@@ -69,60 +65,10 @@ const useCrossmintLogin = () => {
 
   useEffect(() => {
     if (wallet && window.sessionStorage.getItem('isAfterLogin') === 'true') {
-      signInWallet(wallet as EVMSmartWallet);
+      signInCrossmin();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [wallet]);
-
-  const signInWallet = async (wallet: EVMSmartWallet) => {
-    if (jwt && wallet) {
-      wallet
-        .signMessage({
-          message: `Login to GoGoCash with wallet ${wallet.address}`,
-          chain: 'mode',
-        })
-        .then((signature) => {
-          signInWeb3({
-            crossmintToken: jwt,
-            message: `Login to GoGoCash with wallet ${wallet.address}`,
-            provider: 'crossmint',
-            signature: signature,
-            walletAddress: wallet.address,
-          })
-            .then((response) => {
-              console.log('response', response);
-              if (response.success) {
-                const user = response.data.user;
-                const res = response;
-                // @TODO signin crossmint  ======= signin to backend and signIn next-auth ======
-                signIn('credentials', {
-                  email: user.email,
-                  // password: pass,
-                  name: user.username,
-                  id: user.id,
-                  type: 'email',
-                  user: JSON.stringify(res.data.user),
-                  access_token: res.data.access_token,
-                  expires: JSON.stringify(res.data.expires),
-                  refresh_token: res.data.refresh_token,
-                  redirect: true,
-                  callbackUrl: '/',
-                });
-              } else {
-                toast.error(response?.error?.message || 'Error');
-              }
-            })
-            .catch((error) => {
-              console.log('error', error);
-              toast.error(error.message);
-            })
-            .finally(() => {
-              window.sessionStorage.setItem('isAfterLogin', 'false');
-            });
-        });
-    }
-  };
-
   const signOutAuth = () => {
     crossmintAuth.logout();
     signOut();
