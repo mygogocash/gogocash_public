@@ -3,6 +3,9 @@ const nextConfig = {
   // Enable React strict mode for better development experience
   reactStrictMode: true,
 
+  // Support for external modules transpilation
+  transpilePackages: ['lucid-cardano', '@crossmint/connect'],
+
   // Modern image optimization
   images: {
     remotePatterns: [
@@ -24,7 +27,7 @@ const nextConfig = {
   },
 
   // Webpack configuration
-  webpack: (config, { dev, isServer }) => {
+  webpack: (config, { dev }) => {
     // Optimize bundle size
     config.optimization = {
       ...config.optimization,
@@ -50,6 +53,13 @@ const nextConfig = {
       },
     };
 
+    // Handle async/await and top-level await for external modules
+    config.experiments = {
+      ...config.experiments,
+      topLevelAwait: true,
+      asyncWebAssembly: true,
+    };
+
     // Optimize module resolution
     config.resolve = {
       ...config.resolve,
@@ -59,8 +69,22 @@ const nextConfig = {
         module: false,
         path: false,
         os: false,
+        crypto: false,
+        stream: false,
+        http: false,
+        https: false,
+        zlib: false,
+        url: false,
       },
     };
+
+    // Handle specific problematic modules
+    config.module.rules.push({
+      test: /\.m?js$/,
+      resolve: {
+        fullySpecified: false,
+      },
+    });
 
     // Minimize output in production
     if (!dev) {
