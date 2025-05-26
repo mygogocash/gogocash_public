@@ -38,7 +38,7 @@ export default function Index() {
         <Home />
       </div>
       <div
-        className={`w-full md:hidden block flex flex-col items-center justify-center`}
+        className={`w-full md:hidden  flex flex-col items-center justify-center`}
       >
         {showIntro ? <IntroMobile setIntro={setShowIntro} /> : <HomeMobile />}
       </div>
