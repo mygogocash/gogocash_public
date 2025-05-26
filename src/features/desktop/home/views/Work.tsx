@@ -1,5 +1,7 @@
 import BadgeList from '@/components/common/badgeList';
-import WalletIcon from '@/components/icons/NotificationIcon';
+import CartIcon from '@/components/icons/CartIcon';
+import CoinIcon from '@/components/icons/CoinIcon';
+import WalletIcon from '@/components/icons/WalletIcon';
 
 const Work = () => {
   return (
@@ -11,19 +13,20 @@ const Work = () => {
       <BadgeList
         list={[
           {
-            icon: <WalletIcon />,
+            icon: <CartIcon />,
+            title: 'Shop',
+            subTitle:
+              'Shop with you favorite merchants and complete the purchases',
+          },
+          {
+            icon: <CoinIcon />,
             title: 'Earn',
-            subTitle: 'Earn your cashback on every spend up to 30%',
+            subTitle: 'Earn your cashback on every spend up to  30%',
           },
           {
-            icon: <WalletIcon />,
-            title: 'Redeem',
-            subTitle: 'Redeem your cashback on every spend up to 30%',
-          },
-          {
-            icon: <WalletIcon />,
-            title: 'Wallet',
-            subTitle: 'Wallet',
+            icon: <WalletIcon width={51} height={52} strokeWidth={2} />,
+            title: 'Claim',
+            subTitle: 'Claim earning anytime to your wallet',
           },
         ]}
       />
