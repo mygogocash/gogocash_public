@@ -14,12 +14,14 @@ import { useSession } from 'next-auth/react';
 import { Notification } from '@/features/desktop/notification';
 import NotificationIcon from '@/components/icons/NotificationIcon';
 import Help from '@/features/desktop/help';
+import { useCrossmintLoginContext } from '@/providers/CrossmintLoginContext';
 
 const Component = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [isOpenNotification, setIsOpenNotification] = React.useState(false);
   const [isOpenHelpCenter, setIsOpenHelpCenter] = React.useState(false);
   const { data } = useSession();
+  const { login } = useCrossmintLoginContext();
 
   const checkLogIn = useCallback(() => {
     return data?.user;
@@ -89,7 +91,8 @@ const Component = () => {
                 backgroundColor="bg-[var(--primary-4)] text-white"
                 text="Hi! Log in or Sign up here"
                 onClick={function (): void {
-                  setIsOpen(!isOpen);
+                  login();
+                  // setIsOpen(!isOpen);
                   // throw new Error('Function not implemented.');
                 }}
               />
