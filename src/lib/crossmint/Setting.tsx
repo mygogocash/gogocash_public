@@ -7,31 +7,21 @@ import {
 
 export const customCache = new Map();
 const Setting = ({ children }: { children: ReactNode }) => {
-  // Skip Crossmint in development if no valid API key
-  const apiKey = process.env.NEXT_PUBLIC_CROSSMINT_API_KEY;
-  const isValidApiKey =
-    apiKey && apiKey.startsWith('ck_') && apiKey.length > 20;
-
-  if (!isValidApiKey) {
-    console.warn(
-      '⚠️ Crossmint API key not configured properly. Skipping Crossmint providers in development.'
-    );
-    return <>{children}</>;
-  }
+  // Get Crossmint configuration
+  const clientSecret = process.env.NEXT_PUBLIC_CROSSMINT_CLIENT_SECRET || '';
 
   return (
-    <CrossmintProvider apiKey={apiKey}>
+    <CrossmintProvider apiKey={clientSecret}>
       <CrossmintAuthProvider
         embeddedWallets={{
           type: 'evm-smart-wallet',
           createOnLogin: 'all-users',
         }}
         onLoginSuccess={() => {
-          console.log('onLoginSuccess');
-          //   setIsAfterLogin(true);
+          console.log('🎉 Crossmint onLoginSuccess triggered');
           window.sessionStorage.setItem('isAfterLogin', 'true');
         }}
-        loginMethods={['web3', 'google']} // Only show email, Google, and Farcaster login methods
+        loginMethods={['email', 'google', 'twitter', 'web3']}
       >
         <>{children}</>
       </CrossmintAuthProvider>

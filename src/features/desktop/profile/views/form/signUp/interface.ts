@@ -74,3 +74,11 @@ export interface IRequestSignIGoogle {
 export interface IRequestSignInCrossmint {
   token: string;
 }
+
+export interface IRequestSignInWeb3Crossmint {
+  walletAddress: string;
+  signature: string;
+  message: string;
+  provider: string;
+  crossmintToken: string;
+}

@@ -30,17 +30,37 @@ RUN --mount=type=cache,target=/usr/local/share/.cache/yarn \
 # Development stage
 FROM base AS development
 WORKDIR /app
+
+# Install development tools
+RUN apk add --no-cache curl
+
+# Copy dependencies
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Disable Next.js telemetry
-ENV NEXT_TELEMETRY_DISABLED 1
+# Create non-root user for development
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+RUN chown -R nextjs:nodejs /app
+
+# Switch to non-root user
+USER nextjs
+
+# Development environment variables
+ENV NEXT_TELEMETRY_DISABLED=1 \
+    NODE_ENV=development \
+    PORT=3000 \
+    WATCHPACK_POLLING=true \
+    CHOKIDAR_USEPOLLING=true
 
 # Expose port
 EXPOSE 3000
-ENV PORT 3000
 
-# Start development server
+# Health check for development
+HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
+    CMD curl -f http://localhost:3000/api/health || exit 1
+
+# Start development server with hot reload
 CMD ["yarn", "dev"]
 
 # Rebuild the source code only when needed

@@ -54,7 +54,7 @@ export const me = (id: string) =>
 export const signInWeb3 = (formData: IRequestSignInWeb3) =>
   new Promise<IResponseLogin>((resolve, reject) => {
     client
-      .post<IResponseLogin>(`/auth/web3/login`, formData)
+      .post<IResponseLogin>(`/v1/auth/web3/login`, formData)
       .then((response) => {
         resolve(response.data);
       })
@@ -75,14 +75,55 @@ export const signInGoogleCrossmint = (formData: IRequestSignIGoogle) =>
       });
   });
 
-export const signInCrossmint = (formData: IRequestSignInCrossmint) =>
+export const signInCrossmint = (
+  formData: IRequestSignInCrossmint & { walletAddress?: string }
+) =>
   new Promise<IResponseLogin>((resolve, reject) => {
+    // Prepare the request payload with proper validation
+    const payload = {
+      walletAddress: formData.walletAddress || '',
+      signature: '', // Not required for Crossmint authentication
+      message: '', // Not required for Crossmint authentication
+      provider: 'crossmint',
+      crossmintToken: formData.token,
+    };
+
+    console.log('Sending Crossmint login request:', {
+      ...payload,
+      crossmintToken: payload.crossmintToken ? '[REDACTED]' : 'undefined',
+    });
+
     client
-      .post(`/auth/web3/crossmint/validate`, formData)
+      .post<IResponseLogin>(`/v1/auth/web3/login`, payload)
       .then((response) => {
+        console.log('Crossmint login successful:', {
+          success: response.data.success,
+          userId: response.data.data?.user?.id,
+          hasAccessToken: !!response.data.data?.access_token,
+        });
         resolve(response.data);
       })
-      .catch((_error) => {
-        reject(_error);
+      .catch((error) => {
+        console.error('Crossmint login failed:', {
+          status: error.response?.status,
+          message: error.response?.data?.message || error.message,
+          data: error.response?.data,
+        });
+
+        // Enhance error message for better user experience
+        const enhancedError = {
+          ...error,
+          response: {
+            ...error.response,
+            data: {
+              ...error.response?.data,
+              message:
+                error.response?.data?.message ||
+                'Authentication failed. Please try again.',
+            },
+          },
+        };
+
+        reject(enhancedError);
       });
   });
