@@ -1,9 +1,7 @@
 import Button from '@/components/common/button';
-import IconButton from '@/components/common/IconButton';
 import { TitleMobile } from '@/components/mobile/title';
 import Search from '@/features/desktop/search';
-import { HeartFilledIcon } from '@radix-ui/react-icons';
-import { CircleHelp, Tag } from 'lucide-react';
+import { CircleHelp } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -13,6 +11,8 @@ import Deals from './views/Deals';
 import { HOME_MOBILE_TYPE } from './constant';
 import useCountdown from '@/hooks/useCountdown';
 import { HeaderMobile } from '@/components/layouts/mobile/header';
+import ListFilter from './views/ListFilter';
+import { CardProductMobile } from '@/components/mobile/cardProductMobile';
 
 const Component = () => {
   const router = useRouter();
@@ -91,46 +91,11 @@ const Component = () => {
         </div>
       </div>
 
-      <div className="flex items-center justify-between gap-3 w-full mt-10 p-[16px]">
-        {HOME_MOBILE_TYPE.map((ele, index) => {
-          return (
-            <div
-              key={index}
-              className="flex items-center justify-center flex-col gap-2"
-              onClick={() => {
-                setActive(ele.label);
-              }}
-            >
-              <div
-                className={`w-[65px] h-[65px] rounded-full ${
-                  active === ele.label
-                    ? 'bg-[var(--primary-4)]'
-                    : 'bg-[var(--primary-2)]'
-                } flex items-center justify-center`}
-              >
-                <IconButton
-                  icon={
-                    <ele.icon
-                      className={`${ele.label === 'All' ? 'rotate-45' : ''}`}
-                      stroke={active === ele.label ? 'white' : '#00B14F'}
-                      size={30}
-                    />
-                  }
-                />
-              </div>
-              <p
-                className={`text-center ${
-                  active === ele.label
-                    ? 'text-[var(--primary-4)]'
-                    : 'text-[var(--black-3)]'
-                } text-[12px] font-medium`}
-              >
-                {ele.label}
-              </p>
-            </div>
-          );
-        })}
-      </div>
+      <ListFilter
+        active={active}
+        setActive={setActive}
+        list={HOME_MOBILE_TYPE}
+      />
       {/* countdown */}
       <div className="relative bg-[--primary-4] relative rounded-[8px] min-h-[60px] m-[16px] flex items-center justify-between px-[13px] py-[5px]">
         <Image
@@ -192,45 +157,15 @@ const Component = () => {
       <div className="px-[16px] space-y-2">
         {[1, 2, 3, 4].map((ele, index) => {
           return (
-            <div
-              className="flex items-center gap-3"
+            <CardProductMobile
               key={index}
-              onClick={() => {
-                router.push('/product/1');
-              }}
-            >
-              <div className="w-[100px] h-[100px] rounded-[8px] flex items-center">
-                <Image
-                  src={`/iphone.png`}
-                  alt="iphone"
-                  width={100}
-                  height={100}
-                  className=" rounded-[8px] w-full h-auto"
-                />
-              </div>
-              <div className="flex flex-col justify-between min-h-[80px] w-full">
-                <div className="flex items-center justify-between w-full">
-                  <div>
-                    <p className="text-[13px] text-[var(--primary-4)]">PROMO</p>
-                    <p className="text-[10px] font-medium text-[var(--black-3)]">
-                      Shop Name
-                    </p>
-                  </div>
-                  <HeartFilledIcon />
-                </div>
-                <p className="text-[13px] font-medium text-[var(--black-4)]">
-                  {/* box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25); */}
-                  Cashback{' '}
-                  <span className="text-[16px] font-bold drop-shadow-lg">
-                    10%
-                  </span>
-                </p>
-                <div className="border border-[var(--primary-4)] rounded-[3px] flex items-center gap-1 justify-center w-fit px-1">
-                  <Tag size={9} className="rotate-90" stroke="#00b14f" />
-                  <p className="text-[#244340] text-[10px]">On Promotion</p>
-                </div>
-              </div>
-            </div>
+              _image={''}
+              _productName={''}
+              _shopName={''}
+              percent={ele}
+              link={''}
+              type={''}
+            />
           );
         })}
       </div>
