@@ -1,6 +1,7 @@
 'use client';
 import { HeaderMobile } from '@/components/layouts/mobile/header';
 import Shop from '@/features/desktop/shop';
+import { ShopMobile } from '@/features/mobile/shop';
 import { CircleHelp } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
@@ -21,7 +22,12 @@ const ShopPage = () => {
           />
         }
       />
-      <Shop />
+      <div className="md:hidden block w-full">
+        <ShopMobile />
+      </div>
+      <div className="hidden md:block w-full">
+        <Shop />
+      </div>
     </>
   );
 };

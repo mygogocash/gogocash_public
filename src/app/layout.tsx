@@ -3,6 +3,7 @@ import './global.css';
 import '@/styles/lib/embla.css';
 import '@/styles/lib/deals.css';
 import '@/styles/lib/product.css';
+import '@/styles/lib/offer.css';
 import '@/styles/lib/carouselThumb.css';
 import Provider from './provider';
 

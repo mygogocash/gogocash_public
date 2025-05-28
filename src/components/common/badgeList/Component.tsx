@@ -26,10 +26,10 @@ const Component = ({ list, vertical }: IProps) => {
               : ''
           }  bg-[var(--black-1)]  ${
             vertical ? ' h-auto w-[150px] p-3' : 'w-full h-[76px]'
-          }  flex items-center justify-center gap-3 `}
+          }  flex items-center justify-center gap-5 `}
         >
           {item.icon}
-          <div className="flex  flex-col ">
+          <div className="flex flex-col max-w-[140px]">
             <h3 className="text-[var(--black-5)] text-[24px]  font-semibold">
               {item.title}
             </h3>
