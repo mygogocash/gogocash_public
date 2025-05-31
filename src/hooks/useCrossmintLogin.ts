@@ -9,10 +9,7 @@ const useCrossmintLogin = () => {
   const { user, jwt, status: statusAuth } = crossmintAuth;
   const crossmintWallet = useWallet();
   const { wallet, status } = crossmintWallet;
-
   useEffect(() => {
-    console.log('user', user);
-    console.log('statusAuth', statusAuth);
     // @TODO signin crossmint  ======= signin to backend and signIn next-auth ======
     if (
       window.sessionStorage.getItem('isAfterLogin') === 'true' &&
