@@ -24,7 +24,7 @@ const Merchants = () => {
   const merchants = useMemo(() => {
     return (
       (dataMerchants?.data?.items?.map((item) => ({
-        pic: 'https://picsum.photos/id/237/200/300',
+        pic: item.logo,
         percent: Number(item.cashbackPercent.toFixed(2)),
         name: item.name,
         shopName: item.name,
