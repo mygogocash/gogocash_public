@@ -11,12 +11,13 @@ const Component = ({ image, percent, link }: IProp) => {
       }}
       className="w-[180px] md:w-[200px] h-[272px] rounded-[8px] bg-[#FFF] flex items-center justify-between flex-col"
     >
-      <div className="w-[200px] h-[200px] rounded-t-[8px]">
+      <div className="w-[200px] h-[200px] rounded-t-[8px] flex items-center">
         <ImageComponent
           src={image || '/shopee.png'}
           alt="card"
           width={200}
           height={200}
+          className="object-contain rounded-t-[8px]"
         />
       </div>
       <p className="flex items-center justify-between mb-[16px] w-full px-2">

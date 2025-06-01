@@ -83,3 +83,63 @@ export interface MetaCampaigns {
   season: string;
   year: number;
 }
+
+export interface IResponseProducts {
+  success: boolean;
+  message: string;
+  data: DataProducts;
+}
+
+export interface DataProducts {
+  pagination: Pagination;
+  products: Product[];
+}
+
+export interface Pagination {
+  limit: number;
+  page: number;
+  pages: number;
+  sortBy: string;
+  sortOrder: string;
+  total: number;
+}
+
+export interface Product {
+  id: string;
+  merchantId: string;
+  name: string;
+  sku: string;
+  description: string;
+  brand: string;
+  price: number;
+  originalPrice: number;
+  currency: Currency;
+  cashbackPercent: number;
+  cashbackFlat: number;
+  categories: Category[];
+  tags: Tag[];
+  images: string[];
+  productUrl: string;
+  affiliateUrl: string;
+  status: Status;
+  clicksCount: number;
+  meta: null;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export enum Category {
+  MenSShoesAndClothing = "Men's Shoes and Clothing",
+}
+
+export enum Currency {
+  Thb = 'THB',
+}
+
+export enum Status {
+  Active = 'active',
+}
+
+export enum Tag {
+  Shopping = 'Shopping',
+}

@@ -1,5 +1,5 @@
-import { IProp } from './interface';
-import { HeartFilledIcon } from '@radix-ui/react-icons';
+import { IPropProductList } from './interface';
+import { HeartFilledIcon, HeartIcon } from '@radix-ui/react-icons';
 import { useRouter } from 'next/navigation';
 import ImageComponent from '../Image';
 
@@ -10,11 +10,12 @@ const CardProduct = ({
   percent,
   link,
   type,
-}: IProp) => {
+  like,
+}: IPropProductList) => {
   const router = useRouter();
   return (
     <div
-      className="space-y-1 w-[180px] md:w-[200px] bg-white rounded-[8px]"
+      className="space-y-1 w-[180px] md:w-[200px] bg-white rounded-[8px] h-full"
       onClick={() => {
         router.push(link);
       }}
@@ -22,29 +23,30 @@ const CardProduct = ({
       <div className="rounded-t-[8px] relative ">
         <div
           className={`w-[88px] h-[34px] bg-[var(--primary-4)] rounded-tl-[8px] rounded-br-[8px]
-          absolute top-0 left-0 text-[15px] fotn-semoibold text-white flex items-center justify-center`}
+          absolute top-0 left-0 text-[15px] font-semibold text-white flex items-center justify-center`}
         >
           {type}
         </div>
         <div
-          className={`absolute bottom-3 right-3 bg-white/70 rounded-full w-[30px] h-[30px] flex items-center justify-center`}
+          className={`absolute bottom-3 right-3 bg-white/60 rounded-full w-[30px] h-[30px] flex items-center justify-center`}
         >
-          <HeartFilledIcon color="red" />
+          {like ? <HeartFilledIcon color="red" /> : <HeartIcon />}
         </div>
-        <div className="rounded-t-[8px]">
+        <div className="rounded-t-[8px] w-[180px] md:w-[200px] h-[200px]">
           <ImageComponent
             src={_image || '/iphone.png'}
             alt={_productName}
             width={200}
             height={200}
+            className="object-[inherit] rounded-t-[8px] h-full"
           />
         </div>
       </div>
       <div className=" p-[8px] md:p-0">
-        <h3 className="text-[18px] font-bold text-black max-w-[200px] w-full">
+        <h3 className="text-[18px] font-bold text-black max-w-[200px] w-full line-clamp-1">
           {_productName}
         </h3>
-        <p className="text-[var(--black-3)] text-[14px] font-normal">
+        <p className="text-[var(--black-3)] text-[14px] font-normal line-clamp-1">
           {_shopName}
         </p>
       </div>

@@ -55,14 +55,14 @@ const Component = () => {
       <div className="w-full bg-[#F5F4F4] py-5">
         <TitleMobile title={'Today Offer'} rightTitle={'More'} />
         <div className="w-full overflow-hidden pl-[16px]">
-          <CardProductSlideMobile />
+          <CardProductSlideMobile list={[]} />
         </div>
       </div>
 
       <div className="w-full bg-white">
         <TitleMobile title={'Recommended for You'} rightTitle={'More'} />
         <div className="w-full overflow-hidden pl-[16px]">
-          <CardSlideProductMobile />
+          <CardSlideProductMobile list={[]} />
         </div>
       </div>
       <div className="w-full bg-white ">

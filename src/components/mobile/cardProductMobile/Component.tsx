@@ -10,6 +10,7 @@ interface IProp {
   percent: number;
   link: string;
   type: string;
+  like?: boolean;
 }
 const Component = ({ ...prop }: IProp) => {
   const router = useRouter();
@@ -17,7 +18,7 @@ const Component = ({ ...prop }: IProp) => {
     <div
       className="flex items-center gap-3"
       onClick={() => {
-        router.push('/product/1');
+        router.push(prop.link);
       }}
     >
       <div className="w-[100px] h-[100px] rounded-[8px] flex items-center">

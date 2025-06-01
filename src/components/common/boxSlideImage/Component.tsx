@@ -32,7 +32,7 @@ const Component = ({ title, onClick, icon, list }: IProp) => {
                     className="embla__slide"
                     key={index}
                     onClick={() => {
-                      router.push(`${ele}`);
+                      router.push(`${ele.link}`);
                     }}
                   >
                     <div className="embla__slide__number">

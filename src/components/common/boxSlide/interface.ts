@@ -14,4 +14,5 @@ export interface IList {
   shopName: string;
   link: string;
   type: string;
+  like?: boolean;
 }

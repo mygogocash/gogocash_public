@@ -13,7 +13,7 @@ const Component = () => {
             {[1, 2, 3, 4, 5, 6].map((ele, index) => (
               <div className="product__slide" key={index}>
                 <div className="product__slide__number">
-                  <div className="w-full flex items-center justify-center flex-col max-w-[200px] h-[290px]">
+                  <div className="w-full flex items-center justify-center flex-col max-w-[200px] h-auto">
                     <CardProduct
                       _image={''}
                       _productName={''}

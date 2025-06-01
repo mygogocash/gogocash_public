@@ -4,6 +4,7 @@ import { IntroMobile } from '@/features/mobile/intro';
 import { HomeMobile } from '@/features/mobile/home';
 import { useEffect, useState } from 'react';
 import Layout from '@/components/layouts';
+import { HomeContext } from '@/providers/HomeContext';
 
 export default function Index() {
   const [showIntro, setShowIntro] = useState(false);
@@ -33,15 +34,17 @@ export default function Index() {
   }
 
   return (
-    <Layout intro={showIntro}>
-      <div className={`w-full hidden md:block`}>
-        <Home />
-      </div>
-      <div
-        className={`w-full md:hidden block flex flex-col items-center justify-center`}
-      >
-        {showIntro ? <IntroMobile setIntro={setShowIntro} /> : <HomeMobile />}
-      </div>
-    </Layout>
+    <HomeContext>
+      <Layout intro={showIntro}>
+        <div className={`w-full hidden md:block`}>
+          <Home />
+        </div>
+        <div
+          className={`w-full md:hidden block flex flex-col items-center justify-center`}
+        >
+          {showIntro ? <IntroMobile setIntro={setShowIntro} /> : <HomeMobile />}
+        </div>
+      </Layout>
+    </HomeContext>
   );
 }

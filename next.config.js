@@ -25,6 +25,18 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'picsum.photos',
       },
+      {
+        protocol: 'https',
+        hostname: 'my-live.slatic.net',
+      },
+      {
+        protocol: 'https',
+        hostname: 'storage.googleapis.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'th-live-01.slatic.net',
+      },
     ],
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 60,

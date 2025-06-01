@@ -13,6 +13,7 @@ import useCountdown from '@/hooks/useCountdown';
 import { HeaderMobile } from '@/components/layouts/mobile/header';
 import ListFilter from './views/ListFilter';
 import { CardProductMobile } from '@/components/mobile/cardProductMobile';
+import { useHomeContext } from '@/providers/HomeContext';
 
 const Component = () => {
   const router = useRouter();
@@ -20,7 +21,8 @@ const Component = () => {
   const { data } = useSession();
   const {
     formatTime: { hours, minutes, seconds, days },
-  } = useCountdown('2025-04-30');
+  } = useCountdown('2025-07-30');
+  const { products, merchants } = useHomeContext();
 
   return (
     <div
@@ -59,7 +61,6 @@ const Component = () => {
                 <h1 className="text-white font-bold text-[32px]">฿ 50.00 </h1>
                 <div className="flex items-center gap-1 h-auto w-fit px-2 py-1 rounded-[100px] bg-[#FFFBE8] shadow drop-shadow-[0px_4px_25px_0px_#00000040]">
                   {/* <Star /> */}
-                  {/* /Users/admin/gogocash/apps/web-end-user/public/solar_star-bold-duotone.svg */}
                   <Image
                     src={`/solar_star-bold-duotone.svg`}
                     alt="solar_star"
@@ -153,27 +154,40 @@ const Component = () => {
         </div>
       </div>
       {/*  */}
-      <TitleMobile title={'Recommended Shops for You'} rightTitle={'More'} />
+      <TitleMobile
+        title={'Recommended Shops for You'}
+        rightTitle={'More'}
+        onClick={() => {
+          router.push('/shop');
+        }}
+      />
       <div className="px-[16px] space-y-2">
-        {[1, 2, 3, 4].map((ele, index) => {
+        {merchants.map((ele, index) => {
           return (
             <CardProductMobile
               key={index}
-              _image={''}
-              _productName={''}
-              _shopName={''}
-              percent={ele}
-              link={''}
-              type={''}
+              _image={ele.pic}
+              _productName={ele.name}
+              _shopName={ele.shopName}
+              percent={ele.percent}
+              link={ele.link}
+              type={ele.type}
+              like={ele.like}
             />
           );
         })}
       </div>
 
-      <div className="w-full bg-[#F5F4F4]">
-        <TitleMobile title={'Recommended for You'} rightTitle={'More'} />
+      <div className="w-full bg-[#F5F4F4] py-5">
+        <TitleMobile
+          title={'Recommended for You'}
+          rightTitle={'More'}
+          onClick={() => {
+            router.push('/product');
+          }}
+        />
         <div className="w-full overflow-hidden pl-[16px]">
-          <CardSlideProductMobile />
+          <CardSlideProductMobile list={products} />
         </div>
       </div>
       <div className="w-full bg-white space-y-3">

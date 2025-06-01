@@ -1,4 +1,5 @@
-import ImageNext from 'next/image';
+/* eslint-disable @next/next/no-img-element */
+// import ImageNext from 'next/image';
 import { useEffect, useState } from 'react';
 
 interface IProp {
@@ -6,8 +7,9 @@ interface IProp {
   alt: string;
   width: number;
   height: number;
+  className?: string;
 }
-const ImageComponent = ({ src, alt, width, height }: IProp) => {
+const ImageComponent = ({ src, alt, width, height, className }: IProp) => {
   const [isValid, setIsValid] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -19,30 +21,31 @@ const ImageComponent = ({ src, alt, width, height }: IProp) => {
 
   if (isValid === null)
     return (
-      <ImageNext
+      <img
         src={'/no_image.jpg'}
         alt={'preview image'}
         width={width}
         height={height}
+        className={className}
       />
     );
   if (!isValid)
     return (
-      <ImageNext
+      <img
         src={'/no_image.jpg'}
         alt={'preview image'}
         width={width}
         height={height}
-        className="w-full h-[inherit]"
+        className={`w-full ${className}`}
       />
     );
   return (
-    <ImageNext
+    <img
       src={src}
       alt={alt}
       width={width}
       height={height}
-      className="w-full h-[inherit]"
+      className={`w-full ${className}`}
     />
   );
 };
