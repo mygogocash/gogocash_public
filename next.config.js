@@ -3,6 +3,34 @@ const nextConfig = {
   // Enable React strict mode for better development experience
   reactStrictMode: true,
 
+  // Development optimizations for hot reload
+  ...(process.env.NODE_ENV === 'development' && {
+    // Fast Refresh configuration
+    experimental: {
+      // Enable faster builds in development
+      turbo: {
+        rules: {
+          '*.svg': {
+            loaders: ['@svgr/webpack'],
+            as: '*.js',
+          },
+        },
+      },
+    },
+
+    // Optimize development server
+    devIndicators: {
+      buildActivity: true,
+      buildActivityPosition: 'bottom-right',
+    },
+
+    // Enable source maps for better debugging
+    productionBrowserSourceMaps: false,
+
+    // Faster compilation
+    swcMinify: true,
+  }),
+
   // Support for external modules transpilation
   transpilePackages: ['lucid-cardano', '@crossmint/connect'],
 
@@ -44,6 +72,26 @@ const nextConfig = {
 
   // Webpack configuration
   webpack: (config, { dev }) => {
+    // Development optimizations
+    if (dev) {
+      // Enable faster rebuilds
+      config.watchOptions = {
+        poll: 1000,
+        aggregateTimeout: 300,
+        ignored: ['**/node_modules', '**/.next', '**/.git'],
+      };
+
+      // Optimize development builds
+      config.optimization = {
+        ...config.optimization,
+        removeAvailableModules: false,
+        removeEmptyChunks: false,
+        splitChunks: false,
+      };
+
+      // Enable source maps for better debugging
+      config.devtool = 'eval-cheap-module-source-map';
+    }
     // Optimize bundle size
     config.optimization = {
       ...config.optimization,
