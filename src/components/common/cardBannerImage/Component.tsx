@@ -1,7 +1,7 @@
-import Image from 'next/image';
 import { IProp } from './interface';
+import ImageComponent from '../Image';
 
-const Component = ({ image, height }: IProp) => {
+const Component = ({ image, height, promotionName, time }: IProp) => {
   return (
     <div className="w-full space-y-4">
       <div
@@ -9,7 +9,7 @@ const Component = ({ image, height }: IProp) => {
           height || 'h-[272px]'
         } `}
       >
-        <Image
+        <ImageComponent
           src={image || '/banner.png'}
           alt="banner"
           width={200}
@@ -19,10 +19,10 @@ const Component = ({ image, height }: IProp) => {
       </div>
       <div>
         <h4 className="text-[var(--black-6)] text-[12px] md:text-[20px] font-bold">
-          Promotion Name
+          {promotionName}
         </h4>
         <p className="text-[var(--black-3)]  text-[10px]  md:text-[16px]">
-          00 Month 0000
+          {time || '00 Month 0000'}
         </p>
       </div>
     </div>

@@ -36,7 +36,7 @@ const ImageComponent = ({ src, alt, width, height, className }: IProp) => {
         alt={'preview image'}
         width={width}
         height={height}
-        className={`w-full ${className}`}
+        className={`w-full object-contain ${className}`}
       />
     );
   return (

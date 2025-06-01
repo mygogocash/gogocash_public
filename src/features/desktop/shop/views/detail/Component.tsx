@@ -4,8 +4,7 @@ import React from 'react';
 import { list } from '../../constant';
 import CardProduct from '@/components/common/cardProduct';
 import Button from '@/components/common/button';
-import Image from 'next/image';
-import { Coins, SquareChartGantt, StoreIcon, WalletIcon } from 'lucide-react';
+import { BoxIcon, Coins, SquareChartGantt, StoreIcon, Tag } from 'lucide-react';
 import Deals from '@/features/desktop/home/views/Deals';
 import BoxSlide from '@/components/common/boxSlide';
 import BadgeList from '@/components/common/badgeList';
@@ -15,53 +14,78 @@ import Condition from './views/Condition';
 import HowtoClaim from './views/HowtoClaim';
 import Tab from '@/components/common/tab';
 import ShowMore from '@/components/common/showMore';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
+import useSWR from 'swr';
+import { IResponseShopDetail } from '../../interface';
+import { fetcher } from '@/lib/client';
+import ImageComponent from '@/components/common/Image';
+import CartIcon from '@/components/icons/CartIcon';
+import { IResponseProducts } from '@/features/desktop/home/interface';
+import { mapDataProduct } from '@/hooks/useHome';
 const Component = () => {
   const [isOpenCondition, setIsOpenCondition] = React.useState(false);
   const [isOpenClaim, setIsOpenClaim] = React.useState(false);
   const router = useRouter();
+  const param = useParams();
+  const { data } = useSWR<IResponseShopDetail>(
+    `/merchants/${param.id}`,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+    }
+  );
+  const shop = data?.data;
+  const limit = 20;
+  const { data: dataProduct } = useSWR<IResponseProducts>(
+    `/products?limit=${limit}`,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+    }
+  );
+  const products = dataProduct ? mapDataProduct(dataProduct) : [];
   return (
     <div className="container-inner space-y-8 my-[10px] md:my-[88px]">
       {/*  */}
       <div className="flex items-center gap-20 md:flex-row flex-col">
         <div className="w-[300px] h-[300px]">
-          <Image
-            src={'/shopee.png'}
+          <ImageComponent
+            src={shop?.logo || '/shopee.png'}
             width={300}
             height={300}
-            alt="shopee"
+            alt={shop?.name || 'shop name'}
             className="w-full"
           />
         </div>
         <div>
           <h1 className="font-bold text-[30px] md:text-[40px] text-[var(--black-5)]">
-            Shopee Thailand
+            {shop?.name || ''}
           </h1>
           <h3 className="font-normal text-[16px] md:text-[24px] text-[var(--black-5)]">
             Shop with GoGoCash to maximize cashback up to{' '}
-            <span className=" text-[30px] md:text-[40px]">10%</span>
+            <span className=" text-[30px] md:text-[40px]">
+              {shop?.cashbackPercent || 0}%
+            </span>
           </h3>
           <p className="text-[20px] text-[var(--black-3)] text-light my-3 mb-8">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-            euismod id sem quis accumsan. Sed tempus placerat velit a placerat.
-            Cras suscipit est at mauris blandit efficitur finibus non augue.
+            {shop?.description || ''}
           </p>
           <BadgeList
             list={[
               {
-                icon: <WalletIcon size={30} />,
+                icon: <CartIcon width={24} height={24} strokeWidth={4} />,
                 title: '10%',
                 subTitle: 'Featured Products',
               },
               {
-                icon: <WalletIcon />,
+                icon: <Tag />,
                 title: '10%',
-                subTitle: 'Featured Products',
+                subTitle: 'Hot Deals',
               },
               {
-                icon: <WalletIcon />,
+                icon: <BoxIcon />,
                 title: '10%',
-                subTitle: 'Featured Products',
+                subTitle: 'Sold Out with GoGoCash',
               },
             ]}
           />
@@ -142,22 +166,23 @@ const Component = () => {
           ...item,
           content: (
             <div className="grid xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-10 pt-10">
-              {[1, 2, 3, 4, 5, 6, 7].map((item, index) => (
+              {products.map((item, index) => (
                 <CardProduct
                   key={index}
-                  _image={''}
-                  _productName={''}
-                  _shopName={''}
-                  percent={0}
-                  link={'/product/1'}
-                  type={''}
+                  _image={item.pic}
+                  _productName={item.name}
+                  _shopName={item.shopName}
+                  percent={item.percent}
+                  link={`/product/${item.link}`}
+                  type={item.type}
+                  like={item.like}
                 />
               ))}
             </div>
           ),
         }))}
       />
-      <ShowMore min={20} max={80} />
+      <ShowMore min={limit} max={80} />
     </div>
   );
 };

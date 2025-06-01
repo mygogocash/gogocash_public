@@ -143,3 +143,37 @@ export enum Status {
 export enum Tag {
   Shopping = 'Shopping',
 }
+
+export interface IResponseAds {
+  success: boolean;
+  message: string;
+  data: DataAds[];
+}
+
+export interface DataAds {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  position: string;
+  type: string;
+  url: string;
+  startDate: Date;
+  endDate: Date;
+  status: string;
+  country: string;
+  costPerClick: number;
+  costPerImpression: number;
+  showingRatio: number;
+  impressions: number;
+  clicks: number;
+  publisherIds: string[];
+  ignoredPublisherIds: string[];
+  isGlobal: boolean;
+  note: string;
+  meta: null;
+  createdBy: string;
+  createdAt: Date;
+  updatedAt: Date;
+  enableTargeting: boolean;
+}

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { EmblaOptionsType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
 import { Thumb } from './views/Thumb';
-import Image from 'next/image';
+import ImageComponent from '../Image';
 
 type PropType = {
   slides: string[];
@@ -46,9 +46,9 @@ const Component: React.FC<PropType> = (props) => {
           {slides.map((item, index) => (
             <div className="carousel__slide" key={index}>
               <div className="carousel__slide__number">
-                <Image
+                <ImageComponent
                   src={item || ''}
-                  alt="pot_ex"
+                  alt="image slide"
                   width={550}
                   height={550}
                   className="max-w-[550px] max-h-[550px] h-auto w-full"

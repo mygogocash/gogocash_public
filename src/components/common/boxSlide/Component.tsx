@@ -12,7 +12,9 @@ const Component = ({ title, onClick, icon, list }: IProp) => {
     <div className="flex items-center gap-[32px]">
       <div className="hidden bg-[var(--primary-4)] rounded-l-[24px] md:flex items-center justify-center flex-col w-[250px] h-[352px]">
         {icon}
-        <h4 className="text-white text-[26px] font-bold mt-3">{title}</h4>
+        <h4 className="text-white text-[26px] font-bold mt-3 text-center">
+          {title}
+        </h4>
         <Button
           backgroundColor="mt-14 bg-white border border-[var(--black-3)] rounded-full h-[39px] px-10 !py-0 font-light text-[var(--primary-4)]"
           onClick={function (): void {
@@ -31,7 +33,7 @@ const Component = ({ title, onClick, icon, list }: IProp) => {
                     className="embla__slide"
                     key={index}
                     onClick={() => {
-                      router.push(`${ele}`);
+                      router.push(`${ele.link}`);
                     }}
                   >
                     <div className="embla__slide__number">

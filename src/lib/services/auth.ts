@@ -54,7 +54,7 @@ export const me = (id: string) =>
 export const signInWeb3 = (formData: IRequestSignInWeb3) =>
   new Promise<IResponseLogin>((resolve, reject) => {
     client
-      .post<IResponseLogin>(`/v1/auth/web3/login`, formData)
+      .post<IResponseLogin>(`/auth/web3/login`, formData)
       .then((response) => {
         resolve(response.data);
       })
@@ -94,7 +94,7 @@ export const signInCrossmint = (
     });
 
     client
-      .post<IResponseLogin>(`/v1/auth/web3/login`, payload)
+      .post<IResponseLogin>(`/auth/web3/login`, payload)
       .then((response) => {
         console.log('Crossmint login successful:', {
           success: response.data.success,

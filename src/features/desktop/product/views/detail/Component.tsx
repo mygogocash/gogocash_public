@@ -15,27 +15,37 @@ import {
   WalletIcon,
 } from 'lucide-react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import React from 'react';
+import useSWR from 'swr';
+import { IResponseProductDetail } from '../../interface';
+import { fetcher } from '@/lib/client';
 
 const images = ['/pot_ex_1.png', '/pot_ex.png', '/shopee.png'];
 const Component = () => {
   const [isOpenModal, setIsOpenModal] = React.useState(false);
   const router = useRouter();
+  const param = useParams();
+  const id = param.id;
+  const { data: dataProductDetail } = useSWR<IResponseProductDetail>(
+    `/products/${id}`,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+    }
+  );
+  const detail = dataProductDetail?.data;
   return (
     <div className="container-inner space-y-8 my-[10px] md:my-[88px]">
       <div className="grid lg:grid-cols-2 gap-10">
-        <CarouselThumb slides={images} />
+        <CarouselThumb slides={detail?.images || []} />
         <div className="flex items-center flex-col">
           <div>
             <h1 className="md:text-[40px] text-[var(--black-5)] fotn-bold">
-              2.5 Liters Shabu Pot
+              {detail?.name || ''}
             </h1>
             <p className="text-[var(--black-3)] text-[14px] font-normal">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-              euismod id sem quis accumsan. Sed tempus placerat velit a
-              placerat. Cras suscipit est at mauris blandit efficitur finibus
-              non augue.
+              {detail?.description || ''}
             </p>
           </div>
           <div className="flex w-full gap-[48px] flex-col md:flex-row items-center">
@@ -45,7 +55,7 @@ const Component = () => {
                   Full Price
                 </p>
                 <p className="font-normal text-[var(--black-5)] text-[14px]">
-                  $ 100.00
+                  {detail?.currency} {detail?.price || 0}
                 </p>
               </div>
 
@@ -57,7 +67,7 @@ const Component = () => {
                   </span>
                 </p>
                 <p className="font-normal text-[var(--black-5)] text-[14px]">
-                  $ 100.00
+                  {detail?.currency} {detail?.originalPrice || 0}
                 </p>
               </div>
 
@@ -94,18 +104,18 @@ const Component = () => {
                 list={[
                   {
                     icon: <Coins />,
-                    title: '9.98%',
+                    title: `${detail?.cashbackPercent || 0}`,
                     subTitle: 'Max Cashback',
                   },
                   {
                     icon: <PackageCheck />,
-                    title: '9.98%',
-                    subTitle: 'Max Cashback',
+                    title: 'Earn',
+                    subTitle: 'After Complete',
                   },
                   {
                     icon: <WalletIcon />,
-                    title: 'Wallet',
-                    subTitle: 'Wallet',
+                    title: '2 Days',
+                    subTitle: 'Ready to claim',
                   },
                 ]}
               />

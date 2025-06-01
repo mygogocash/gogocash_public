@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useHomeContext } from '@/providers/HomeContext';
 const Product = () => {
   const router = useRouter();
-  const { products } = useHomeContext();
+  const { products, products2, products3, cate } = useHomeContext();
 
   return (
     <>
@@ -12,27 +12,27 @@ const Product = () => {
         onClick={function (): void {
           router.push('shop');
         }}
-        title={'Merchants'}
+        title={cate[0]}
         icon={<StoreIcon />}
-        list={products}
+        list={products || []}
       />
 
       <BoxSlide
         onClick={function (): void {
           router.push('product');
         }}
-        title={'Merchants'}
+        title={cate[1]}
         icon={<StoreIcon />}
-        list={[]}
+        list={products2 || []}
       />
 
       <BoxSlide
         onClick={function (): void {
           router.push('promotion');
         }}
-        title={'Merchants'}
+        title={cate[2]}
         icon={<StoreIcon />}
-        list={[]}
+        list={products3 || []}
       />
     </>
   );

@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { getSession } from 'next-auth/react';
 
-const baseURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+const baseURL = `${process.env.NEXT_PUBLIC_API_URL}/v1`;
 
 const client = axios.create({
   baseURL,
@@ -23,7 +23,6 @@ client.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// レスポンスインターセプター
 client.interceptors.response.use(
   (response) => response,
   (error) => {

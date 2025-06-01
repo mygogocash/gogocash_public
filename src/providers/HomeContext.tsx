@@ -16,6 +16,7 @@ export const HomeContext = ({ children }: { children: ReactNode }) => {
 
 export const useHomeContext = () => {
   const context = useContext(MyContext);
-  if (!context) throw new Error('useMyContext must be used within MyProvider');
+  if (!context)
+    throw new Error('useHomeContext must be used within MyProvider');
   return context;
 };

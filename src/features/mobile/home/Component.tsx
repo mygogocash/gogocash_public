@@ -21,7 +21,7 @@ const Component = () => {
   const { data } = useSession();
   const {
     formatTime: { hours, minutes, seconds, days },
-  } = useCountdown('2025-07-30');
+  } = useCountdown('2025-07-30:15:00:00');
   const { products, merchants } = useHomeContext();
 
   return (
@@ -187,7 +187,7 @@ const Component = () => {
           }}
         />
         <div className="w-full overflow-hidden pl-[16px]">
-          <CardSlideProductMobile list={products} />
+          <CardSlideProductMobile list={products || []} />
         </div>
       </div>
       <div className="w-full bg-white space-y-3">
