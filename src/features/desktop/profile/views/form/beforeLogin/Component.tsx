@@ -8,7 +8,6 @@ import { Title } from '@/features/desktop/profile/views/form/title';
 import { useRouter } from 'next/navigation';
 import { IProps } from './interface';
 import { signIn } from 'next-auth/react';
-import { BlockchainTypes, CrossmintEVMWalletAdapter } from '@crossmint/connect';
 import { useCrossmintLoginContext } from '@/providers/CrossmintLoginContext';
 
 const Component = ({
@@ -23,12 +22,17 @@ const Component = ({
   const { login } = useCrossmintLoginContext();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async function handleLoginWallet() {
-    const crossmintConnect = new CrossmintEVMWalletAdapter({
-      projectId: process.env.NEXT_PUBLIC_CROSSMINT_PROJECT_ID,
-      chain: BlockchainTypes.ETHEREUM, // You can also use POLYGON or BSC
-    });
-
     try {
+      // Dynamic import เพื่อหลีกเลี่ยง top-level await
+      const { BlockchainTypes, CrossmintEVMWalletAdapter } = await import(
+        '@crossmint/connect'
+      );
+
+      const crossmintConnect = new CrossmintEVMWalletAdapter({
+        projectId: process.env.NEXT_PUBLIC_CROSSMINT_PROJECT_ID,
+        chain: BlockchainTypes.ETHEREUM, // You can also use POLYGON or BSC
+      });
+
       const walletAddress = await crossmintConnect.connect();
       console.log('walletAddress', walletAddress);
 
@@ -97,7 +101,7 @@ const Component = ({
         </div>
       </div>
       <div className="w-full space-y-8">
-        <TitleSeparator text="You’re new here?" />
+        <TitleSeparator text="You're new here?" />
 
         <Button
           backgroundColor="bg-white text-black border-[var(--primary-4)] border rounded-full h-[56px]"

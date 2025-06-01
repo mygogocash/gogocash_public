@@ -1,7 +1,7 @@
-import Image from 'next/image';
 import { IProp } from './interface';
 import { HeartFilledIcon } from '@radix-ui/react-icons';
 import { useRouter } from 'next/navigation';
+import ImageComponent from '../Image';
 
 const CardProduct = ({
   _image,
@@ -31,13 +31,14 @@ const CardProduct = ({
         >
           <HeartFilledIcon color="red" />
         </div>
-        <Image
-          src={_image || '/iphone.png'}
-          alt={_productName}
-          width={200}
-          height={200}
-          className="w-full h-full rounded-t-[8px]"
-        />
+        <div className="rounded-t-[8px]">
+          <ImageComponent
+            src={_image || '/iphone.png'}
+            alt={_productName}
+            width={200}
+            height={200}
+          />
+        </div>
       </div>
       <div className=" p-[8px] md:p-0">
         <h3 className="text-[18px] font-bold text-black max-w-[200px] w-full">

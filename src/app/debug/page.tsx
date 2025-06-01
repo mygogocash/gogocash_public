@@ -17,15 +17,7 @@ import CrossmintDebugCard from '@/components/debug/CrossmintDebugCard';
 import IntegrationTestCard from '@/components/debug/IntegrationTestCard';
 
 // Integration Types
-interface IntegrationStatus {
-  name: string;
-  status: 'connected' | 'disconnected' | 'error' | 'testing';
-  description: string;
-  lastChecked?: Date;
-  error?: string;
-  config?: Record<string, unknown>;
-  endpoints?: string[];
-}
+// IntegrationStatus interface removed as it's not being used
 
 interface DebugInfo {
   environment: string;

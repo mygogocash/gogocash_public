@@ -23,7 +23,6 @@ import {
   Shield,
   Zap,
   Star,
-  Heart,
   CheckCircle,
   AlertCircle,
   Info,
@@ -131,32 +130,7 @@ export default function DemoPage() {
     setCrossmintStatus('testing');
 
     try {
-      // ตรวจสอบ environment variables
-      const clientId = process.env.NEXT_PUBLIC_CROSSMINT_CLIENT_ID;
-      const clientSecret = process.env.NEXT_PUBLIC_CROSSMINT_CLIENT_SECRET;
-
-      console.log('🔍 Crossmint Config Debug:');
-      console.log(
-        'Client ID:',
-        clientId ? `${clientId.substring(0, 10)}...` : 'Not found'
-      );
-      console.log(
-        'Client Secret:',
-        clientSecret ? `${clientSecret.substring(0, 10)}...` : 'Not found'
-      );
-      console.log('Is Valid Client ID:', clientId?.startsWith('ck_'));
-
-      if (!clientId || !clientSecret) {
-        throw new Error(
-          'Crossmint credentials not found in environment variables'
-        );
-      }
-
-      if (!clientId.startsWith('ck_')) {
-        throw new Error('Invalid Client ID format. Should start with "ck_"');
-      }
-
-      // ทดสอบการเชื่อมต่อ API
+      // ทดสอบการเชื่อมต่อ API โดยไม่ใช้ process.env ใน client
       const response = await fetch('/api/crossmint/test', {
         method: 'POST',
         headers: {
@@ -165,11 +139,14 @@ export default function DemoPage() {
         body: JSON.stringify({ test: true }),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
         setCrossmintStatus('success');
         toast.success('✅ Crossmint configuration is working!');
+        console.log('✅ Crossmint test successful:', data);
       } else {
-        throw new Error(`API test failed: ${response.status}`);
+        throw new Error(data.error || `API test failed: ${response.status}`);
       }
     } catch (error) {
       console.error('❌ Crossmint Error:', error);

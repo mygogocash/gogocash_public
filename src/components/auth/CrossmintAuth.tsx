@@ -60,7 +60,7 @@ export default function CrossmintAuth({
     }
   }, [session]);
 
-  const handleCrossmintLogin = async (authData: {
+  const _handleCrossmintLogin = async (authData: {
     user: unknown;
     jwt: string;
   }) => {

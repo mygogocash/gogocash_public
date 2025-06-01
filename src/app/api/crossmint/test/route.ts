@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function POST(request: NextRequest) {
+export async function POST(_request: NextRequest) {
   try {
     // ตรวจสอบ environment variables
     const clientId = process.env.NEXT_PUBLIC_CROSSMINT_CLIENT_ID;
