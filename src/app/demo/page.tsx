@@ -144,7 +144,6 @@ export default function DemoPage() {
       if (response.ok) {
         setCrossmintStatus('success');
         toast.success('✅ Crossmint configuration is working!');
-        console.log('✅ Crossmint test successful:', data);
       } else {
         throw new Error(data.error || `API test failed: ${response.status}`);
       }

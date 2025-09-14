@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { getSession } from 'next-auth/react';
 
-const baseURL = `${process.env.NEXT_PUBLIC_API_URL}/v1`;
+const baseURL = `${process.env.NEXT_PUBLIC_API_URL}`;
 
 const client = axios.create({
   baseURL,

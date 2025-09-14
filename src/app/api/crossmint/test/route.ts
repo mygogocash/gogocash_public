@@ -8,18 +8,6 @@ export async function POST(_request: NextRequest) {
     const tokenUrl = process.env.NEXT_PUBLIC_CROSSMINT_TOKEN_URL;
     const verificationUrl = process.env.NEXT_PUBLIC_CROSSMINT_VERIFICATION_URL;
 
-    console.log('🔍 Server-side Crossmint Config Check:');
-    console.log(
-      'Client ID:',
-      clientId ? `${clientId.substring(0, 10)}...` : 'Not found'
-    );
-    console.log(
-      'Client Secret:',
-      clientSecret ? `${clientSecret.substring(0, 10)}...` : 'Not found'
-    );
-    console.log('Token URL:', tokenUrl);
-    console.log('Verification URL:', verificationUrl);
-
     // ตรวจสอบว่ามี credentials ครบถ้วน
     if (!clientId || !clientSecret) {
       return NextResponse.json(

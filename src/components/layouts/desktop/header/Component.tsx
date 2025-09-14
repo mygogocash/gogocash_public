@@ -57,14 +57,6 @@ const Component = () => {
 
   const handleLogin = useCallback(() => {
     try {
-      console.log('🚀 Initiating Crossmint login...');
-      console.log('Login function available:', typeof login === 'function');
-      console.log('Crossmint context:', {
-        hasLogin: !!login,
-        loginState: loginState,
-        statusAuth: crossmintUser ? 'has-user' : 'no-user',
-      });
-
       if (typeof login === 'function') {
         console.log('✅ Calling Crossmint login function...');
 

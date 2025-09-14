@@ -13,37 +13,9 @@ interface LoginState {
 
 const useCrossmintLogin = () => {
   const crossmintAuth = useAuth();
-  const { user, jwt, status: statusAuth, login } = crossmintAuth;
+  const { user, jwt, status: statusAuth, login, getUser } = crossmintAuth;
   const crossmintWallet = useWallet();
   const { wallet, status } = crossmintWallet;
-
-  // Debug Crossmint SDK status
-  console.log('🔍 Crossmint SDK Status:', {
-    statusAuth,
-    hasUser: !!user,
-    hasJwt: !!jwt,
-    hasLogin: !!login,
-    loginType: typeof login,
-    walletStatus: status,
-    hasWallet: !!wallet,
-    crossmintAuthKeys: Object.keys(crossmintAuth),
-    crossmintWalletKeys: Object.keys(crossmintWallet),
-  });
-
-  // Test if login function is callable
-  if (login) {
-    console.log('✅ Login function is available and callable');
-    console.log('Login function details:', {
-      name: login.name,
-      length: login.length,
-      toString: login.toString().substring(0, 100) + '...',
-    });
-  } else {
-    console.warn('⚠️ Login function is not available');
-    console.log('Available auth methods:', Object.keys(crossmintAuth));
-  }
-
-  // Use ref to prevent multiple simultaneous login attempts
   const loginAttemptRef = useRef(false);
   const maxRetries = 3;
 
@@ -102,46 +74,48 @@ const useCrossmintLogin = () => {
           'Wallet address not available, proceeding with Crossmint token only'
         );
       }
+      console.log('🔐 Signing in to backend with Crossmint token:');
+      console.log('User:', user);
+      console.log('Wallet Address:', walletAddress);
+      console.log('Wallet Address JWT:', jwt);
 
-      const response = await signInCrossmint({
-        token: jwt,
-        walletAddress,
-      });
+      const response = await signInCrossmint(
+        {
+          address: walletAddress,
+          id_crossmint: user?.id ?? '',
+          email: user?.email ?? '',
+        },
+        jwt
+      );
 
       console.log('Backend response:', response);
 
-      if (response.success) {
-        const userData = response.data.user;
+      if (response.user) {
+        const userData = response.user;
 
         // Sign in to NextAuth with proper error handling
         console.log('🔐 Calling NextAuth signIn with crossmint provider');
         const result = await signIn('crossmint', {
           jwt: jwt,
-          userId: userData.id,
+          userId: userData.id_crossmint,
           email: userData.email,
-          name: userData.username,
+          address: userData.address,
           redirect: false, // Handle redirect manually
         });
-
+        console.log('NextAuth signIn result:', result);
+        if (result?.ok) {
+          setLoginState((prev) => ({
+            ...prev,
+            isLoggingIn: false,
+            error: null,
+          }));
+          window.sessionStorage.setItem('isAfterLogin', 'false');
+        }
         if (result?.error) {
           throw new Error(`NextAuth error: ${result.error}`);
         }
-
-        setLoginState((prev) => ({
-          ...prev,
-          hasAttemptedLogin: true,
-          isLoggingIn: false,
-          retryCount: 0,
-        }));
-
-        toast.success('Successfully logged in!');
-
-        // Redirect to home page
-        window.location.href = '/';
       } else {
-        throw new Error(
-          response?.error?.message || 'Backend authentication failed'
-        );
+        throw new Error(response?.message || 'Backend authentication failed');
       }
     } catch (error: unknown) {
       console.error('Crossmint login error:', error);
@@ -165,28 +139,14 @@ const useCrossmintLogin = () => {
     }
   }, [
     jwt,
-    wallet?.address,
     loginState.hasAttemptedLogin,
     loginState.retryCount,
-    maxRetries,
+    wallet?.address,
+    user,
   ]);
 
   // Auto-login when Crossmint authentication is successful
   useEffect(() => {
-    console.log('🔍 Crossmint Login State Check:', {
-      statusAuth,
-      hasUser: !!user,
-      hasJwt: !!jwt,
-      hasAttemptedLogin: loginState.hasAttemptedLogin,
-      isLoggingIn: loginState.isLoggingIn,
-      loginAttemptInProgress: loginAttemptRef.current,
-      retryCount: loginState.retryCount,
-      maxRetries,
-      walletAddress: wallet?.address,
-      walletStatus: status,
-    });
-
-    // Add more strict conditions to prevent infinite loop
     if (
       statusAuth === 'logged-in' &&
       user &&
@@ -196,14 +156,21 @@ const useCrossmintLogin = () => {
       !loginAttemptRef.current &&
       loginState.retryCount < maxRetries
     ) {
-      console.log('✅ Crossmint user authenticated, starting backend login:', {
-        user: { id: user.id, email: user.email },
-        wallet: { address: wallet?.address, status },
-      });
+      // console.log('✅ Crossmint user authenticated, starting backend login:', {
+      //   user: { id: user.id, email: user.email },
+      //   wallet: { address: wallet?.address, status },
+      // });
 
       // Add a small delay to prevent rapid fire requests
+      console.log(
+        '>>>>isAfterLogin',
+        window.sessionStorage.getItem('isAfterLogin')
+      );
+
       const timeoutId = setTimeout(() => {
-        signInCrossmintToBackend();
+        if (window.sessionStorage.getItem('isAfterLogin') === 'true') {
+          signInCrossmintToBackend();
+        }
       }, 1000);
 
       return () => clearTimeout(timeoutId);
@@ -233,13 +200,13 @@ const useCrossmintLogin = () => {
   }, [crossmintAuth]);
 
   // Debug what we're returning
-  console.log('🔍 useCrossmintLogin returning:', {
-    hasLogin: !!crossmintAuth.login,
-    loginType: typeof crossmintAuth.login,
-    statusAuth: crossmintAuth.status,
-    hasUser: !!crossmintAuth.user,
-    hasJwt: !!crossmintAuth.jwt,
-  });
+  // console.log('🔍 useCrossmintLogin returning:', {
+  //   hasLogin: !!crossmintAuth.login,
+  //   loginType: typeof crossmintAuth.login,
+  //   statusAuth: crossmintAuth.status,
+  //   hasUser: !!crossmintAuth.user,
+  //   hasJwt: !!crossmintAuth.jwt,
+  // });
 
   return {
     ...crossmintAuth,

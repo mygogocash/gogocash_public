@@ -37,7 +37,7 @@ const CrossmintProviders = lazy(() =>
 
 const Setting = ({ children }: { children: ReactNode }) => {
   // ใช้ค่า default หรือค่าจาก NEXT_PUBLIC env var
-  const clientSecret = process.env.NEXT_PUBLIC_CROSSMINT_CLIENT_SECRET || '';
+  const clientSecret = process.env.NEXT_PUBLIC_CROSSMINT_API_KEY || '';
 
   // ตรวจสอบว่ามี valid API key หรือไม่
   const hasValidApiKey =

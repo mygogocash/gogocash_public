@@ -1,5 +1,4 @@
 import { signinEmail, signup } from '@/lib/services/auth';
-import { signIn } from 'next-auth/react';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { RequestSignup } from '../interface';
@@ -29,21 +28,21 @@ const useSignUp = () => {
         });
 
         console.log('res', res);
-        if (res.data) {
-          signIn('credentials', {
-            email: user.email,
-            // password: pass,
-            name: user.username,
-            id: user.id,
-            type: 'email',
-            user: JSON.stringify(res.data.user),
-            access_token: res.data.access_token,
-            expires: JSON.stringify(res.data.expires),
-            refresh_token: res.data.refresh_token,
-            redirect: true,
-            callbackUrl: '/',
-          });
-        }
+        // if (res.data) {
+        //   signIn('credentials', {
+        //     email: user.email,
+        //     // password: pass,
+        //     name: user.username,
+        //     id: user.id,
+        //     type: 'email',
+        //     user: JSON.stringify(res.data.user),
+        //     access_token: res.data.access_token,
+        //     expires: JSON.stringify(res.data.expires),
+        //     refresh_token: res.data.refresh_token,
+        //     redirect: true,
+        //     callbackUrl: '/',
+        //   });
+        // }
       } else {
         toast.error(response.error?.message || 'Create account failed');
       }

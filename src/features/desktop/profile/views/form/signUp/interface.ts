@@ -1,7 +1,14 @@
 export interface IResponseLogin {
-  success: boolean;
-  error: IError | null;
-  data: IDataSignIn;
+  message: string;
+  user: User;
+}
+
+export interface User {
+  _id: string;
+  address: string;
+  __v: number;
+  email: string;
+  id_crossmint: string;
 }
 
 export interface IDataSignIn {
@@ -72,7 +79,9 @@ export interface IRequestSignIGoogle {
 }
 
 export interface IRequestSignInCrossmint {
-  token: string;
+  address: string;
+  id_crossmint: string;
+  email: string;
 }
 
 export interface IRequestSignInWeb3Crossmint {

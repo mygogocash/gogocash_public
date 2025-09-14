@@ -76,40 +76,23 @@ export const signInGoogleCrossmint = (formData: IRequestSignIGoogle) =>
   });
 
 export const signInCrossmint = (
-  formData: IRequestSignInCrossmint & { walletAddress?: string }
+  formData: IRequestSignInCrossmint,
+  jwt: string
 ) =>
   new Promise<IResponseLogin>((resolve, reject) => {
     // Prepare the request payload with proper validation
-    const payload = {
-      walletAddress: formData.walletAddress || '',
-      signature: '', // Not required for Crossmint authentication
-      message: '', // Not required for Crossmint authentication
-      provider: 'crossmint',
-      crossmintToken: formData.token,
-    };
-
-    console.log('Sending Crossmint login request:', {
-      ...payload,
-      crossmintToken: payload.crossmintToken ? '[REDACTED]' : 'undefined',
-    });
 
     client
-      .post<IResponseLogin>(`/auth/web3/login`, payload)
+      .post<IResponseLogin>(`/auth/sign-in`, formData, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${jwt}`,
+        },
+      })
       .then((response) => {
-        console.log('Crossmint login successful:', {
-          success: response.data.success,
-          userId: response.data.data?.user?.id,
-          hasAccessToken: !!response.data.data?.access_token,
-        });
         resolve(response.data);
       })
       .catch((error) => {
-        console.error('Crossmint login failed:', {
-          status: error.response?.status,
-          message: error.response?.data?.message || error.message,
-          data: error.response?.data,
-        });
-
         // Enhance error message for better user experience
         const enhancedError = {
           ...error,
