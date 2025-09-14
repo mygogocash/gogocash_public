@@ -5,8 +5,8 @@
 export PATH="/usr/local/bin:$PATH"
 
 # Set git config
-git config --local user.name "GoGoCash Bot"
-git config --local user.email "bot@gogocash.co"
+git config --local user.name "jaibun"
+git config --local user.email "jaibun.s89@gmail.com"
 
 # Lint the project
 yarn lint
