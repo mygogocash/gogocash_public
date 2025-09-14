@@ -13,7 +13,7 @@ interface LoginState {
 
 const useCrossmintLogin = () => {
   const crossmintAuth = useAuth();
-  const { user, jwt, status: statusAuth, login, getUser } = crossmintAuth;
+  const { user, jwt, status: statusAuth } = crossmintAuth;
   const crossmintWallet = useWallet();
   const { wallet, status } = crossmintWallet;
   const loginAttemptRef = useRef(false);

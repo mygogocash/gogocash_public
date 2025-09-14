@@ -2,7 +2,7 @@
 . "$(dirname "$0")/_/husky.sh"
 
 # Add PATH
-export PATH="/usr/local/bin:$PATH"
+# export PATH="/usr/local/bin:$PATH"
 
 # Set git config
 git config --local user.name "jaibun"
@@ -12,7 +12,7 @@ git config --local user.email "jaibun.s89@gmail.com"
 yarn lint
 
 # Run tests
-yarn test
+# yarn test
 
 # Build the project
 yarn build

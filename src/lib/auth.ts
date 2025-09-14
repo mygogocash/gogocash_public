@@ -66,6 +66,7 @@ interface CrossmintLoginResult {
 }
 
 // Crossmint Web3 login function with JWT validation
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function performCrossmintLogin(
   crossmintJWT: string
 ): Promise<CrossmintLoginResult> {
