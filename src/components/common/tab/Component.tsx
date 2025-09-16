@@ -14,7 +14,7 @@ export default function Component({ list }: IProp) {
             onClick={() => {
               setActiveTab(`${item.id}`);
             }}
-            className="h-[45px] bg-white rounded-[8px] bg-white flex items-center justify-between px-4"
+            className="h-[45px] bg-white rounded-[8px] flex items-center justify-between px-4"
             style={{
               boxShadow: '0px 4px 25px 0px #00000014',
             }}
