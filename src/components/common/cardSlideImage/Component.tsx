@@ -14,7 +14,7 @@ const Component = () => {
               <div className="product__slide" key={index}>
                 <div className="product__slide__number">
                   <div className="w-full flex items-center justify-center flex-col max-w-[200px] h-auto">
-                    <CardImage image={''} percent={0} link="/shop/1" />
+                    <CardImage image={''} percent={''} link="/shop/1" />
                   </div>
                 </div>
               </div>

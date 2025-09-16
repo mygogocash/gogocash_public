@@ -74,7 +74,7 @@ const Component = () => {
               _image={''}
               _productName={'test'}
               _shopName={'test'}
-              percent={0}
+              percent={''}
               link="/product/1"
               type={''}
             />

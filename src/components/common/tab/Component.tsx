@@ -64,7 +64,7 @@ export default function Component({ list }: IProp) {
                 image={''}
                 productName={''}
                 shopName={''}
-                percent={0}
+                percent={''}
               />
             ))}
           </div> */}
