@@ -1,12 +1,8 @@
-import TitleBar from '@/features/desktop/home/views/TitleBar';
-
-import React from 'react';
+import React, { useState } from 'react';
 import { list } from '../../constant';
 import CardProduct from '@/components/common/cardProduct';
 import Button from '@/components/common/button';
-import { BoxIcon, Coins, SquareChartGantt, StoreIcon, Tag } from 'lucide-react';
-import Deals from '@/features/desktop/home/views/Deals';
-import BoxSlide from '@/components/common/boxSlide';
+import { BoxIcon, Coins, SquareChartGantt, Tag } from 'lucide-react';
 import BadgeList from '@/components/common/badgeList';
 import Search from '@/features/desktop/search';
 import Drawer from '@/components/common/drawer';
@@ -14,62 +10,68 @@ import Condition from './views/Condition';
 import HowtoClaim from './views/HowtoClaim';
 import Tab from '@/components/common/tab';
 import ShowMore from '@/components/common/showMore';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import useSWR from 'swr';
-import { IResponseShopDetail } from '../../interface';
 import { fetcher } from '@/lib/client';
 import ImageComponent from '@/components/common/Image';
 import CartIcon from '@/components/icons/CartIcon';
-import { IResponseProducts } from '@/features/desktop/home/interface';
+import { DataOffer, IResponseOffer } from '@/features/desktop/home/interface';
 import { mapDataProduct } from '@/hooks/useHome';
 const Component = () => {
   const [isOpenCondition, setIsOpenCondition] = React.useState(false);
   const [isOpenClaim, setIsOpenClaim] = React.useState(false);
-  const router = useRouter();
-  const param = useParams();
-  const { data } = useSWR<IResponseShopDetail>(
-    `/merchants/${param.id}`,
+  const params = useParams();
+  const { data: shopDetail } = useSWR<DataOffer>(
+    `/offer/${params.id}`,
     fetcher,
     {
       revalidateOnFocus: false,
     }
   );
-  const shop = data?.data;
-  const limit = 20;
-  const { data: dataProduct } = useSWR<IResponseProducts>(
-    `/products?limit=${limit}`,
+  const shop = shopDetail;
+  const [offerSearch] = useState({
+    category: '',
+    page: 1,
+    limit: 100,
+    search: '',
+  });
+  const dataShop = mapDataProduct({ data: [shopDetail] } as IResponseOffer);
+  const { data: dataOffer } = useSWR<IResponseOffer>(
+    `/offer?category=${offerSearch.category}&search=${offerSearch.search}&limit=${offerSearch.limit}&page=${offerSearch.page}`,
     fetcher,
     {
       revalidateOnFocus: false,
     }
   );
-  const products = dataProduct ? mapDataProduct(dataProduct) : [];
+
+  const data = mapDataProduct(dataOffer as IResponseOffer);
   return (
     <div className="container-inner space-y-8 my-[10px] md:my-[88px]">
       {/*  */}
-      <div className="flex items-center gap-20 md:flex-row flex-col">
-        <div className="w-[300px] h-[300px]">
+      <div className="flex items-start gap-20 md:flex-row flex-col">
+        <div className="w-[30%] h-[300px]">
           <ImageComponent
             src={shop?.logo || '/shopee.png'}
             width={300}
             height={300}
-            alt={shop?.name || 'shop name'}
+            alt={shop?.offer_name || 'shop name'}
             className="w-full"
           />
         </div>
-        <div>
+        <div className="w-[70%]">
           <h1 className="font-bold text-[30px] md:text-[40px] text-[var(--black-5)]">
-            {shop?.name || ''}
+            {shop?.offer_name || ''}
           </h1>
           <h3 className="font-normal text-[16px] md:text-[24px] text-[var(--black-5)]">
             Shop with GoGoCash to maximize cashback up to{' '}
             <span className=" text-[30px] md:text-[40px]">
-              {shop?.cashbackPercent || 0}%
+              {dataShop?.[0]?.percent || 0}
             </span>
           </h3>
-          <p className="text-[20px] text-[var(--black-3)] text-light my-3 mb-8">
-            {shop?.description || ''}
-          </p>
+          <div
+            className="text-[20px] text-[var(--black-3)] text-light my-3 mb-8"
+            dangerouslySetInnerHTML={{ __html: shop?.description || '' }}
+          />
           <BadgeList
             list={[
               {
@@ -115,14 +117,14 @@ const Component = () => {
         </div>
       </div>
       <Drawer isOpen={isOpenCondition} setIsOpen={setIsOpenCondition}>
-        <Condition />
+        <Condition link={`${shop?.tracking_link}?` || ''} />
       </Drawer>
 
       <Drawer isOpen={isOpenClaim} setIsOpen={setIsOpenClaim}>
         <HowtoClaim />
       </Drawer>
 
-      <Tab
+      {/* <Tab
         list={list.map((item) => ({
           ...item,
           content: (
@@ -136,12 +138,12 @@ const Component = () => {
             />
           ),
         }))}
-      />
+      /> */}
 
       {/*  */}
 
       {/*  */}
-      <div className="space-y-5">
+      {/* <div className="space-y-5">
         <TitleBar
           title={'Grab your Deals'}
           button={{
@@ -153,7 +155,7 @@ const Component = () => {
           }}
         />
         <Deals />
-      </div>
+      </div> */}
       {/*  */}
       <div className="flex items-center justify-between">
         <h1 className="text-[var(--black-5)] font-bold text-[24px] md:text-[36px]">
@@ -166,23 +168,22 @@ const Component = () => {
           ...item,
           content: (
             <div className="grid xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-10 pt-10">
-              {products.map((item, index) => (
+              {data?.map((item, index) => (
                 <CardProduct
                   key={index}
                   _image={item.pic}
                   _productName={item.name}
                   _shopName={item.shopName}
                   percent={item.percent}
-                  link={`/product/${item.link}`}
+                  link={`${item.link}`}
                   type={item.type}
-                  like={item.like}
                 />
               ))}
             </div>
           ),
         }))}
       />
-      <ShowMore min={limit} max={80} />
+      <ShowMore min={offerSearch.limit} max={80} />
     </div>
   );
 };

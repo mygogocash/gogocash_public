@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 const ProductPage = () => {
   const router = useRouter();
 
+  // const
   return (
     <>
       <HeaderMobile

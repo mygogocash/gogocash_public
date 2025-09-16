@@ -1,5 +1,5 @@
 export interface IProp {
   image?: string;
-  percent?: number;
+  percent?: string;
   link: string;
 }

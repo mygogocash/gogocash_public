@@ -1,12 +1,63 @@
-export interface IResponseMerchants {
-  success: boolean;
-  error: null;
-  data: DataMerchants;
+export interface IResponseOffer {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+  data: DataOffer[];
 }
 
-export interface DataMerchants {
-  items: ItemMerchants[];
-  pagination: PaginationMerchants;
+export interface DataOffer {
+  _id: string;
+  offer_id: number;
+  __v: number;
+  categories: string;
+  commission_tracking: CommissionTracking;
+  commissions: { [key: string]: string }[];
+  countries: string;
+  currency: Currency;
+  datetime_created: Date;
+  datetime_updated: Date;
+  description: string;
+  directory_page: string;
+  is_require_approval: number;
+  logo: string;
+  lookup_value: LookupValue;
+  marketplace_store_offer: boolean;
+  merchant_id: number;
+  offer_name: string;
+  payment_terms: number;
+  preview_url: string;
+  special_commissions: string[];
+  tracking_link: string;
+  tracking_type: TrackingType;
+  validation_terms: number;
+}
+
+export enum CommissionTracking {
+  RealTime = 'real-time',
+}
+
+export enum Currency {
+  Aud = 'AUD',
+  Cny = 'CNY',
+  Eur = 'EUR',
+  Idr = 'IDR',
+  Myr = 'MYR',
+  // Thb = "THB",
+  Usd = 'USD',
+}
+
+export enum LookupValue {
+  CPA = 'cpa',
+  CPABoth = 'cpa_both',
+  CPS = 'cps',
+}
+
+export enum TrackingType {
+  Desktop = 'desktop',
+  DesktopMobile = 'desktop mobile',
+  DesktopMobileIosAndroid = 'desktop mobile ios android',
+  IosAndroid = 'ios android',
 }
 
 export interface ItemMerchants {

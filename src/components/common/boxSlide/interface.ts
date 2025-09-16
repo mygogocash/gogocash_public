@@ -8,7 +8,7 @@ export interface IProp {
 }
 
 export interface IList {
-  percent: number;
+  percent: string;
   pic: string;
   name: string;
   shopName: string;

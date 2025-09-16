@@ -1,17 +1,12 @@
 import ImageComponent from '@/components/common/Image';
-import { useHomeContext } from '@/providers/HomeContext';
 import { EmblaOptionsType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 const OPTIONS: EmblaOptionsType = { slidesToScroll: 'auto' };
 
 const DontMiss = () => {
-  const router = useRouter();
   const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS);
-  const { banner } = useHomeContext();
-  const data = banner?.data;
 
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
@@ -40,7 +35,7 @@ const DontMiss = () => {
     <section className="m-auto  w-full relative">
       <div className="overflow-hidden  w-full" ref={emblaRef}>
         <div className="flex w-full gap-5">
-          {data?.map((ele, index) => (
+          {/* {products?.map((ele, index) => (
             <div
               className="flex-[0_0_100%] w-full max-h-[455px]"
               key={index}
@@ -49,14 +44,22 @@ const DontMiss = () => {
               }}
             >
               <ImageComponent
-                src={ele.image || '/dontMiss.png'}
+                src={ele.pic || '/dontMiss.png'}
                 alt={'dontMiss'}
                 width={1160}
                 className="w-full h-auto max-h-[455px]"
                 height={455}
               />
             </div>
-          ))}
+          ))} */}
+
+          <ImageComponent
+            src={'/dontMiss.png'}
+            alt={'dontMiss'}
+            width={1160}
+            className="w-full h-auto max-h-[455px]"
+            height={455}
+          />
         </div>
       </div>
       {canScrollPrev && (

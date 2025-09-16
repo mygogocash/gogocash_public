@@ -17,7 +17,7 @@ const Component = ({ image, percent, link }: IProp) => {
           alt="card"
           width={200}
           height={200}
-          className="object-contain rounded-t-[8px]"
+          className=" rounded-t-[8px] w-[200px] h-[200px] object-contain"
         />
       </div>
       <p className="flex items-center justify-between mb-[16px] w-full px-2">
@@ -26,7 +26,8 @@ const Component = ({ image, percent, link }: IProp) => {
         </span>
         <span className="text-[20px] text-black font-semibold ">
           {' '}
-          {percent}%
+          {percent}
+          {/* {percent?.includes('%') ? '' : '%'} */}
         </span>
       </p>
     </div>

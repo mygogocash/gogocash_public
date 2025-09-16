@@ -5,7 +5,7 @@ import { useState } from 'react';
 import * as Form from '@radix-ui/react-form';
 import Button from '@/components/common/button';
 
-const Condition = () => {
+const Condition = ({ link }: { link: string }) => {
   const [checked, setChecked] = useState(false);
   return (
     <div className="md:my-[64px] my-10 mx-5 md:mx-[40px] overflow-y-auto ">
@@ -101,6 +101,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam euismod id sem qu
             fullWidth
             backgroundColor=" !justify-center bg-[var(--primary-4)] uppercase rounded-full h-[61px] !text-[24px] text-white"
             text="Shop Now"
+            onClick={() => {
+              // @TODO update data link save to DB here
+              window.open(link, '_blank');
+            }}
           />
         </Form.Root>
       </div>

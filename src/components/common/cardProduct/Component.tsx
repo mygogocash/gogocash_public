@@ -22,7 +22,7 @@ const CardProduct = ({
     >
       <div className="rounded-t-[8px] relative ">
         <div
-          className={`w-[88px] h-[34px] bg-[var(--primary-4)] rounded-tl-[8px] rounded-br-[8px]
+          className={`w-fit px-2 h-[34px] bg-[var(--primary-4)] rounded-tl-[8px] rounded-br-[8px]
           absolute top-0 left-0 text-[15px] font-semibold text-white flex items-center justify-center`}
         >
           {type}
@@ -38,7 +38,7 @@ const CardProduct = ({
             alt={_productName}
             width={200}
             height={200}
-            className="object-[inherit] rounded-t-[8px] h-full"
+            className="object-contain rounded-t-[8px] h-full"
           />
         </div>
       </div>
@@ -54,9 +54,7 @@ const CardProduct = ({
         <span className="text-[14px] text-black font-normal">
           Cashback up to
         </span>
-        <span className="text-[20px] text-black font-semibold ">
-          {percent}%
-        </span>
+        <span className="text-[20px] text-black font-semibold ">{percent}</span>
       </p>
     </div>
   );

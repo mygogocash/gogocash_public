@@ -31,7 +31,7 @@ const Component = () => {
                 <CardImage
                   key={index}
                   image="/shopee.png"
-                  percent={10}
+                  percent={'10'}
                   link="/shop/1"
                 />
               ))}
