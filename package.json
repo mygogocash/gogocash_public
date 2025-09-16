@@ -1,6 +1,6 @@
 {
   "name": "@gogocash/source",
-  "version": "0.0.34",
+  "version": "0.0.35",
   "license": "MIT",
   "engines": {
     "node": ">=20.18.0",
