@@ -35,14 +35,17 @@ const Component = () => {
   // Function to get user display info (email or wallet address)
   const getUserDisplayInfo = useCallback(() => {
     // First try to get email from session data
-    const sessionUser = data?.user as { email?: string };
-    if (sessionUser?.email) {
-      return sessionUser.email;
-    }
+    const sessionUser = data?.user as {
+      username: string;
+      email?: string;
+      wallet: string;
+    };
 
-    // Then try to get email from crossmint user
-    if (crossmintUser?.email) {
-      return crossmintUser.email;
+    if (sessionUser?.username && sessionUser?.username !== 'undefined') {
+      return sessionUser.username;
+    }
+    if (sessionUser?.email && sessionUser?.email !== 'undefined') {
+      return sessionUser.email;
     }
 
     // Finally try to get wallet address
@@ -53,7 +56,7 @@ const Component = () => {
     }
 
     return 'User';
-  }, [data?.user, crossmintUser?.email, wallet?.address]);
+  }, [data?.user, wallet?.address]);
 
   const handleLogin = useCallback(() => {
     try {

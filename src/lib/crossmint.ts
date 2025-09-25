@@ -3,6 +3,8 @@
  * Based on Crossmint SDK documentation: https://docs.crossmint.com/authentication/introduction
  */
 
+import { Session } from 'next-auth';
+
 export interface CrossmintUser {
   userId: string;
   email?: string;
@@ -17,6 +19,7 @@ export interface CrossmintUser {
     address: string;
     chain: string;
   }>;
+  username?: string;
 }
 
 export interface CrossmintAuthResult {
@@ -101,17 +104,20 @@ export function parseCrossmintUser(authData: unknown): CrossmintUser | null {
 /**
  * Get user display name from Crossmint user data
  */
-export function getCrossmintUserDisplayName(user: CrossmintUser): string {
-  if (user.google?.displayName) {
-    return user.google.displayName;
+export function getCrossmintUserDisplayName(user: Session['user']): string {
+  if (user.username) {
+    return user.username;
   }
-  if (user.farcaster?.username) {
-    return `@${user.farcaster.username}`;
-  }
+  // if (user.google?.displayName) {
+  //   return user.google.displayName;
+  // }
+  // if (user.farcaster?.username) {
+  //   return `@${user.farcaster.username}`;
+  // }
   if (user.email) {
     return user.email;
   }
-  return user.userId;
+  return user.id || '';
 }
 
 /**

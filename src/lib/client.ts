@@ -27,6 +27,8 @@ client.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response) {
+      console.log('API response error:', error.response);
+
       //   throw new Error(error.response.data.message || 'API request failed');
       return error.response;
     } else if (error.request) {

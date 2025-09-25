@@ -2,7 +2,8 @@
 const nextConfig = {
   // Enable React strict mode for better development experience
   reactStrictMode: true,
-
+  // swcMinify: false,
+  output: 'standalone',
   // Development optimizations for hot reload
   ...(process.env.NODE_ENV === 'development' && {
     // Fast Refresh configuration

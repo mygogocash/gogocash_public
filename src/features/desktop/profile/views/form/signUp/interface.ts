@@ -9,6 +9,8 @@ export interface User {
   __v: number;
   email: string;
   id_crossmint: string;
+  id_twitter: string;
+  username: string;
 }
 
 export interface IDataSignIn {

@@ -28,5 +28,6 @@
     "src/**/*.tsx",
     ".next/types/**/*.ts"
   ],
-  "exclude": ["node_modules", "jest.config.ts"]
+  "exclude": ["node_modules", "jest.config.ts"],
+  "noImplicitTypeOf": false
 }

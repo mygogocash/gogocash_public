@@ -1,110 +1,42 @@
-# Multi-stage build for Next.js application
-FROM node:20-alpine AS base
+# Stage 1: The 'builder' stage
+FROM node:20-alpine AS builder
 
-# Install dependencies only when needed
-FROM base AS deps
-RUN apk add --no-cache \
-    libc6-compat \
-    curl \
-    python3 \
-    make \
-    g++ \
-    && rm -rf /var/cache/apk/*
 WORKDIR /app
 
-# Configure yarn for better performance and network handling
-RUN yarn config set network-timeout 600000 && \
-    yarn config set network-concurrency 1 && \
-    yarn config set registry https://registry.npmjs.org/ && \
-    yarn config set cache-folder /usr/local/share/.cache/yarn
+# 1. Install build dependencies (Python, make, g++ for node-gyp)
+#    - Use a single RUN command to install and then remove the package list cache
+RUN apk update && \
+    apk add --no-cache python3 make g++ && \
+    rm -rf /var/cache/apk/*
 
-# Copy package files first for better Docker layer caching
+ENV SWC_PKG_TRIPLE=x86_64-unknown-linux-musl
+# Copy package.json and package-lock.json and install dependencies
 COPY package.json yarn.lock ./
 
-# Install dependencies with yarn and enable caching
-# Use legacy peer deps to handle dependency conflicts
-RUN --mount=type=cache,target=/usr/local/share/.cache/yarn \
-    echo "Installing dependencies with yarn..." && \
-    yarn install --frozen-lockfile --prefer-offline --legacy-peer-deps
+# 2. Run yarn install (and clean cache)
+# RUN yarn install --frozen-lockfile && yarn cache clean
+RUN yarn install --frozen-lockfile 
+# --build-from-source=@swc/core && yarn cache clean
 
-# Development stage
-FROM base AS development
-WORKDIR /app
-
-# Install development tools
-RUN apk add --no-cache curl
-
-# Copy dependencies
-COPY --from=deps /app/node_modules ./node_modules
+# The rest of your Dockerfile...
 COPY . .
-
-# Create non-root user for development
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-RUN chown -R nextjs:nodejs /app
-
-# Switch to non-root user
-USER nextjs
-
-# Development environment variables
-ENV NEXT_TELEMETRY_DISABLED=1 \
-    NODE_ENV=development \
-    PORT=3000 \
-    WATCHPACK_POLLING=true \
-    CHOKIDAR_USEPOLLING=true
-
-# Expose port
-EXPOSE 3000
-
-# Health check for development
-HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
-    CMD curl -f http://localhost:3000/api/health || exit 1
-
-# Start development server with hot reload
-CMD ["yarn", "dev"]
-
-# Rebuild the source code only when needed
-FROM base AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
-
-# Disable Next.js telemetry during build
-ENV NEXT_TELEMETRY_DISABLED 1
-
-# Build application with output optimization
 RUN yarn build
 
-# Production image, copy all the files and run next
-FROM base AS production
+# Stage 2: The 'runner' stage...
+# ... (no changes needed here, as the final image will be small)
+
+# baseステージをもとにrunnerステージを開始
+FROM builder AS runner
+
 WORKDIR /app
 
-ENV NODE_ENV production
-ENV NEXT_TELEMETRY_DISABLED 1
-
-# Create non-root user
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-
-# Copy built application
+# public と .next/static は nextjs の standalone を使う場合に含まれないため、コピーする必要がある
 COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
 
-# Set the correct permission for prerender cache
-RUN mkdir .next
-RUN chown nextjs:nodejs .next
-
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-USER nextjs
-
-EXPOSE 3000
-ENV PORT 3000
-
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
-    CMD curl -f http://localhost:3000/api/health || exit 1
-
-CMD ["node", "server.js"] 
+# `next start` の代わりに `node server.js` を使用
+CMD ["node", "server.js"]

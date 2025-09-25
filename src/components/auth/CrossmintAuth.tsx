@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import {
-  CrossmintUser,
   CrossmintAuthResult,
   isCrossmintConfigured,
   handleCrossmintError,
@@ -24,9 +23,7 @@ export default function CrossmintAuth({
 }: CrossmintAuthProps) {
   const { data: session, status } = useSession();
   const [isLoading, setIsLoading] = useState(false);
-  const [crossmintUser, setCrossmintUser] = useState<CrossmintUser | null>(
-    null
-  );
+  const crossmintUser = session?.user;
 
   // Check if Crossmint is configured
   useEffect(() => {
@@ -37,28 +34,6 @@ export default function CrossmintAuth({
       onAuthError?.(error);
     }
   }, [onAuthError]);
-
-  // Parse Crossmint user from session
-  useEffect(() => {
-    if (session?.user?.crossmint_user_id && session?.user?.user) {
-      try {
-        const userData =
-          typeof session.user.user === 'string'
-            ? JSON.parse(session.user.user)
-            : session.user.user;
-
-        const parsedUser = parseCrossmintUser({
-          userId: session.user.crossmint_user_id,
-          email: userData?.email,
-          ...userData,
-        });
-
-        setCrossmintUser(parsedUser);
-      } catch (error) {
-        console.error('❌ Error parsing user data from session:', error);
-      }
-    }
-  }, [session]);
 
   const _handleCrossmintLogin = async (authData: {
     user: unknown;
@@ -98,7 +73,6 @@ export default function CrossmintAuth({
         jwt: authData.jwt,
       };
 
-      setCrossmintUser(user);
       onAuthSuccess?.(authResult);
 
       console.log('✅ Authentication completed successfully');
@@ -114,7 +88,6 @@ export default function CrossmintAuth({
   const handleLogout = async () => {
     try {
       setIsLoading(true);
-      setCrossmintUser(null);
       await signOut({ redirect: false });
       console.log('✅ Logout successful');
     } catch (error) {
@@ -137,7 +110,7 @@ export default function CrossmintAuth({
   }
 
   // Show authenticated state
-  if (session?.user && crossmintUser) {
+  if (session?.user) {
     return (
       <div
         className={`p-4 border rounded-lg bg-green-50 border-green-200 ${className}`}
@@ -145,19 +118,19 @@ export default function CrossmintAuth({
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-lg font-semibold text-green-800">
-              Welcome, {getCrossmintUserDisplayName(crossmintUser)}!
+              Welcome, {getCrossmintUserDisplayName(session.user)}!
             </h3>
             <p className="text-sm text-green-600">
               Authenticated with Crossmint
             </p>
-            {crossmintUser.email && (
+            {crossmintUser?.email && (
               <p className="text-sm text-gray-600">
                 Email: {crossmintUser.email}
               </p>
             )}
-            {crossmintUser.wallets && crossmintUser.wallets.length > 0 && (
+            {crossmintUser?.wallet && crossmintUser.wallet.length > 0 && (
               <p className="text-sm text-gray-600">
-                Wallets: {crossmintUser.wallets.length}
+                Wallets: {crossmintUser.wallet.length}
               </p>
             )}
           </div>

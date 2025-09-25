@@ -100,6 +100,8 @@ const useCrossmintLogin = () => {
           userId: userData.id_crossmint,
           email: userData.email,
           address: userData.address,
+          username: userData?.username,
+          id_twitter: userData?.id_twitter,
           redirect: false, // Handle redirect manually
         });
         console.log('NextAuth signIn result:', result);
@@ -134,9 +136,11 @@ const useCrossmintLogin = () => {
       if (loginState.retryCount < 2) {
         toast.error(errorMessage);
       }
+      crossmintAuth.logout();
     } finally {
       loginAttemptRef.current = false;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     jwt,
     loginState.hasAttemptedLogin,
@@ -187,7 +191,11 @@ const useCrossmintLogin = () => {
     status,
   ]);
 
-  const signOutAuth = useCallback(() => {
+  const signOutAuth = useCallback(async () => {
+    await Promise.all([
+      crossmintAuth.logout(),
+      signOut({ redirect: true, callbackUrl: '/' }),
+    ]);
     setLoginState({
       isLoggingIn: false,
       hasAttemptedLogin: false,
@@ -195,8 +203,6 @@ const useCrossmintLogin = () => {
       retryCount: 0,
     });
     loginAttemptRef.current = false;
-    crossmintAuth.logout();
-    signOut({ redirect: true, callbackUrl: '/' });
   }, [crossmintAuth]);
 
   // Debug what we're returning

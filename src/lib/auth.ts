@@ -19,23 +19,24 @@ declare module 'next-auth' {
     refresh_token?: string;
     expires?: string;
     user?: any;
-    buyer?: any;
+    // buyer?: any;
     wallet?: any;
     crossmint_user_id?: string;
     crossmint_jwt?: string;
+    username?: string;
   }
   interface Session {
     user: {
       access_token?: string;
       refresh_token?: string;
-      expires?: string;
-      user?: any;
-      buyer?: any;
+      // expires?: string;
+      // user?: any;
+      // buyer?: any;
       wallet?: any;
       crossmint_user_id?: string;
       crossmint_jwt?: string;
       email?: string;
-      name?: string;
+      username?: string;
       id?: string;
     };
   }
@@ -56,11 +57,12 @@ interface CrossmintLoginResult {
       firstName?: string;
       lastName?: string;
     };
-    buyer?: any;
+    // buyer?: any;
     wallet?: any;
     access_token?: string;
     refresh_token?: string;
     expires?: any;
+    username?: string;
   };
   error?: string;
 }
@@ -168,6 +170,7 @@ function isValidJWTFormat(token: string): boolean {
 }
 
 // Helper function to safely parse JSON data
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function safeJsonParse(data: any): any {
   if (!data) return null;
 
@@ -194,6 +197,8 @@ export const authOptions: AuthOptions = {
         userId: { label: 'User ID', type: 'text' },
         email: { label: 'Email', type: 'email' },
         address: { label: 'Address', type: 'text' },
+        username: { label: 'Username', type: 'text' },
+        id_twitter: { label: 'Twitter ID', type: 'text' },
       },
       async authorize(credentials) {
         try {
@@ -212,12 +217,14 @@ export const authOptions: AuthOptions = {
             console.log('✅ Crossmint authentication successful');
 
             const userData = credentials;
-            const fullName = 'Test User';
+            const fullName = credentials.username;
 
             return {
               id: userData?.userId || credentials.userId || 'unknown',
               email: userData?.email || credentials.email || '',
-              name: fullName,
+              username: fullName,
+              id_twitter: userData.id_twitter,
+              wallet: credentials.address,
               access_token: credentials?.jwt,
             } as unknown as User;
           }
@@ -249,9 +256,11 @@ export const authOptions: AuthOptions = {
             ...token,
             access_token: user.access_token,
             refresh_token: user.refresh_token,
-            expires: user.expires,
-            user: user.user,
-            buyer: user.buyer,
+            // expires: user.expires,
+            // user: user.user,
+            // buyer: user.buyer,
+            username: user.username,
+            address: user.wallet,
             wallet: user.wallet,
             crossmint_user_id: user.crossmint_user_id,
             crossmint_jwt: user.crossmint_jwt,
@@ -266,28 +275,30 @@ export const authOptions: AuthOptions = {
     },
     async session({ session, token }) {
       try {
+        // console.log('token', token);
+
         // Parse data safely using helper function
-        const userData = safeJsonParse(token.user);
-        const buyerData = safeJsonParse(token.buyer);
-        const walletData = safeJsonParse(token.wallet);
-        const expiresData = safeJsonParse(token.expires);
+        // const userData = safeJsonParse(token.user);
+        // const buyerData = safeJsonParse(token.buyer);
+        // const walletData = safeJsonParse(token.wallet);
+        // const expiresData = safeJsonParse(token.expires);
 
         return {
           ...session,
           user: {
             ...session.user,
-            id: userData?.id || token.sub,
-            email: userData?.email || session.user?.email,
-            name:
-              userData?.firstName && userData?.lastName
-                ? `${userData.firstName} ${userData.lastName}`.trim()
-                : session.user?.name,
+            id: token.sub,
+            email: token?.email || session.user?.email,
+            username:
+              typeof token?.username === 'string'
+                ? token.username
+                : session.user?.username,
             access_token: token.access_token,
             refresh_token: token.refresh_token,
-            expires: expiresData,
-            user: userData,
-            buyer: buyerData,
-            wallet: walletData,
+            // expires: expiresData,
+            // user: userData,
+            // buyer: buyerData,
+            wallet: token.wallet,
             crossmint_user_id: token.crossmint_user_id,
             crossmint_jwt: token.crossmint_jwt,
           },
