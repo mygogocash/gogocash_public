@@ -18,7 +18,7 @@ const Component = ({ src, open }: IProp) => {
         />
       </div>
       <p className="text-[var(--black-5)] text-[14px]">
-        {data?.user?.user?.username || ''}
+        {data?.user?.username || ''}
       </p>
       <IconButton
         icon={
