@@ -23,7 +23,7 @@ const Component = () => {
             subTitle={'Withdraw Your Cashback Earnings'}
           />
           <div>
-            <h2 className="text-[14px] md:text-[24px] font-medium text-[var(--black-5)]">
+            <h2 className="text-[14px] md:text-[24px] font-medium text-black-5">
               Withdraw to
             </h2>
             <Select2
@@ -37,14 +37,14 @@ const Component = () => {
             />
           </div>
           <div>
-            <h2 className="text-[14px] md:text-[24px] font-medium text-[var(--black-5)]">
+            <h2 className="text-[14px] md:text-[24px] font-medium text-black-5">
               Withdraw Fee
             </h2>
             <TextField
               placeholder={'Fee'}
               name={'fee'}
               startIcon={
-                <p className="text-[14px] md:text-[24px] text-[var(--black-5)]">
+                <p className="text-[14px] md:text-[24px] text-black-5">
                   Withdraw Fee
                 </p>
               }
@@ -56,10 +56,10 @@ const Component = () => {
 
           <div className=" space-y-5">
             <div className="flex items-center justify-between">
-              <p className="text-[14px] md:text-[20px] text-[var(--black-4)]  font-semibold">
+              <p className="text-[14px] md:text-[20px] text-black-4 font-semibold">
                 You will receive
               </p>
-              <h1 className="text-[var(--primary-4)] text-[24px] md:text-[32px] font-bold">
+              <h1 className="text-primary-4 text-[24px] md:text-[32px] font-bold">
                 $0.00
               </h1>
             </div>
@@ -68,7 +68,7 @@ const Component = () => {
               text={'WITHDRAW'}
               fullWidth
               center
-              backgroundColor="text-white bg-[var(--primary-4)] rounded-full h-[51px]"
+              backgroundColor="text-white bg-primary-4 rounded-full h-[51px]"
             />
           </div>
         </Form.Root>

@@ -22,7 +22,7 @@ const CardProduct = ({
     >
       <div className="rounded-t-[8px] relative ">
         <div
-          className={`w-fit px-2 h-[34px] bg-[var(--primary-4)] rounded-tl-[8px] rounded-br-[8px]
+          className={`w-fit px-2 h-[34px] bg-primary-4 rounded-tl-[8px] rounded-br-[8px]
           absolute top-0 left-0 text-[15px] font-semibold text-white flex items-center justify-center`}
         >
           {type}
@@ -46,7 +46,7 @@ const CardProduct = ({
         <h3 className="text-[18px] font-bold text-black max-w-[200px] w-full line-clamp-1">
           {_productName}
         </h3>
-        <p className="text-[var(--black-3)] text-[14px] font-normal line-clamp-1">
+        <p className="text-black-3 text-[14px] font-normal line-clamp-1">
           {_shopName}
         </p>
       </div>

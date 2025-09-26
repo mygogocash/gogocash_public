@@ -55,7 +55,7 @@ const Component = ({
       <div className="space-y-2 w-full">
         <Button
           icon={<GoogleIcon />}
-          backgroundColor="bg-white text-black border-[var(--grey-2)] border"
+          backgroundColor="bg-white text-black border-grey-2 border"
           text={`${isLogin ? 'Login' : 'Sign up'} with Google`}
           onClick={function (): void {
             // signIn('google');
@@ -67,7 +67,7 @@ const Component = ({
         />
         {/* <Button
           icon={<Facebook2Icon />}
-          backgroundColor="bg-white text-black border-[var(--grey-2)] border"
+          backgroundColor="bg-white text-black border-grey-2 border"
           text={`${isLogin ? 'Login' : 'Sign up'} with Facebook`}
           onClick={function (): void {
             signIn('facebook');
@@ -76,7 +76,7 @@ const Component = ({
         /> */}
         <Button
           icon={<Mail />}
-          backgroundColor="bg-white text-black border-[var(--grey-2)] border"
+          backgroundColor="bg-white text-black border-grey-2 border"
           text={`${isLogin ? 'Login' : 'Sign up'} with E-mail`}
           onClick={function (): void {
             if (isLogin) {
@@ -89,7 +89,7 @@ const Component = ({
           <TitleSeparator text={`or ${isLogin ? 'login' : 'sign up'} with`} />
           <Button
             icon={<Wallet />}
-            backgroundColor="bg-white text-black border-[var(--grey-2)] border"
+            backgroundColor="bg-white text-black border-grey-2 border"
             text="Connect with Wallet"
             onClick={async function (): Promise<void> {
               handleModal?.(false);
@@ -104,7 +104,7 @@ const Component = ({
         <TitleSeparator text="You're new here?" />
 
         <Button
-          backgroundColor="bg-white text-black border-[var(--primary-4)] border rounded-full h-[56px]"
+          backgroundColor="bg-white text-black border-primary-4 border rounded-full h-[56px]"
           text={!isLogin ? 'LOGIN' : 'Sign Up'}
           onClick={function (): void {
             if (!isLogin) {

@@ -75,7 +75,7 @@ const Component = () => {
                           }}
                           className={`${
                             select === ele.value
-                              ? 'bg-[var(--primary-1)]  text-[var(--primary-4)]'
+                              ? 'bg-primary-1 text-primary-4'
                               : 'text-black'
                           }  p-2 rounded-[8px]`}
                         >

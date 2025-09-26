@@ -35,24 +35,24 @@ const Component = () => {
         </div>
         <div className="flex items-center gap-20">
           <div className="space-y-4 ">
-            <p className="text-[var(--black-4)] text-[14px] md:text-[18px] font-medium">
+            <p className="text-black-4 text-[14px] md:text-[18px] font-medium">
               Name
             </p>
-            <p className="text-[var(--black-4)] text-[14px] md:text-[18px] font-medium">
+            <p className="text-black-4 text-[14px] md:text-[18px] font-medium">
               Username
             </p>
-            <p className="text-[var(--black-4)] text-[14px] md:text-[18px] font-medium">
+            <p className="text-black-4 text-[14px] md:text-[18px] font-medium">
               Email
             </p>
           </div>
           <div className="space-y-4 ">
-            <p className="text-[var(--black-4)] text-[14px] md:text-[18px] font-normal">
+            <p className="text-black-4 text-[14px] md:text-[18px] font-normal">
               Name
             </p>
-            <p className="text-[var(--black-4)] text-[14px] md:text-[18px] font-normal">
+            <p className="text-black-4 text-[14px] md:text-[18px] font-normal">
               Username
             </p>
-            <p className="text-[var(--black-4)] text-[14px] md:text-[18px] font-normal">
+            <p className="text-black-4 text-[14px] md:text-[18px] font-normal">
               Email
             </p>
           </div>

@@ -59,10 +59,10 @@ const Component = () => {
 
   return (
     <div
-      className="text-[var(--black-3)] text-[12px]
+      className="text-black-3 text-[12px]
     font-semibold shadow-[0px_4px_25px_0px_rgba(0,0,0,0.25)] rounded-[16px] p-5 md:p-[40px] space-y-10"
     >
-      <h1 className="text-[var(--black-5)] text-[36px] font-medium">
+      <h1 className="text-black-5 text-[36px] font-medium">
         Financial History
       </h1>
       <div className="flex items-center gap-3 flex-wrap">
@@ -146,12 +146,12 @@ const Component = () => {
             {table.getHeaderGroups().map((headerGroup) => (
               <tr
                 key={headerGroup.id}
-                className="h-[66px] border-b border-[var(--grey-1)]"
+                className="h-[66px] border-b border-grey-1"
               >
                 {headerGroup.headers.map((header) => (
                   <th
                     key={header.id}
-                    className="px-4  text-left text-[--black-5] text-[14px] font-bold"
+                    className="px-4  text-left text-black-5 text-[14px] font-bold"
                   >
                     {flexRender(
                       header.column.columnDef.header,
@@ -168,13 +168,13 @@ const Component = () => {
               table?.getRowModel()?.rows?.map?.((row) => (
                 <tr
                   key={row.id}
-                  className={`hover:bg-[var(--grey-1)] border-b border-[var(--grey-1)] h-[66px]`}
+                  className={`hover:bg-grey-1 border-b border-grey-1 h-[66px]`}
                 >
                   {row.getVisibleCells().map((cell) =>
                     cell.column.id === 'status' ? (
                       <td
                         key={cell.id}
-                        className="px-4 text-[--black-5] text-[14px] font-medium"
+                        className="px-4 text-black-5 text-[14px] font-medium"
                       >
                         <Badge
                           status={cell.getValue() as Status}
@@ -184,7 +184,7 @@ const Component = () => {
                     ) : (
                       <td
                         key={cell.id}
-                        className="px-4 text-[--black-5] text-[14px] font-medium"
+                        className="px-4 text-black-5 text-[14px] font-medium"
                       >
                         {flexRender(
                           cell.column.columnDef.cell,

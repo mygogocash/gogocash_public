@@ -65,7 +65,7 @@ const Component = () => {
                   )
                 }
               />
-              <p className="text-[var(--black-3)] text-[16px]">{`Password has to more than 8 letters with a least 2 numbers.`}</p>
+              <p className="text-black-3 text-[16px]">{`Password has to more than 8 letters with a least 2 numbers.`}</p>
             </div>
             <TextField
               name="passwordCon"
@@ -102,7 +102,7 @@ const Component = () => {
                 <Button
                   type="submit"
                   disabled={false}
-                  backgroundColor="bg-[var(--primary-4)] text-white rounded-full h-[56px]"
+                  backgroundColor="bg-primary-4 text-white rounded-full h-[56px]"
                   text="Continue"
                   fullWidth
                   center

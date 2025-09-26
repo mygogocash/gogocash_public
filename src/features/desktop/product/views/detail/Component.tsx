@@ -41,61 +41,53 @@ const Component = () => {
         <CarouselThumb slides={detail?.images || []} />
         <div className="flex items-center flex-col">
           <div>
-            <h1 className="md:text-[40px] text-[var(--black-5)] fotn-bold">
+            <h1 className="md:text-[40px] text-black-5 font-bold">
               {detail?.name || ''}
             </h1>
-            <p className="text-[var(--black-3)] text-[14px] font-normal">
+            <p className="text-black-3 text-[14px] font-normal">
               {detail?.description || ''}
             </p>
           </div>
           <div className="flex w-full gap-[48px] flex-col md:flex-row items-center">
             <div className="w-full">
-              <div className="flex items-center justify-between border-b border-b-[var(--grey-2)] py-2 mt-4">
-                <p className="font-bold text-[var(--black-5)] text-[14px]">
-                  Full Price
-                </p>
-                <p className="font-normal text-[var(--black-5)] text-[14px]">
+              <div className="flex items-center justify-between border-b border-b-grey-2 py-2 mt-4">
+                <p className="font-bold text-black-5 text-[14px]">Full Price</p>
+                <p className="font-normal text-black-5 text-[14px]">
                   {detail?.currency} {detail?.price || 0}
                 </p>
               </div>
 
-              <div className="flex items-center justify-between border-b border-b-[var(--grey-2)] py-2">
-                <p className="font-normal text-[var(--black-5)] text-[14px]">
+              <div className="flex items-center justify-between border-b border-b-grey-2 py-2">
+                <p className="font-normal text-black-5 text-[14px]">
                   Promotion{' '}
-                  <span className="text-[var(--black-3)] text-[8px]">
+                  <span className="text-black-3 text-[8px]">
                     (All included)
                   </span>
                 </p>
-                <p className="font-normal text-[var(--black-5)] text-[14px]">
+                <p className="font-normal text-black-5 text-[14px]">
                   {detail?.currency} {detail?.originalPrice || 0}
                 </p>
               </div>
 
-              <div className="flex items-center justify-between border-b border-b-[var(--grey-2)] py-2">
-                <p className="font-normal text-[var(--primary-4)] text-[14px]">
+              <div className="flex items-center justify-between border-b border-b-grey-2 py-2">
+                <p className="font-normal text-primary-4 text-[14px]">
                   Paid Price
                 </p>
-                <p className="font-normal text-[var(--primary-4)] text-[14px]">
+                <p className="font-normal text-primary-4 text-[14px]">
                   $ 100.00
                 </p>
               </div>
 
-              <div className="flex items-center justify-between border-b border-b-[var(--grey-2)] py-2 mt-4">
-                <p className="font-normal text-[var(--black-5)] text-[14px]">
-                  Cashback
-                </p>
-                <p className="font-normal text-[var(--black-5)] text-[14px]">
-                  $ 100.00
-                </p>
+              <div className="flex items-center justify-between border-b border-b-grey-2 py-2 mt-4">
+                <p className="font-normal text-black-5 text-[14px]">Cashback</p>
+                <p className="font-normal text-black-5 text-[14px]">$ 100.00</p>
               </div>
 
-              <div className="flex items-center justify-between border-b border-b-[var(--grey-2)] py-2">
-                <p className="font-bold text-[var(--primary-4)] text-[14px]">
+              <div className="flex items-center justify-between border-b border-b-grey-2 py-2">
+                <p className="font-bold text-primary-4 text-[14px]">
                   Actual Paid Price
                 </p>
-                <p className="font-bold text-[var(--primary-4)] text-[14px]">
-                  $ 100.00
-                </p>
+                <p className="font-bold text-primary-4 text-[14px]">$ 100.00</p>
               </div>
             </div>
             <div>
@@ -122,16 +114,16 @@ const Component = () => {
             </div>
           </div>
           <div className="mt-5 w-full">
-            <h1 className="text-[var(--primary-4)] text-[40px] font-bold">
+            <h1 className="text-primary-4 text-[40px] font-bold">
               $ 84.24
-              <span className="text-[24px] text-[var(--black-5)] line-through ml-3">
+              <span className="text-[24px] text-black-5 line-through ml-3">
                 $ 100.00
               </span>
             </h1>
             <Button
               onClick={() => setIsOpenModal(true)}
               fullWidth
-              backgroundColor=" !justify-center bg-[var(--primary-4)] uppercase rounded-full h-[61px] !text-[24px] text-white"
+              backgroundColor=" !justify-center bg-primary-4 uppercase rounded-full h-[61px] !text-[24px] text-white"
               text="Shop Now"
             />
           </div>
@@ -142,11 +134,11 @@ const Component = () => {
         <div className="flex gap-2 items-center">
           <Image src="/shopee.png" alt="" width={80} height={80} />
           <div className="flex flex-col">
-            <h3 className="text-[var(--black-5)] text-[24px] font-semibold">
+            <h3 className="text-black-5 text-[24px] font-semibold">
               Shopee Thailand
             </h3>
             <p
-              className={`text-[var(--black-3)] text-[14px] font-light flex md:items-center gap-3 md:flex-row flex-col`}
+              className={`text-black-3 text-[14px] font-light flex md:items-center gap-3 md:flex-row flex-col`}
             >
               <span> Products 100</span>
               <span className="flex items-center gap-2">
@@ -164,12 +156,12 @@ const Component = () => {
           <Button
             text={'Visit Shop'}
             icon={<StoreIcon />}
-            backgroundColor="border-[0.5px] border-[var(--primary-4)] rounded-full text-[var(--primary-4)] h-[40px]"
+            backgroundColor="border-[0.5px] border-primary-4 rounded-full text-primary-4 h-[40px]"
           />
           <Button
             text={'Terms and Conditions'}
             icon={<DockIcon />}
-            backgroundColor="border-[0.5px] border-[var(--primary-4)] rounded-full text-[var(--primary-4)] h-[40px]"
+            backgroundColor="border-[0.5px] border-primary-4 rounded-full text-primary-4 h-[40px]"
           />
         </div>
       </div>
@@ -215,7 +207,7 @@ const Component = () => {
                 />
               </div>
             </div>
-            <p className="text-[var(--black-4)] text-[10px] text-center">
+            <p className="text-black-4 text-[10px] text-center">
               Waiting too long?{' '}
               <span className=" underline-offset-1 underline cursor-pointer">
                 Click here

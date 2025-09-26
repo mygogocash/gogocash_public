@@ -32,9 +32,7 @@ const Component = () => {
               >
                 <div
                   className={`w-[50px] h-[50px] md:w-[65px] md:h-[65px] rounded-full ${
-                    active === ele.label
-                      ? 'bg-[var(--primary-4)]'
-                      : 'bg-[var(--primary-2)]'
+                    active === ele.label ? 'bg-primary-4' : 'bg-primary-2'
                   } flex items-center justify-center`}
                 >
                   <IconButton
@@ -49,9 +47,7 @@ const Component = () => {
                 </div>
                 <p
                   className={`text-center ${
-                    active === ele.label
-                      ? 'text-[var(--primary-4)]'
-                      : 'text-[var(--black-3)]'
+                    active === ele.label ? 'text-primary-4' : 'text-black-3'
                   } text-[12px] font-medium`}
                 >
                   {ele.label}
@@ -60,9 +56,7 @@ const Component = () => {
             );
           })}
         </div>
-        <h1 className="text-[24px] font-medium text-[var(--black-4)]">
-          What’s New?
-        </h1>
+        <h1 className="text-[24px] font-medium text-black-4">What’s New?</h1>
 
         <div className="">
           {list.map((ele, index) => {
@@ -71,7 +65,7 @@ const Component = () => {
                 <div
                   className={`w-[40px] h-[40px] rounded-full ${
                     ele.type === 'wallet'
-                      ? 'bg-[var(--primary-2)]'
+                      ? 'bg-primary-2'
                       : ele.type === 'cashback'
                       ? ''
                       : ''
@@ -95,15 +89,11 @@ const Component = () => {
                 </div>
                 <div className="w-full ">
                   <div className="flex items-center justify-between">
-                    <h3 className={`text-[var(--black-4)] text-[16px]`}>
-                      {ele.title}
-                    </h3>
-                    <p className={`text-[var(--black-3)] text-[12px]`}>
-                      {ele.time}
-                    </p>
+                    <h3 className={`text-black-4 text-[16px]`}>{ele.title}</h3>
+                    <p className={`text-black-3 text-[12px]`}>{ele.time}</p>
                   </div>
                   <div className="flex items-center justify-between mt-[5px]">
-                    <p className="font-normal text-[12px] text-[var(--black-3)] max-w-[calc(100%-15px)]">
+                    <p className="font-normal text-[12px] text-black-3 max-w-[calc(100%-15px)]">
                       {ele.description}
                     </p>
                     {ele.read ? (

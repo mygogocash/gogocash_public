@@ -16,7 +16,7 @@ const Component = ({
       disabled={disabled}
       className={clsx(
         backgroundColor,
-        disabled ? '!bg-[var(--black-1)] !text-[var(--black-3)]' : '',
+        disabled ? '!bg-black-1 !text-black-3' : '',
         'px-[32px] py-[16px] rounded-[8px] hover:scale-105 transition-all duration-75 flex items-center',
         fullWidth ? 'w-full' : '',
         center ? 'justify-center' : ''

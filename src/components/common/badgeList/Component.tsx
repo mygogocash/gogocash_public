@@ -24,16 +24,16 @@ const Component = ({ list, vertical }: IProps) => {
                 ? 'rounded-b-[24px]'
                 : 'rounded-r-[100px]'
               : ''
-          }  bg-[var(--black-1)]  ${
+          }  bg-black-2  ${
             vertical ? ' h-auto w-[150px] p-3' : 'w-full h-[76px]'
           }  flex items-center justify-center gap-5 `}
         >
           {item.icon}
           <div className="flex flex-col max-w-[140px]">
-            <h3 className="text-[var(--black-5)] text-[24px]  font-semibold">
+            <h3 className="text-black-5 text-[24px]  font-semibold">
               {item.title}
             </h3>
-            <p className="text-[var(--black-4)] text-[8px]">{item.subTitle}</p>
+            <p className="text-black-4 text-[8px]">{item.subTitle}</p>
           </div>
         </div>
       ))}

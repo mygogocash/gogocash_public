@@ -33,7 +33,7 @@ const Component = () => {
               required
               defaultValue={''}
             />
-            <div className="h-[1px] w-full bg-[var(--black-2)]" />
+            <div className="h-[1px] w-full bg-black-2" />
             <TextField
               type="email"
               name="email"
@@ -41,7 +41,7 @@ const Component = () => {
               required
               defaultValue={'info@gmail.com'}
             />
-            <div className="h-[1px] w-full bg-[var(--black-2)]" />
+            <div className="h-[1px] w-full bg-black-2" />
             <TextField
               name="password"
               type={showPassword ? 'text' : 'password'}
@@ -62,12 +62,10 @@ const Component = () => {
             text={'CONTINUE'}
             fullWidth
             center
-            backgroundColor="h-[45px] bg-[var(--primary-4)] rounded-full text-white"
+            backgroundColor="h-[45px] bg-primary-4 rounded-full text-white"
           />
           <div className="flex items-center justify-center gap-4 ">
-            <p className="text-[var(--black-3)] text-[12px]">
-              I haven’t an account
-            </p>
+            <p className="text-black-3 text-[12px]">I haven’t an account</p>
           </div>
         </Form.Root>
       </div>

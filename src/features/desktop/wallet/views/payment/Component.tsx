@@ -12,17 +12,17 @@ const Component = () => {
       <div className="mt-4 space-y-2">
         {PaymentMethod.map((item, index) => (
           <div
-            className=" border rounded-[8px] border-[var(--grey-1)] h-[62px] flex gap-3 items-center justify-between px-3"
+            className=" border rounded-[8px] border-grey-1 h-[62px] flex gap-3 items-center justify-between px-3"
             key={index}
           >
             <div className="flex gap-3 items-center">
               {item.name === 'ApplePay' ? (
-                <item.icon fill={'var(--black-4)'} />
+                <item.icon fill={'#6B7280'} />
               ) : (
                 <item.icon />
               )}
 
-              <p className="font-normal text-[16px] text-[var(--black-4)]">
+              <p className="font-normal text-[16px] text-black-4">
                 {item.name}
               </p>
             </div>

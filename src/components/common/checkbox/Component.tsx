@@ -21,8 +21,8 @@ const Component = ({
           <Checkbox.Root
             required={required}
             className={`flex size-[20px] appearance-none  items-center justify-center rounded-[4px]
-              hover:bg-violet3 outline outline-[var(--primary-4)] focus:shadow-[0_0_0_2px_var(--primary-4)]
-              ${!defaultChecked ? 'bg-white' : 'bg-[var(--primary-4)]'}`}
+              hover:bg-violet3 outline outline-primary-4 focus:shadow-[0_0_0_2px_var(--primary-4)]
+              ${!defaultChecked ? 'bg-white' : 'bg-primary-4'}`}
             defaultChecked={defaultChecked}
             id={id}
             name={name}
@@ -31,7 +31,7 @@ const Component = ({
             <Checkbox.Indicator className="text-violet11">
               <CheckIcon
                 className={`${
-                  defaultChecked ? 'text-white' : 'text-[var(--primary-4)]'
+                  defaultChecked ? 'text-white' : 'text-primary-4'
                 }`}
               />
             </Checkbox.Indicator>

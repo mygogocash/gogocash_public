@@ -25,7 +25,7 @@ const Component = () => {
           </div>
           <Button
             icon={<SquareChartGantt />}
-            backgroundColor="text-[var(--primary-6)] border-[0.5px] border-[var(--primary-2)] bg-[var(--primary-2)] rounded-full h-[39px] px-10 !py-2"
+            backgroundColor="text-primary-6 border-[0.5px] border-primary-2 bg-primary-2 rounded-full h-[39px] px-10 !py-2"
             text={'Terms and Conditions'}
             onClick={() => {
               console.log('click');

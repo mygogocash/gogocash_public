@@ -48,14 +48,14 @@ const Component = () => {
             />
           </Form.Root>
 
-          <h1 className="text-[24px] font-bold text-[var(--black-5)]">FAQs</h1>
+          <h1 className="text-[24px] font-bold text-black-5">FAQs</h1>
           <div className="w-full">
             {[1, 2].map((ele) => {
               return (
                 <div
                   onClick={() => setOpenDetails(true)}
                   key={ele}
-                  className="flex items-center justify-between w-full border-b border-b-[var(--black-2)] py-5"
+                  className="flex items-center justify-between w-full border-b border-b-black-2 py-5"
                 >
                   <p className="text-[14px] font-medium text-black">
                     What is GoGoCash?
@@ -65,7 +65,7 @@ const Component = () => {
               );
             })}
           </div>
-          <h1 className="text-[24px] font-bold text-[var(--black-5)]">
+          <h1 className="text-[24px] font-bold text-black-5">
             Contact Customer Support
           </h1>
           <div className="w-full flex items-center justify-between shadow-[0px_1px_10px_0px_rgba(0,0,0,0.25)] rounded-[8px] py-[16px] px-[24px]">

@@ -38,7 +38,7 @@ const Component = ({
             />
             <div className="h-[calc(100vh-470px)]">
               <div className="relative bg_green_gradient w-full h-[228px] rounded-[16px] from-[#244340] via-transparent to-[#83DC9A] shadow-[0px_4px_25px_0px_rgba(0,0,0,0.25)]">
-                <div className="absolute top-5 font-medium right-0 text-[16px] text-[var(--primary-4)] bg-[var(--primary-2)] rounded-l-full px-3 py-1">
+                <div className="absolute top-5 font-medium right-0 text-[16px] text-primary-4 bg-primary-2 rounded-l-full px-3 py-1">
                   Default
                 </div>
 
@@ -55,7 +55,7 @@ const Component = ({
                 </div>
               </div>
               <div className="flex items-center justify-between mt-5">
-                <p className="text-[var(--black-4)] text-[20px] font-medium">
+                <p className="text-black-4 text-[20px] font-medium">
                   Set as Default
                 </p>
                 <Switch
@@ -79,8 +79,8 @@ const Component = ({
       </Drawer>
       <TitleBar
         title={'Withdrawal Methods'}
-        icon={<PlusCircleIcon className="stroke-[var(--primary-4)] " />}
-        styleButton="bg-white border border-[var(--primary-4)] text-[var(--primary-4)]"
+        icon={<PlusCircleIcon className="stroke-primary-4 " />}
+        styleButton="bg-white border border-primary-4 text-primary-4"
         button={{
           text: 'Add Withdrawal Methods',
           onClick: () => {
@@ -106,7 +106,7 @@ const Component = ({
                     className="relative bg_green_gradient max-w-[400px] md:w-[400px] w-full h-[214px] rounded-[16px] from-[#244340] via-transparent to-[#83DC9A] shadow-[0px_4px_25px_0px_rgba(0,0,0,0.25)]"
                   >
                     {index === 0 ? (
-                      <div className="absolute top-5 font-medium right-0 text-[16px] text-[var(--primary-4)] bg-[var(--primary-2)] rounded-l-full px-3 py-1">
+                      <div className="absolute top-5 font-medium right-0 text-[16px] text-primary-4 bg-primary-2 rounded-l-full px-3 py-1">
                         Default
                       </div>
                     ) : (

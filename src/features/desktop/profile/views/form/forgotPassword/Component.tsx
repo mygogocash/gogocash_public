@@ -23,12 +23,12 @@ const Component = ({ _isOpen, setIsOpen }: IProp) => {
         description="Magic Link Sent!"
         content={
           <div>
-            <p className="text-[var(--black-3)] text-[16px] font-light text-center">
+            <p className="text-black-3 text-[16px] font-light text-center">
               We’ve sent the magic link to your email, please Check your inbox.
             </p>
             <Link
               href={'#'}
-              className="text-[var(--primary-4)] underline flex items-center justify-center text-[16px] font-light"
+              className="text-primary-4 underline flex items-center justify-center text-[16px] font-light"
             >
               Got it! Head to inbox.{' '}
             </Link>
@@ -65,7 +65,7 @@ const Component = ({ _isOpen, setIsOpen }: IProp) => {
           <Button
             type="submit"
             disabled={false}
-            backgroundColor="bg-[var(--primary-4)] text-white rounded-full h-[56px]"
+            backgroundColor="bg-primary-4 text-white rounded-full h-[56px]"
             text="Continue"
             fullWidth
             center
@@ -76,7 +76,7 @@ const Component = ({ _isOpen, setIsOpen }: IProp) => {
         <TitleSeparator text="You’re new here?" />
 
         <Button
-          backgroundColor="bg-white text-black border-[var(--primary-4)] border rounded-full h-[56px]"
+          backgroundColor="bg-white text-black border-primary-4 border rounded-full h-[56px]"
           text="Login"
           onClick={function (): void {
             setIsOpen?.('login');

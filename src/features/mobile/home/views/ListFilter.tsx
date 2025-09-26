@@ -24,9 +24,7 @@ const ListFilter = ({ active, setActive, list, space }: IProp) => {
           >
             <div
               className={`w-[65px] h-[65px] rounded-full ${
-                active === ele.label
-                  ? 'bg-[var(--primary-4)]'
-                  : 'bg-[var(--primary-2)]'
+                active === ele.label ? 'bg-primary-4' : 'bg-primary-2'
               } flex items-center justify-center`}
             >
               <IconButton
@@ -41,9 +39,7 @@ const ListFilter = ({ active, setActive, list, space }: IProp) => {
             </div>
             <p
               className={`text-center ${
-                active === ele.label
-                  ? 'text-[var(--primary-4)]'
-                  : 'text-[var(--black-3)]'
+                active === ele.label ? 'text-primary-4' : 'text-black-3'
               } text-[12px] font-medium`}
             >
               {ele.label}

@@ -16,7 +16,7 @@ const Component = () => {
         <Payment />
       </Drawer>
       <div className="hidden md:flex items-center justify-between">
-        <h1 className="text-[var(--black-5)] font-bold text-[24px] md:text-[36px]">
+        <h1 className="text-black-5 font-bold text-[24px] md:text-[36px]">
           Picked for You
         </h1>
         <div className="max-w-[400px] w-full">

@@ -57,14 +57,14 @@ const Component = ({ _isOpen, setIsOpen, handleModal }: IProp) => {
           <Button
             type="submit"
             disabled={false}
-            backgroundColor="bg-[var(--primary-4)] text-white rounded-full h-[56px]"
+            backgroundColor="bg-primary-4 text-white rounded-full h-[56px]"
             text="Login"
             fullWidth
             center
           />
         </Form.Submit>
         <button
-          className="text-[14px] text-[var(--black-5)] underline text-right ml-auto"
+          className="text-[14px] text-black-5 underline text-right ml-auto"
           onClick={() => {
             setIsOpen?.('forgot');
           }}
@@ -74,7 +74,7 @@ const Component = ({ _isOpen, setIsOpen, handleModal }: IProp) => {
         <TitleSeparator text="You’re new here?" />
 
         <Button
-          backgroundColor="bg-white text-black border-[var(--primary-4)] border rounded-full h-[56px]"
+          backgroundColor="bg-white text-black border-primary-4 border rounded-full h-[56px]"
           text="Sign Up"
           onClick={function (): void {
             handleModal?.(false);

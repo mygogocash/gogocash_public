@@ -17,14 +17,14 @@ const Component = ({ title, subTitle, showLogo, center }: IProp) => {
 
       <div className="w-full">
         <h1
-          className={`font-bold text-[20px] md:text-[36px] text-[var(--black-5)] ${
+          className={`font-bold text-[20px] md:text-[36px] text-black-5 ${
             center ? 'text-center' : ''
           }`}
         >
           {title}
         </h1>
         <p
-          className={`font-semibold text-[14px] md:text-[16px] text-[var(--black-5)] ${
+          className={`font-semibold text-[14px] md:text-[16px] text-black-5 ${
             center ? 'text-center' : ''
           }`}
         >

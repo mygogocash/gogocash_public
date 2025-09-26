@@ -12,16 +12,14 @@ interface IProp {
 const TitleBar = ({ title, button, icon, styleButton }: IProp) => {
   return (
     <div className="sm:flex-row flex-col flex items-center justify-between">
-      <h1 className="text-[var(--black-5)] text-[20px] md:text-[32px] font-semibold">
+      <h1 className="text-black-5 text-[20px] md:text-[32px] font-semibold">
         {title}
       </h1>
       {button && (
         <Button
           icon={icon}
           backgroundColor={`${
-            styleButton
-              ? styleButton
-              : 'bg-white border border-[var(--black-3)] '
+            styleButton ? styleButton : 'bg-white border border-black-3'
           } rounded-full h-[39px] px-10 !py-0 `}
           onClick={function (): void {
             button?.onClick?.();

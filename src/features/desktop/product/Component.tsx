@@ -14,7 +14,7 @@ const Component = () => {
   return (
     <div className="container-inner space-y-8 my-[10px] md:my-[88px]">
       <div className="flex items-center justify-between md:flex-row flex-col">
-        <h1 className="text-[var(--black-5)] font-bold text-[24px] md:text-[36px]">
+        <h1 className="text-black-5 font-bold text-[24px] md:text-[36px]">
           Picked for You
         </h1>
         <div className="max-w-[400px] w-full">

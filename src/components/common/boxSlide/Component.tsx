@@ -10,13 +10,13 @@ const Component = ({ title, onClick, icon, list }: IProp) => {
   const router = useRouter();
   return (
     <div className="flex items-center gap-[32px]">
-      <div className="hidden bg-[var(--primary-4)] rounded-l-[24px] md:flex items-center justify-center flex-col w-[250px] h-[352px]">
+      <div className="hidden bg-primary-4 rounded-l-[24px] md:flex items-center justify-center flex-col w-[250px] h-[352px]">
         {icon}
         <h4 className="text-white text-[26px] font-bold mt-3 text-center">
           {title}
         </h4>
         <Button
-          backgroundColor="mt-14 bg-white border border-[var(--black-3)] rounded-full h-[39px] px-10 !py-0 font-light text-[var(--primary-4)]"
+          backgroundColor="mt-14 bg-white border border-black-3 rounded-full h-[39px] px-10 !py-0 font-light text-primary-4"
           onClick={function (): void {
             onClick?.();
           }}

@@ -110,7 +110,7 @@ const Component = () => {
               {MenuHeader.map((item) => {
                 return (
                   <Link key={item.title} href={item.link}>
-                    <li className=" cursor-pointer text-[var(--black-5)]">
+                    <li className=" cursor-pointer text-black-5">
                       {item.title}
                     </li>
                   </Link>
@@ -165,7 +165,7 @@ const Component = () => {
           <>
             <div className="hidden md:flex  items-center gap-2">
               <Button
-                backgroundColor="bg-[var(--primary-4)] text-white"
+                backgroundColor="bg-primary-4 text-white"
                 text={
                   loginState?.isLoggingIn
                     ? 'Logging in...'

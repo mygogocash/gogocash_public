@@ -35,7 +35,7 @@ const Component = ({ setIsOpenModal }: IProp) => {
           );
         })}
       </div>
-      <div className="border-b border-[var(--black-1)] w-full h-[1px]" />
+      <div className="border-b border-black-1 w-full h-[1px]" />
       <TitleBar title={'Choose your Background Color'} />
       <div className="flex items-center gap-5 flex-wrap">
         {[1, 2, 3, 4, 5, 6].map((ele, index) => {
@@ -55,7 +55,7 @@ const Component = ({ setIsOpenModal }: IProp) => {
         <Button
           text={'Cancel'}
           center
-          backgroundColor="bg-[var(--black-2)] text-black"
+          backgroundColor="bg-black-2 text-black"
           onClick={() => {
             setIsOpenModal?.(false);
           }}
@@ -63,7 +63,7 @@ const Component = ({ setIsOpenModal }: IProp) => {
         <Button
           text={'Save'}
           center
-          backgroundColor="bg-[var(--primary-4)] text-white"
+          backgroundColor="bg-primary-4 text-white"
         />
       </div>
     </div>

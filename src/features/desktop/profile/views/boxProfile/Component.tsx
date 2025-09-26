@@ -17,9 +17,7 @@ const Component = ({ src, open }: IProp) => {
           height={24}
         />
       </div>
-      <p className="text-[var(--black-5)] text-[14px]">
-        {data?.user?.username || ''}
-      </p>
+      <p className="text-black-5 text-[14px]">{data?.user?.username || ''}</p>
       <IconButton
         icon={
           <ArrowIcon

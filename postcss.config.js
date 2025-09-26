@@ -1,13 +1,19 @@
-// const { join } = require('path');
-
-// Note: If you use library-specific PostCSS/Tailwind configuration then you should remove the `postcssConfig` build
-// option from your application's configuration (i.e. project.json).
-//
-// See: https://nx.dev/guides/using-tailwind-css-in-react#step-4:-applying-configuration-to-libraries
-// config: join(__dirname, 'tailwind.config.js'),
+// postcss.config.js
 module.exports = {
   plugins: {
     tailwindcss: {},
     autoprefixer: {},
+    cssnano: {
+      preset: [
+        'default',
+        {
+          discardComments: { removeAll: true },
+          normalizeWhitespace: true,
+          mergeLonghand: false, // ❌ กันไม่ให้รวม background-* เป็น shorthand
+          convertValues: false, // ❌ กันไม่ให้ rgba()/color ถูก optimize จนเพี้ยน
+          colormin: false, // ❌ กันไม่ให้ minify สีจนทับ tailwind
+        },
+      ],
+    },
   },
 };

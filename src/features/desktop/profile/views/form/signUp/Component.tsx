@@ -59,7 +59,7 @@ const Component = () => {
                 required
                 defaultValue={''}
               />
-              <p className="text-[var(--black-3)] text-[16px]">{`Username has to be more than 8 letters with a least 2 numbers.`}</p>
+              <p className="text-black-3 text-[16px]">{`Username has to be more than 8 letters with a least 2 numbers.`}</p>
             </div>
             <TextField
               type="email"
@@ -110,7 +110,7 @@ const Component = () => {
                   )
                 }
               />
-              <p className="text-[var(--black-3)] text-[16px]">{`Password has to more than 8 letters with a least 2 numbers.`}</p>
+              <p className="text-black-3 text-[16px]">{`Password has to more than 8 letters with a least 2 numbers.`}</p>
             </div>
             <Checkbox
               defaultChecked={checked}
@@ -139,7 +139,7 @@ const Component = () => {
                 }
                 type="submit"
                 disabled={isSubmitting}
-                backgroundColor="bg-[var(--primary-4)] text-white rounded-full h-[56px]"
+                backgroundColor="bg-primary-4 text-white rounded-full h-[56px]"
                 text="Sign Up"
                 fullWidth
                 center
@@ -158,7 +158,7 @@ const Component = () => {
                   height={24}
                 />
               }
-              backgroundColor="bg-white text-black border-[var(--grey-2)] border"
+              backgroundColor="bg-white text-black border-grey-2 border"
               text="Connect with Crossmint"
               onClick={async function (): Promise<void> {
                 // handleLoginWallet();
@@ -171,7 +171,7 @@ const Component = () => {
             <TitleSeparator text="You already have an account?" />
 
             <Button
-              backgroundColor="bg-white text-[var(--primary-4)] border-[var(--primary-4)] border rounded-full h-[56px]"
+              backgroundColor="bg-white text-primary-4 border-primary-4 border rounded-full h-[56px]"
               text="Log In"
               onClick={function (): void {
                 setIsOpen(true);

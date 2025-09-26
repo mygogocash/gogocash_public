@@ -59,17 +59,17 @@ const Component = () => {
           />
         </div>
         <div className="w-[70%]">
-          <h1 className="font-bold text-[30px] md:text-[40px] text-[var(--black-5)]">
+          <h1 className="font-bold text-[30px] md:text-[40px] text-black-5">
             {shop?.offer_name || ''}
           </h1>
-          <h3 className="font-normal text-[16px] md:text-[24px] text-[var(--black-5)]">
+          <h3 className="font-normal text-[16px] md:text-[24px] text-black-5">
             Shop with GoGoCash to maximize cashback up to{' '}
             <span className=" text-[30px] md:text-[40px]">
               {dataShop?.[0]?.percent || 0}
             </span>
           </h3>
           <div
-            className="text-[20px] text-[var(--black-3)] text-light my-3 mb-8"
+            className="text-[20px] text-black-3 text-light my-3 mb-8"
             dangerouslySetInnerHTML={{ __html: shop?.description || '' }}
           />
           <BadgeList
@@ -100,7 +100,7 @@ const Component = () => {
         <div className="flex items-center gap-4  flex-wrap ">
           <Button
             icon={<SquareChartGantt />}
-            backgroundColor="text-white border-[0.5px] border-[var(--primary-4)] bg-[var(--primary-4)] rounded-full h-[39px] px-10 !py-2"
+            backgroundColor="text-white border-[0.5px] border-primary-4 bg-primary-4 rounded-full h-[39px] px-10 !py-2"
             text={'Terms and Conditions'}
             onClick={() => {
               setIsOpenCondition(true);
@@ -108,7 +108,7 @@ const Component = () => {
           />
           <Button
             icon={<Coins />}
-            backgroundColor="text-white border-[0.5px] border-[var(--primary-4)] bg-[var(--primary-4)] rounded-full h-[39px] px-10 !py-2"
+            backgroundColor="text-white border-[0.5px] border-primary-4 bg-primary-4 rounded-full h-[39px] px-10 !py-2"
             text={'How to Claim?'}
             onClick={() => {
               setIsOpenClaim(true);
@@ -158,7 +158,7 @@ const Component = () => {
       </div> */}
       {/*  */}
       <div className="flex items-center justify-between">
-        <h1 className="text-[var(--black-5)] font-bold text-[24px] md:text-[36px]">
+        <h1 className="text-black-5 font-bold text-[24px] md:text-[36px]">
           All Products
         </h1>
       </div>

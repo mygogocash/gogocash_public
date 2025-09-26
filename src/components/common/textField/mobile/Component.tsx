@@ -35,7 +35,7 @@ const Component = ({
               required={required}
               className={`${
                 textRight ? 'text-right' : ''
-              } text-[16px] text-[var(--black-5)] w-full h-[56px] ${
+              } text-[16px] text-black-5 w-full h-[56px] ${
                 startIcon ? 'pl-14' : 'pl-3'
               } ${
                 endIcon ? 'pr-14' : 'pr-3'

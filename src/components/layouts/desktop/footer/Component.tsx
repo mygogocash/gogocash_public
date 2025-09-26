@@ -6,7 +6,7 @@ import IconButton from '@/components/common/IconButton';
 const Component = () => {
   const router = useRouter();
   return (
-    <footer className="bg-[var(--black-1)] py-[40px] w-full md:block hidden">
+    <footer className="bg-black-1 py-[40px] w-full md:block hidden">
       <div className="container-inner">
         <div className="flex flex-wrap mb-[64px]">
           <div className="flex-none w-1/3">
@@ -16,7 +16,7 @@ const Component = () => {
             <div className="flex items-center justify-between flex-wrap md:mt-0 mt-5 space-y-[24px] md:space-y-0">
               {FooterList1.map((item, index) => (
                 <div key={index}>
-                  <p className="font-bold text-[20px] text-[var(--black-5)] mb-[16px]">
+                  <p className="font-bold text-[20px] text-black-5 mb-[16px]">
                     {item.title}
                   </p>
                   <ul>
@@ -66,23 +66,20 @@ const Component = () => {
             ))}
           </div>
         </div>
-        <hr className="border-b-[0.5px] border-[var(--grey-1)] w-full my-[24px]" />
+        <hr className="border-b-[0.5px] border-grey-1 w-full my-[24px]" />
         <div className="flex justify-between flex-wrap my-[24px]">
-          <p className="text-[var(--black-5)] text-normal text-[12px]">
+          <p className="text-black-5 text-normal text-[12px]">
             © 2024 GoGoCash
           </p>
           <div className="flex gap-[32px] flex-wrap">
             {Content.map((item, index) => (
-              <p
-                key={index}
-                className="text-[var(--black-5)] font-bold text-[12px]"
-              >
+              <p key={index} className="text-black-5 font-bold text-[12px]">
                 {item.title}
               </p>
             ))}
           </div>
         </div>
-        <p className="text-[var(--black-5)] text-normal text-[12px]">
+        <p className="text-black-5 text-normal text-[12px]">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </p>
       </div>

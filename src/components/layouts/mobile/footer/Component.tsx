@@ -20,9 +20,7 @@ const Component = () => {
           />
           <p
             className={`text-[8px] text-light ${
-              pathname === '/'
-                ? 'text-[var(--primary-4)]'
-                : 'text-[var(--black-3)]'
+              pathname === '/' ? 'text-primary-4' : 'text-black-3'
             }`}
           >
             Home
@@ -37,9 +35,7 @@ const Component = () => {
           />
           <p
             className={`text-[8px] text-light ${
-              pathname === '/wallet'
-                ? 'text-[var(--primary-4)]'
-                : 'text-[var(--black-3)]'
+              pathname === '/wallet' ? 'text-primary-4' : 'text-black-3'
             }`}
           >
             Wallet
@@ -56,9 +52,7 @@ const Component = () => {
           />
           <p
             className={`text-[8px] text-light ${
-              pathname === '/notification'
-                ? 'text-[var(--primary-4)]'
-                : 'text-[var(--black-3)]'
+              pathname === '/notification' ? 'text-primary-4' : 'text-black-3'
             }`}
           >
             Notification
@@ -73,9 +67,7 @@ const Component = () => {
           />
           <p
             className={`text-[8px] text-light ${
-              pathname === '/profile'
-                ? 'text-[var(--primary-4)]'
-                : 'text-[var(--black-3)]'
+              pathname === '/profile' ? 'text-primary-4' : 'text-black-3'
             }`}
           >
             Profile

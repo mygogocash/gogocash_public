@@ -12,7 +12,7 @@ const Component = () => {
   const { login } = useAuth();
   const router = useRouter();
   return (
-    <div className="bg-[var(--primary-4)] min-h-screen">
+    <div className="bg-primary-4 min-h-screen">
       <div className="w-full">
         <div className="relative  h-full w-full p-[16px]">
           <div className="flex items-center justify-between">
@@ -33,7 +33,7 @@ const Component = () => {
       <div className="space-y-2 w-full p-[16px] h-[calc(100vh-300px)] flex items-center justify-end flex-col">
         <Button
           icon={<GoogleIcon />}
-          backgroundColor="bg-white text-black border-[var(--grey-2)] border"
+          backgroundColor="bg-white text-black border-grey-2 border"
           text={`Login with Google`}
           onClick={function (): void {
             login();
@@ -43,7 +43,7 @@ const Component = () => {
         />
         {/* <Button
           icon={<Facebook2Icon />}
-          backgroundColor="bg-white text-black border-[var(--grey-2)] border"
+          backgroundColor="bg-white text-black border-grey-2 border"
           text={`Login with Facebook`}
           onClick={function (): void {
             signIn('facebook', { redirect: true, callbackUrl: '/' });
@@ -52,7 +52,7 @@ const Component = () => {
         /> */}
         <Button
           icon={<Mail />}
-          backgroundColor="bg-white text-black border-[var(--grey-2)] border"
+          backgroundColor="bg-white text-black border-grey-2 border"
           text={`Login with E-mail`}
           onClick={function (): void {
             router.push(`/login`);
@@ -62,11 +62,11 @@ const Component = () => {
         <div className="w-full space-y-8 pt-1">
           <TitleSeparator
             text={`or login with`}
-            bgText="bg-[var(--primary-4)] text-white"
+            bgText="bg-primary-4 text-white"
           />
           <Button
             icon={<Wallet />}
-            backgroundColor="bg-white text-black border-[var(--grey-2)] border"
+            backgroundColor="bg-white text-black border-grey-2 border"
             text="Connect with Wallet"
             onClick={function (): void {
               //   handleModal?.(false);

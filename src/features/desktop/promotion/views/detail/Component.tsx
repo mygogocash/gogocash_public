@@ -24,14 +24,14 @@ const Component = () => {
         className="w-full"
       />
       <div className="flex items-center justify-between md:flex-row flex-col">
-        <h1 className="font-bold text-[30px] md:text-[40px] text-[var(--black-5)]">
+        <h1 className="font-bold text-[30px] md:text-[40px] text-black-5">
           Grocery Shopping Made Easy
         </h1>
-        <p className="font-normal text-[30px] md:text-[40px] text-[var(--black-5)]">
+        <p className="font-normal text-[30px] md:text-[40px] text-black-5">
           1 Jan 2025 to 31 March 2025
         </p>
       </div>
-      <div className="text-[var(--black-3)] text-[18px] md:text-[24px] font-light">
+      <div className="text-black-3 text-[18px] md:text-[24px] font-light">
         {`Tired of lugging heavy bags and fighting crowds at the grocery store? 🛒
         Let Shopee Thailand bring the fresh produce to you! 🥦🍎 We offer a wide
         selection of fruits, vegetables, and healthy food options, all delivered
@@ -45,7 +45,7 @@ const Component = () => {
       <div className={`w-full relative min-h-[50px] `}>
         <Button
           icon={<SquareChartGantt />}
-          backgroundColor="absolute top-[-19px] left-0  text-white border-[0.5px] border-[var(--primary-4)] bg-[var(--primary-4)] rounded-full h-[39px] px-10 !py-2"
+          backgroundColor="absolute top-[-19px] left-0  text-white border-[0.5px] border-primary-4 bg-primary-4 rounded-full h-[39px] px-10 !py-2"
           text={'Terms and Conditions'}
           onClick={() => {
             setOpenTerm(!openTerm);
@@ -53,7 +53,7 @@ const Component = () => {
         />
 
         {openTerm && (
-          <div className="text-[var(--black-3)] text-[18px] md:text-[24px] font-light border border-[var(--primary-4)] rounded-[16px] p-8">
+          <div className="text-black-3 text-[18px] md:text-[24px] font-light border border-primary-4 rounded-[16px] p-8">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
             euismod id sem quis accumsan. Sed tempus placerat velit a placerat.
             Cras suscipit est at mauris blandit efficitur finibus non augue.
@@ -83,7 +83,7 @@ const Component = () => {
         <CardSlideImage />
       </div>
       <div className="flex items-center justify-between">
-        <h1 className="text-[var(--black-5)] font-bold text-[24px] md:text-[36px]">
+        <h1 className="text-black-5 font-bold text-[24px] md:text-[36px]">
           Featured Products
         </h1>
         <div className="max-w-[400px] w-full">

@@ -12,7 +12,7 @@ const Component = ({ setIntro }: IProp) => {
   return (
     <div className=" min-h-screen w-full">
       <p
-        className="text-right text-[var(--black-3)] text-[16px] my-5 px-5 w-full"
+        className="text-right text-black-3 text-[16px] my-5 px-5 w-full"
         onClick={() => {
           window.localStorage.setItem('intro', 'true');
           setIntro?.(false);
@@ -28,7 +28,7 @@ const Component = ({ setIntro }: IProp) => {
           width={342}
           height={300}
         />
-        <p className="text-[var(--black-4)] text-[16px] font-bold">
+        <p className="text-black-4 text-[16px] font-bold">
           {lists[active || 0].title}
         </p>
       </div>
@@ -37,12 +37,12 @@ const Component = ({ setIntro }: IProp) => {
           <div key={index} className="flex gap-1 items-center justify-center">
             {active === index ? (
               <div
-                className="h-[4px] w-[68px] bg-[var(--primary-4)]"
+                className="h-[4px] w-[68px] bg-primary-4"
                 onClick={() => setActive(index)}
               />
             ) : (
               <div
-                className="h-[4px] w-[23px] bg-[var(--black-2)]"
+                className="h-[4px] w-[23px] bg-black-2"
                 onClick={() => setActive(index)}
               />
             )}
@@ -52,7 +52,7 @@ const Component = ({ setIntro }: IProp) => {
       <div className="flex items-center justify-between">
         {active > 0 && (
           <p
-            className="cursor-pointer text-[var(--black-3)] text-[16px] my-5 px-5 w-full"
+            className="cursor-pointer text-black-3 text-[16px] my-5 px-5 w-full"
             onClick={() => {
               console.log('active', active);
 
@@ -65,7 +65,7 @@ const Component = ({ setIntro }: IProp) => {
 
         {active <= 2 && (
           <p
-            className="cursor-pointer text-right text-[var(--black-3)] text-[16px] my-5 px-5 w-full"
+            className="cursor-pointer text-right text-black-3 text-[16px] my-5 px-5 w-full"
             onClick={() => {
               setActive((prev) => (active >= 2 ? 0 : prev + 1));
               if (active >= 2) {

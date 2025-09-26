@@ -30,9 +30,9 @@ const Component = () => {
         data ? 'h-full' : 'h-[calc(100vh-220px)]'
       } overflow-auto bg-white`}
     >
-      <div className="bg-[var(--primary-4)]">
+      <div className="bg-primary-4">
         <HeaderMobile
-          background="bg-[var(--primary-4)]"
+          background="bg-primary-4"
           iconRight={
             <CircleHelp
               stroke="white"
@@ -42,9 +42,9 @@ const Component = () => {
             />
           }
         />
-        <div className="relative bg-[var(--primary-4)] h-[180px] w-full px-[16px] pb-[16px]">
+        <div className="relative bg-primary-4 h-[180px] w-full px-[16px] pb-[16px]">
           {data ? (
-            <div className="w-full flex ite,ms-center justify-center flex-col h-full pb-[25px]">
+            <div className="w-full flex items-center justify-center flex-col h-full pb-[25px]">
               <div className="flex items-center justify-between">
                 <p className="text-white text-[16px] font-normal">
                   Wallet Balance
@@ -98,7 +98,7 @@ const Component = () => {
         list={HOME_MOBILE_TYPE}
       />
       {/* countdown */}
-      <div className="relative bg-[--primary-4] relative rounded-[8px] min-h-[60px] m-[16px] flex items-center justify-between px-[13px] py-[5px]">
+      <div className="relative bg-primary-4 rounded-[8px] min-h-[60px] m-[16px] flex items-center justify-between px-[13px] py-[5px]">
         <Image
           src={'/Coin.svg'}
           alt="Coin"
@@ -202,7 +202,7 @@ const Component = () => {
             <p className="text-[14px] text-[#244340] font-medium">
               Already Have an Account?
             </p>
-            <p className="text-[var(--black-3)] text-[12px]">
+            <p className="text-black-3 text-[12px]">
               Experience full feature on GoGoCash with account
             </p>
           </div>
@@ -210,7 +210,7 @@ const Component = () => {
             text={'Login'}
             fullWidth
             center
-            backgroundColor="bg-[var(--primary-4)] text-white rounded-full"
+            backgroundColor="bg-primary-4 text-white rounded-full"
             onClick={() => {
               router.push(`/login/before`);
             }}
@@ -219,7 +219,7 @@ const Component = () => {
             text={'Create an Account'}
             fullWidth
             center
-            backgroundColor=" border border-[var(--primary-4)] text-[var(--primary-4)] rounded-full"
+            backgroundColor=" border border-primary-4 text-primary-4 rounded-full"
             onClick={() => {
               router.push(`/sign-up`);
             }}

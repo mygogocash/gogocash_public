@@ -4,7 +4,7 @@ import PlayStoreIcon from '@/components/icons/PlayStoreIcon';
 const BannerPocket = () => {
   return (
     <div
-      className="relative bg-[var(--primary-4)] rounded-[24px] w-full flex items-center
+      className="relative bg-primary-4 rounded-[24px] w-full flex items-center
     justify-between md:px-[64px] md:py-[40px] p-5 xl:h-[325px] overflow-hidden xl:flex-row flex-col"
     >
       <div className="max-w-[763px] flex w-full flex-col space-y-5">
@@ -26,7 +26,7 @@ const BannerPocket = () => {
           </p>
         </div>
         <div className="flex items-center md:justify-start justify-center gap-4  flex-wrap">
-          <div className="bg-[var(--black-5)] w-fit h-[51px] rounded-[8px] p-[13px] flex items-center justify-center gap-3">
+          <div className="bg-black-5 w-fit h-[51px] rounded-[8px] p-[13px] flex items-center justify-center gap-3">
             <AppleIcon />
             <div>
               <p className="text-white text-[8px] font-extralight">
@@ -35,7 +35,7 @@ const BannerPocket = () => {
               <h5 className="text-white text-[16px] font-bold">App Store</h5>
             </div>
           </div>
-          <div className="bg-[var(--black-5)] w-fit h-[51px] rounded-[8px] p-[13px] flex items-center justify-center gap-3">
+          <div className="bg-black-5 w-fit h-[51px] rounded-[8px] p-[13px] flex items-center justify-center gap-3">
             <PlayStoreIcon />
             <div>
               <p className="text-white text-[8px] font-extralight">
