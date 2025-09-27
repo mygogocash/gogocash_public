@@ -18,6 +18,7 @@ export const mapDataProduct = (dt: IResponseOffer) => {
           shopName: item?.offer_name,
           link: `/shop/${item?._id}`,
           type: item?.categories?.toUpperCase(),
+          like: false,
         };
       })
     : ([] as IList[]);
@@ -43,39 +44,32 @@ const useHome = () => {
     fetcher,
     {
       revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+      revalidateIfStale: false,
+      // use cache
     }
   );
-
-  const merchants = useMemo(() => {
-    return (
-      (dataMerchants?.data?.map((item) => {
-        const percent = Object.values(item.commissions?.[0]);
-        return {
-          pic: item.logo,
-          percent: percent[0],
-          name: item.offer_name,
-          shopName: item.offer_name,
-          link: `/shop/${item._id}`,
-          type: item.categories?.toUpperCase(),
-        };
-      }) as IList[]) || []
-    );
-  }, [dataMerchants]);
 
   const cate = ['Fashion', 'Marketplace', 'Electronics'];
   const { data: dataProduct, isLoading: isLoadingProduct } =
     useSWR<IResponseOffer>(`/offer?category=${cate[0]}`, fetcher, {
       revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+      revalidateIfStale: false,
     });
 
   const { data: dataProduct2, isLoading: isLoadingProduct2 } =
     useSWR<IResponseOffer>(`/offer?category=${cate[1]}`, fetcher, {
       revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+      revalidateIfStale: false,
     });
 
   const { data: dataProduct3, isLoading: isLoadingProduct3 } =
     useSWR<IResponseOffer>(`/offer?category=${cate[2]}`, fetcher, {
       revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+      revalidateIfStale: false,
     });
 
   const products = useMemo(() => {
@@ -90,6 +84,23 @@ const useHome = () => {
     if (dataProduct3) return mapDataProduct(dataProduct3);
   }, [dataProduct3]);
 
+  const merchants = useMemo(() => {
+    if (dataMerchants) return mapDataProduct(dataMerchants);
+
+    // return (
+    //   (dataMerchants?.data?.map((item) => {
+    //     const percent = Object.values(item.commissions?.[0]);
+    //     return {
+    //       pic: item.logo,
+    //       percent: percent[0],
+    //       name: item.offer_name,
+    //       shopName: item.offer_name,
+    //       link: `/shop/${item._id}`,
+    //       type: item.categories?.toUpperCase(),
+    //     };
+    //   }) as IList[]) || []
+    // );
+  }, [dataMerchants]);
   return {
     merchants,
     isLoadingMerchants,

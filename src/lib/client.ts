@@ -27,10 +27,10 @@ client.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response) {
-      console.log('API response error:', error.response);
-
+      // console.log('API response error:', error.response);
       //   throw new Error(error.response.data.message || 'API request failed');
-      return error.response;
+      return Promise.reject(error.response);
+      // throw new Error('No response from server');
     } else if (error.request) {
       throw new Error('No response from server');
     } else {

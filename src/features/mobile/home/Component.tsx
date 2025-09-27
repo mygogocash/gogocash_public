@@ -5,14 +5,14 @@ import { CircleHelp } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import CardSlideProductMobile from '@/components/mobile/cardSlideProduct';
 import Deals from './views/Deals';
 import { HOME_MOBILE_TYPE } from './constant';
 import useCountdown from '@/hooks/useCountdown';
 import { HeaderMobile } from '@/components/layouts/mobile/header';
 import ListFilter from './views/ListFilter';
-import { CardProductMobile } from '@/components/mobile/cardProductMobile';
+// import { CardProductMobile } from '@/components/mobile/cardProductMobile';
 import { useHomeContext } from '@/providers/HomeContext';
 
 const Component = () => {
@@ -22,8 +22,11 @@ const Component = () => {
   const {
     formatTime: { hours, minutes, seconds, days },
   } = useCountdown('2025-07-30:15:00:00');
-  const { products, merchants } = useHomeContext();
+  const { merchants } = useHomeContext();
+  // const merchants = [];
 
+  // const products: any[] = [];
+  // const merchants: any[] = [];
   return (
     <div
       className={`w-full ${
@@ -57,7 +60,7 @@ const Component = () => {
                   className={`w-[32px] h-[32px]`}
                 />
               </div>
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between  gap-2">
                 <h1 className="text-white font-bold text-[32px]">฿ 50.00 </h1>
                 <div className="flex items-center gap-1 h-auto w-fit px-2 py-1 rounded-[100px] bg-[#FFFBE8] shadow drop-shadow-[0px_4px_25px_0px_#00000040]">
                   {/* <Star /> */}
@@ -154,15 +157,15 @@ const Component = () => {
         </div>
       </div>
       {/*  */}
-      <TitleMobile
+      {/* <TitleMobile
         title={'Recommended Shops for You'}
         rightTitle={'More'}
         onClick={() => {
           router.push('/shop');
         }}
-      />
-      <div className="px-[16px] space-y-2">
-        {merchants.map((ele, index) => {
+      /> */}
+      {/* <div className="px-[16px] space-y-2">
+        {merchants?.map((ele, index) => {
           return (
             <CardProductMobile
               key={index}
@@ -176,18 +179,18 @@ const Component = () => {
             />
           );
         })}
-      </div>
+      </div> */}
 
       <div className="w-full bg-[#F5F4F4] py-5">
         <TitleMobile
-          title={'Recommended for You'}
+          title={'Recommended Shops for You'}
           rightTitle={'More'}
           onClick={() => {
-            router.push('/product');
+            router.push('/shop');
           }}
         />
         <div className="w-full overflow-hidden pl-[16px]">
-          <CardSlideProductMobile list={products || []} />
+          <CardSlideProductMobile list={merchants || []} />
         </div>
       </div>
       <div className="w-full bg-white space-y-3">
@@ -230,4 +233,4 @@ const Component = () => {
   );
 };
 
-export default Component;
+export default memo(Component);

@@ -7,11 +7,15 @@ const Component = ({ min, max, onClick }: IProp) => {
       <p className="text-black-3 text-[14px] font-normal">
         Show {min} results out of {max}
       </p>
-      <Button
-        backgroundColor="bg-white border-[0.5px] border-black-3 rounded-full h-[39px] px-10 !py-2"
-        text={'View More'}
-        onClick={onClick}
-      />
+      {min >= max ? (
+        <p className="text-black-3 text-[14px] font-normal">No more data</p>
+      ) : (
+        <Button
+          backgroundColor="bg-white border-[0.5px] border-black-3 rounded-full h-[39px] px-10 !py-2"
+          text={'View More'}
+          onClick={onClick}
+        />
+      )}
     </div>
   );
 };

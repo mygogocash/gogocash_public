@@ -2,6 +2,7 @@ import { HeartFilledIcon } from '@radix-ui/react-icons';
 import { Tag } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { memo } from 'react';
 
 interface IProp {
   _image: string;
@@ -52,4 +53,4 @@ const Component = ({ ...prop }: IProp) => {
   );
 };
 
-export default Component;
+export default memo(Component); //Component;

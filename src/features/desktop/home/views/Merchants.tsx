@@ -2,6 +2,7 @@ import StoreIcon from '@/components/icons/StoreIcon';
 import { useRouter } from 'next/navigation';
 import BoxSlideImage from '@/components/common/boxSlideImage';
 import { useHomeContext } from '@/providers/HomeContext';
+import { IList } from '@/components/common/boxSlide/interface';
 const Merchants = () => {
   const router = useRouter();
   const { errorMerchants, isLoadingMerchants, merchants } = useHomeContext();
@@ -15,7 +16,7 @@ const Merchants = () => {
         }}
         title={'Merchants'}
         icon={<StoreIcon />}
-        list={merchants}
+        list={merchants as IList[]}
       />
     </>
   );

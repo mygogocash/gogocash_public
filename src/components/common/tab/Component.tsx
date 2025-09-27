@@ -23,7 +23,7 @@ export default function Component({ list }: IProp) {
             <ChevronRight />
           </div>
         ))}
-
+        {list?.find((item) => item.id == Number(_activeTab) || 0)?.content}
         {/* <div className="w-full">
           {list?.find((item) => item.id == activeTab)?.content}
         </div> */}

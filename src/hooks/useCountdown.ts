@@ -6,13 +6,13 @@ const useCountdown = (date: string) => {
   const [timeLeft, setTimeLeft] = useState(targetTime - new Date().getTime());
 
   useEffect(() => {
-    if (timeLeft <= 0) return;
+    if (timeLeft > 0) {
+      const timer = setInterval(() => {
+        setTimeLeft(targetTime - new Date().getTime());
+      }, 1000);
 
-    const timer = setInterval(() => {
-      setTimeLeft(targetTime - new Date().getTime());
-    }, 1000);
-
-    return () => clearInterval(timer);
+      return () => clearInterval(timer);
+    }
   }, [timeLeft, targetTime]);
 
   // Convert milliseconds to Days, Hours, Minutes, and Seconds

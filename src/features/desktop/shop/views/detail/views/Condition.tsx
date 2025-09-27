@@ -5,7 +5,7 @@ import { useState } from 'react';
 import * as Form from '@radix-ui/react-form';
 import Button from '@/components/common/button';
 
-const Condition = ({ link }: { link: string }) => {
+const Condition = ({ onClickShop }: { onClickShop: () => void }) => {
   const [checked, setChecked] = useState(false);
   return (
     <div className="md:my-[64px] my-10 mx-5 md:mx-[40px] overflow-y-auto ">
@@ -96,7 +96,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam euismod id sem qu
             text="Shop Now"
             onClick={() => {
               // @TODO update data link save to DB here
-              window.open(link, '_blank');
+              // window.open(link, '_blank');
+              onClickShop();
             }}
           />
         </Form.Root>

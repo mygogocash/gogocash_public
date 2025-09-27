@@ -1,6 +1,6 @@
 'use client';
 import Home from '@/features/desktop/home';
-import { IntroMobile } from '@/features/mobile/intro';
+// import { IntroMobile } from '@/features/mobile/intro';
 import { HomeMobile } from '@/features/mobile/home';
 import { useEffect, useState } from 'react';
 import Layout from '@/components/layouts';
@@ -42,7 +42,8 @@ export default function Index() {
         <div
           className={`w-full md:hidden flex flex-col items-center justify-center`}
         >
-          {showIntro ? <IntroMobile setIntro={setShowIntro} /> : <HomeMobile />}
+          {/* {showIntro ? <IntroMobile setIntro={setShowIntro} /> : } */}
+          <HomeMobile />
         </div>
       </Layout>
     </HomeContext>

@@ -15,7 +15,7 @@ const CardProduct = ({
   const router = useRouter();
   return (
     <div
-      className="space-y-1 w-[180px] md:w-[200px] bg-white rounded-[8px] h-full"
+      className="space-y-1 w-[180px] md:w-[200px] bg-white rounded-[8px] h-full m-auto"
       onClick={() => {
         router.push(link);
       }}
@@ -32,13 +32,13 @@ const CardProduct = ({
         >
           {like ? <HeartFilledIcon color="red" /> : <HeartIcon />}
         </div>
-        <div className="rounded-t-[8px] w-[180px] md:w-[200px] h-[200px]">
+        <div className="rounded-t-[8px] overflow-hidden w-[180px] md:w-[200px] min-h-[200px] max-h-[200px] h-max flex items-center justify-center bg-white">
           <ImageComponent
             src={_image || '/iphone.png'}
             alt={_productName}
             width={200}
             height={200}
-            className="object-contain rounded-t-[8px] h-full"
+            className=" object-contain rounded-t-[8px] h-full"
           />
         </div>
       </div>

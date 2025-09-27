@@ -32,3 +32,20 @@ export interface ShopDataDetail {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface RequestGenerateDeeplink {
+  offer_id: number;
+  merchant_id: number;
+  preview_url: string;
+}
+
+export interface ResponseGenerateDeeplink {
+  _id: string;
+  offer_id: number;
+  merchant_id: number;
+  user_id: string;
+  deeplink: string;
+  createdAt: Date;
+  updatedAt: Date;
+  __v: number;
+}

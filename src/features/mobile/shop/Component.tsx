@@ -1,20 +1,35 @@
-import { useState } from 'react';
-import ListFilter from '../home/views/ListFilter';
-import { HOME_MOBILE_TYPE } from '../home/constant';
-import Search from '@/features/desktop/search';
-import Image from 'next/image';
-import Button from '@/components/common/button';
-import { SquareChartGantt } from 'lucide-react';
 import { TitleMobile } from '@/components/mobile/title';
-import CardSlideProductMobile from '@/components/mobile/cardSlideProduct';
-import { CardProductSlideMobile } from '@/components/mobile/cardProductSlideMobile';
 import CardProduct from '@/components/common/cardProduct';
+import { useMemo, useState } from 'react';
+import useSWR from 'swr';
+import { IResponseOffer } from '@/features/desktop/home/interface';
+import { fetcher } from '@/lib/client';
+import { mapDataProduct } from '@/hooks/useHome';
 
 const Component = () => {
-  const [active, setActive] = useState('All');
+  // const [active, setActive] = useState('All');
+  const [offerSearch] = useState({
+    category: '',
+    page: 1,
+    limit: 100,
+    search: '',
+  });
+  const { data: dataMerchants } = useSWR<IResponseOffer>(
+    `/offer?category=${offerSearch.category}&search=${offerSearch.search}&limit=${offerSearch.limit}&page=${offerSearch.page}`,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+      revalidateIfStale: false,
+      // use cache
+    }
+  );
+  const merchants = useMemo(() => {
+    if (dataMerchants) return mapDataProduct(dataMerchants);
+  }, [dataMerchants]);
   return (
     <>
-      <div className="mb-[24px] bg-white shadow-[0px_4px_25px_0px_#00000014] h-[132px] px-[16px] mx-[16px] rounded-[8px] flex items-center justify-between">
+      {/* <div className="mb-[24px] bg-white shadow-[0px_4px_25px_0px_#00000014] h-[132px] px-[16px] mx-[16px] rounded-[8px] flex items-center justify-between">
         <div>
           <h2 className="font-bold text-[16px] text-black">Shop Name </h2>
           <div className="flex items-center gap-2 mb-2">
@@ -44,9 +59,9 @@ const Component = () => {
       </div>
       <div className="px-[16px]">
         <Search />
-      </div>
+      </div> */}
 
-      <ListFilter
+      {/* <ListFilter
         active={active}
         setActive={setActive}
         list={HOME_MOBILE_TYPE}
@@ -64,19 +79,19 @@ const Component = () => {
         <div className="w-full overflow-hidden pl-[16px]">
           <CardSlideProductMobile list={[]} />
         </div>
-      </div>
+      </div> */}
       <div className="w-full bg-white ">
-        <TitleMobile title={'All Products'} rightTitle={'More'} />
+        <TitleMobile title={'All Shop'} rightTitle="" />
         <div className="px-[16px] grid grid-cols-2 gap-2 items-center">
-          {[1, 2, 3, 4].map((ele, index) => (
+          {merchants?.map((ele, index) => (
             <CardProduct
               key={index}
-              _image={''}
-              _productName={'test'}
-              _shopName={'test'}
-              percent={''}
-              link="/product/1"
-              type={''}
+              _image={ele.pic}
+              _productName={ele.shopName}
+              _shopName={ele.shopName}
+              percent={ele.percent}
+              link={ele.link}
+              type={ele.type}
             />
           ))}
         </div>
