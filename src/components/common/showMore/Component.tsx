@@ -1,13 +1,13 @@
 import Button from '../button';
 import { IProp } from './interface';
 
-const Component = ({ min, max, onClick }: IProp) => {
+const Component = ({ min, max, onClick, totalPage, currentPage }: IProp) => {
   return (
     <div className="flex items-center justify-center flex-col gap-3 mt-[48px]">
       <p className="text-black-3 text-[14px] font-normal">
         Show {min} results out of {max}
       </p>
-      {min >= max ? (
+      {Number(currentPage) >= Number(totalPage) ? (
         <p className="text-black-3 text-[14px] font-normal">No more data</p>
       ) : (
         <Button

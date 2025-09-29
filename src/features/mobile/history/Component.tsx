@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 const Component = () => {
   const router = useRouter();
   return (
-    <div className="p-5 space-y-5">
+    <div className="p-5 space-y-5 md:max-w-[600px] mx-auto">
       <p className="text-[20px] font-medium text-black-6">Wallet History</p>
       <div
         onClick={() => {

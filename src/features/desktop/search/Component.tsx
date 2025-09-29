@@ -25,9 +25,16 @@ const list = [
     ],
   },
 ];
-const Component = () => {
+const Component = ({
+  onSearch,
+  value,
+}: {
+  onSearch?: (value: string) => void;
+  value?: string;
+}) => {
   const [select, setSelect] = useState('');
-  const [search, setSearch] = useState('');
+  // const [search, setSearch] = useState('');
+  const [show] = useState(false);
 
   return (
     <div className=" w-full">
@@ -36,16 +43,18 @@ const Component = () => {
         onSubmit={(event) => {
           event.preventDefault();
           const formData = new FormData(event.currentTarget);
-          console.log('Submitted:', Object.fromEntries(formData));
+          // console.log('Submitted:', Object.fromEntries(formData));
           const data = Object.fromEntries(formData);
-          setSearch(data?.search as string);
+          // console.log('data', data?.search as string);
+          window.sessionStorage.setItem('search_offer', data?.search as string);
+          onSearch?.(data?.search as string);
         }}
         onChange={(event) => {
           event.preventDefault();
-          const formData = new FormData(event.currentTarget);
-          console.log('Submitted:', Object.fromEntries(formData));
-          const data = Object.fromEntries(formData);
-          setSearch(data?.search as string);
+          // const formData = new FormData(event.currentTarget);
+          // console.log('Submitted:', Object.fromEntries(formData));
+          // const data = Object.fromEntries(formData);
+          // setSearch(data?.search as string);
         }}
       >
         <TextField
@@ -53,9 +62,10 @@ const Component = () => {
           type={'text'}
           placeholder="Search"
           startIcon={<SearchIcon />}
+          defaultValue={value?.toString() || ''}
         />
       </Form.Root>
-      {search && (
+      {show && (
         <div className="relative">
           <div className="z-[99] absolute top-[10px] w-full h-[300px] overflow-auto bg-white rounded-[8px] shadow-2xl py-4 px-[8px]">
             {list.map((item, index) => {

@@ -1,8 +1,10 @@
 import ArrowCircleIcon from '@/components/icons/ArrowCircleIcon';
 import Search from '@/features/desktop/search';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const Banner = () => {
+  const router = useRouter();
   return (
     <section className="h-[543px] w-full relative flex flex-wrap ">
       <div className="flex  flex-col justify-center w-full">
@@ -16,7 +18,12 @@ const Banner = () => {
           </h1>
         </div>
         <div className="bg-primary-4 max-w-[582px] h-[92px] mt-3 rounded-[16px] flex items-center justify-center px-4">
-          <Search />
+          <Search
+            onSearch={(value) => {
+              window.sessionStorage.setItem('search_offer', value);
+              router.push('/shop');
+            }}
+          />
         </div>
       </div>
       <Image
