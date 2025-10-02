@@ -5,7 +5,7 @@ import Payment from '../wallet/views/payment';
 import TitleBar from '../home/views/TitleBar';
 import { EditProfile } from './views/editProfile';
 import { Social } from './views/social';
-import { ArrowDown, CopyIcon } from 'lucide-react';
+import { CopyIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import useSWR from 'swr';
 import { ResponseGetMyOffers } from './interface';

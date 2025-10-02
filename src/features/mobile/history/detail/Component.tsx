@@ -2,7 +2,7 @@
 
 // import PaypalIcon from '@/components/icons/PaypalIcon';
 import { ResponseConversion } from '@/features/desktop/profile/interface';
-import { ArrowBigLeft, ChevronLeft, Wallet2 } from 'lucide-react';
+import { ChevronLeft, Wallet2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 const Component = ({
