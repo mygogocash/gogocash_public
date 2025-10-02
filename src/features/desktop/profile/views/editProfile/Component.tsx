@@ -2,10 +2,12 @@ import Dialog from '@/components/common/dialog';
 import Image from 'next/image';
 import React from 'react';
 import { FormEditProfile } from './form';
+import { useSession } from 'next-auth/react';
+import { CopyIcon } from 'lucide-react';
 
 const Component = () => {
   const [isOpenModal, setIsOpenModal] = React.useState(false);
-
+  const { data: session } = useSession();
   return (
     <>
       <Dialog
@@ -36,10 +38,10 @@ const Component = () => {
         <div className="flex items-center gap-20">
           <div className="space-y-4 ">
             <p className="text-black-4 text-[14px] md:text-[18px] font-medium">
-              Name
+              Username
             </p>
             <p className="text-black-4 text-[14px] md:text-[18px] font-medium">
-              Username
+              Wallet
             </p>
             <p className="text-black-4 text-[14px] md:text-[18px] font-medium">
               Email
@@ -47,13 +49,26 @@ const Component = () => {
           </div>
           <div className="space-y-4 ">
             <p className="text-black-4 text-[14px] md:text-[18px] font-normal">
-              Name
+              {session?.user?.username || 'No Name'}
+            </p>
+            <p className="text-black-4 text-[14px] md:text-[18px] font-normal flex items-center gap-2">
+              {session?.user?.wallet && session?.user?.wallet?.length > 0
+                ? `${session.user.wallet.slice(
+                    0,
+                    5
+                  )}...${session.user.wallet.slice(-5)}`
+                : 'No Address'}
+              <CopyIcon
+                size={`13`}
+                className="cursor-pointer transition-colors duration-200 hover:text-blue-500 active:text-blue-700"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  navigator.clipboard.writeText(session?.user.wallet || '');
+                }}
+              />
             </p>
             <p className="text-black-4 text-[14px] md:text-[18px] font-normal">
-              Username
-            </p>
-            <p className="text-black-4 text-[14px] md:text-[18px] font-normal">
-              Email
+              {session?.user?.email || 'No Email'}
             </p>
           </div>
         </div>
