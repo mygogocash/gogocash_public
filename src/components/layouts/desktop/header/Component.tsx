@@ -15,6 +15,7 @@ import { Notification } from '@/features/desktop/notification';
 import NotificationIcon from '@/components/icons/NotificationIcon';
 import Help from '@/features/desktop/help';
 import { useCrossmintLoginContext } from '@/providers/CrossmintLoginContext';
+import toast from 'react-hot-toast';
 
 const Component = () => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -26,6 +27,7 @@ const Component = () => {
     user: crossmintUser,
     wallet,
     loginState,
+    logout,
   } = useCrossmintLoginContext();
 
   const checkLogIn = useCallback(() => {
@@ -60,34 +62,23 @@ const Component = () => {
 
   const handleLogin = useCallback(() => {
     try {
+      logout(); // Ensure any existing session is cleared before login
       if (typeof login === 'function') {
-        console.log('✅ Calling Crossmint login function...');
-
-        // Call the login function which should show the modal
         login();
-        console.log('✅ Login function called successfully');
       } else {
-        console.error('❌ Login function not available');
-        console.error(
-          'Available context properties:',
-          Object.keys({
-            login,
-            user: crossmintUser,
-            wallet,
-            loginState,
-          })
+        toast.error(
+          'Crossmint login not available. Please check configuration.'
         );
-        alert('Crossmint login not available. Please check configuration.');
       }
     } catch (error) {
       console.error('❌ Login error:', error);
-      alert(
+      toast.error(
         `Login error: ${
           error instanceof Error ? error.message : 'Unknown error'
         }`
       );
     }
-  }, [login, loginState, crossmintUser, wallet]);
+  }, [login, logout]);
 
   return (
     <header className="h-[82px] bg-white py-[16px] shadow-lg sticky top-0 z-[9] w-full md:block hidden">

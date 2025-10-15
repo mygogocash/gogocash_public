@@ -74,10 +74,10 @@ const useCrossmintLogin = () => {
           'Wallet address not available, proceeding with Crossmint token only'
         );
       }
-      console.log('🔐 Signing in to backend with Crossmint token:');
-      console.log('User:', user);
-      console.log('Wallet Address:', walletAddress);
-      console.log('Wallet Address JWT:', jwt);
+      // console.log('🔐 Signing in to backend with Crossmint token:');
+      // console.log('User:', user);
+      // console.log('Wallet Address:', walletAddress);
+      // console.log('Wallet Address JWT:', jwt);
 
       const response = await signInCrossmint(
         {
@@ -88,13 +88,10 @@ const useCrossmintLogin = () => {
         jwt
       );
 
-      console.log('Backend response:', response);
-
       if (response.user) {
         const userData = response.user;
 
         // Sign in to NextAuth with proper error handling
-        console.log('🔐 Calling NextAuth signIn with crossmint provider');
         const result = await signIn('crossmint', {
           jwt: jwt,
           userId: userData.id_crossmint,
@@ -104,7 +101,6 @@ const useCrossmintLogin = () => {
           id_twitter: userData?.id_twitter,
           redirect: false, // Handle redirect manually
         });
-        console.log('NextAuth signIn result:', result);
         if (result?.ok) {
           setLoginState((prev) => ({
             ...prev,
@@ -166,11 +162,6 @@ const useCrossmintLogin = () => {
       // });
 
       // Add a small delay to prevent rapid fire requests
-      console.log(
-        '>>>>isAfterLogin',
-        window.sessionStorage.getItem('isAfterLogin')
-      );
-
       const timeoutId = setTimeout(() => {
         if (window.sessionStorage.getItem('isAfterLogin') === 'true') {
           signInCrossmintToBackend();
