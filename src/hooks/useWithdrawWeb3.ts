@@ -42,8 +42,8 @@ const useWithdrawWeb3 = () => {
           setAccount(address);
           setChainId(Number(network.chainId));
 
-          console.log('✅ Wallet connected:', address);
-          console.log('🌐 Chain ID:', network.chainId);
+          //   console.log('✅ Wallet connected:', address);
+          //   console.log('🌐 Chain ID:', network.chainId);
         }
       }
     } catch (err) {
@@ -149,7 +149,7 @@ const useWithdrawWeb3 = () => {
     info: ResponseWithdrawCheck;
   }) {
     try {
-      console.log('Initiating withdrawCashback with message:', msg_);
+      //   console.log('Initiating withdrawCashback with message:', msg_);
 
       // await connectWallet();
       if (!window.ethereum) throw new Error('MetaMask not found');
@@ -182,12 +182,12 @@ const useWithdrawWeb3 = () => {
         signer
       );
 
-      console.log('Preparing to withdraw cashback with message:', msg_);
-      console.log('Using signature:', signature);
+      //   console.log('Preparing to withdraw cashback with message:', msg_);
+      //   console.log('Using signature:', signature);
       const conversionIdHashes: `0x${string}`[] = msg_.conversionIdHashes.map(
         (id) => keccak256(toUtf8Bytes(id)) as `0x${string}`
       );
-      console.log('conversionIdHashes', conversionIdHashes);
+      //   console.log('conversionIdHashes', conversionIdHashes);
 
       const dt = {
         userid: msg_.userid,
@@ -198,7 +198,7 @@ const useWithdrawWeb3 = () => {
         conversionIdHashes: conversionIdHashes,
         expireAt: BigInt(msg_.expireAt),
       };
-      console.log('dt', dt);
+      //   console.log('dt', dt);
 
       //   const tx = await signer.sendTransaction({
       //     to: process.env.NEXT_PUBLIC_CONTRACT_WITHDRAW_ADDRESS!,
@@ -216,8 +216,8 @@ const useWithdrawWeb3 = () => {
         signature
       );
       const receipt = await tx.wait();
-      console.log('Transaction sent:', tx.hash);
-      console.log('Transaction receipt:', receipt);
+      //   console.log('Transaction sent:', tx.hash);
+      //   console.log('Transaction receipt:', receipt);
       if (receipt && msg_?.info) {
         createWithdraw({
           tx_hash: receipt.hash,
@@ -236,7 +236,7 @@ const useWithdrawWeb3 = () => {
         });
       }
 
-      console.log('✅ Withdraw successful:', receipt);
+      //   console.log('✅ Withdraw successful:', receipt);
     } catch (err) {
       console.error('❌ Withdraw failed:', err);
       toast.error('Withdrawal failed. Please try again.');
