@@ -2,7 +2,7 @@
 
 // import PaypalIcon from '@/components/icons/PaypalIcon';
 import { ResponseConversion } from '@/features/desktop/profile/interface';
-import { ChevronLeft, Wallet2 } from 'lucide-react';
+import { ChevronLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 const Component = ({
@@ -84,18 +84,20 @@ const Component = ({
                         </p>
                       </div>
                       <div>
-                        <p className="text-[14px] text-black-6 font-normal">
-                          <span className="text-black-4 text-[10px]">
-                            Sale:{' '}
-                          </span>{' '}
-                          {item.currency} {item.sale_amount}
-                        </p>
-                        <p className="text-[14px] text-black-6 font-normal">
-                          <span className="text-black-4 text-[10px]">
-                            Payout:{' '}
-                          </span>{' '}
-                          {item.currency} {item.payout}
-                        </p>
+                        <div>
+                          <p className="text-[14px] text-black-6 font-normal">
+                            <span className="text-black-4 text-[10px]">
+                              Sale:{' '}
+                            </span>{' '}
+                            {item.currency} {item.sale_amount}
+                          </p>
+                          <p className="text-[14px] text-black-6 font-normal">
+                            <span className="text-black-4 text-[10px]">
+                              Payout:{' '}
+                            </span>{' '}
+                            {item.currency} {item.payout}
+                          </p>
+                        </div>
                       </div>
                     </div>
                     <div className="border-b-[1px] border-b-black-2 my-3" />
@@ -113,9 +115,7 @@ const Component = ({
         <div className="shadow-[0px_1px_10px_0px_rgba(0,0,0,0.25)] rounded-[8px] p-[16px]">
           <div className="flex items-center justify-between">
             <p className="text-[14px] text-black-6 font-medium">Notice</p>
-            <div className="cursor-pointer text-[10px] bg-primary-1 rounded-[8px] py-[4px] px-[8px] text-primary-6 flex items-center gap-1">
-              <Wallet2 color="#0b5a2d" /> Withdraw
-            </div>
+            {/*  */}
           </div>
           <p className="text-[10px] text-black-3 mt-3">
             Withdraw was incomplete due to issues with your payment method. The

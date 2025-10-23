@@ -7,7 +7,6 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { memo, useState } from 'react';
 import CardSlideProductMobile from '@/components/mobile/cardSlideProduct';
-import Deals from './views/Deals';
 import { HOME_MOBILE_TYPE } from './constant';
 import useCountdown from '@/hooks/useCountdown';
 import { HeaderMobile } from '@/components/layouts/mobile/header';
@@ -193,12 +192,12 @@ const Component = () => {
           <CardSlideProductMobile list={merchants || []} />
         </div>
       </div>
-      <div className="w-full bg-white space-y-3">
+      {/* <div className="w-full bg-white space-y-3">
         <TitleMobile title={'Order Now'} rightTitle={'More'} />
         <div className="w-full overflow-hidden pl-[16px]">
           <Deals />
         </div>
-      </div>
+      </div> */}
       {!data && (
         <div className="absolute w-full bottom-0 bg-white border-t border-white rounded-t-[24px] p-[16px] space-y-3 shadow-[0px_-4px_25px_0px_#00000014] mt-5">
           <div>

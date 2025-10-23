@@ -99,6 +99,7 @@ const useCrossmintLogin = () => {
           address: userData.address,
           username: userData?.username,
           id_twitter: userData?.id_twitter,
+          _id: userData?._id,
           redirect: false, // Handle redirect manually
         });
         if (result?.ok) {

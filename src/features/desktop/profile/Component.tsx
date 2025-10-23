@@ -41,7 +41,10 @@ const Component = () => {
       </div> */}
       <TitleBar title={'Personal Information'} />
       <EditProfile />
-      <TitleBar title={'My Affiliate link'} />
+      <TitleBar
+        title={'My Affiliate link'}
+        button={{ text: 'Withdraw', onClick: () => router.push(`withdraw`) }}
+      />
       <div className="p-5 space-y-5 md:max-w-[600px] mx-auto">
         {/* <p className="text-[20px] font-medium text-black-6">
           My Affiliate link

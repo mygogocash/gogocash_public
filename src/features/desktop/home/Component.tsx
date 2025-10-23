@@ -3,7 +3,6 @@ import { useRouter } from 'next/navigation';
 import Banner from './views/Banner';
 import BannerPocket from './views/BannerPocket';
 import Community from './views/Community';
-import Deals from './views/Deals';
 import { DontMiss } from './views/DontMiss';
 import Merchants from './views/Merchants';
 import Product from './views/Product';
@@ -31,7 +30,7 @@ const Component = () => {
         <DontMiss />
       </div>
       <Product />
-      <div className="space-y-5">
+      {/* <div className="space-y-5">
         <TitleBar
           title={'Grab your Deals'}
           button={{
@@ -40,7 +39,7 @@ const Component = () => {
           }}
         />
         <Deals />
-      </div>
+      </div> */}
       <div className="space-y-5">
         <TitleBar title={'Put GoGoCash in your Pocket'} />
         <BannerPocket />

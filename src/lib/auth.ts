@@ -13,6 +13,7 @@ declare module 'next-auth' {
     wallet?: any;
     crossmint_user_id?: string;
     crossmint_jwt?: string;
+    _id?: string;
   }
   interface User {
     access_token?: string;
@@ -24,6 +25,7 @@ declare module 'next-auth' {
     crossmint_user_id?: string;
     crossmint_jwt?: string;
     username?: string;
+    _id?: string;
   }
   interface Session {
     user: {
@@ -38,6 +40,7 @@ declare module 'next-auth' {
       email?: string;
       username?: string;
       id?: string;
+      _id?: string;
     };
   }
 }
@@ -195,6 +198,7 @@ export const authOptions: AuthOptions = {
       credentials: {
         jwt: { label: 'Crossmint JWT', type: 'text' },
         userId: { label: 'User ID', type: 'text' },
+        _id: { label: 'Mongo ID', type: 'text' },
         email: { label: 'Email', type: 'email' },
         address: { label: 'Address', type: 'text' },
         username: { label: 'Username', type: 'text' },
@@ -218,6 +222,7 @@ export const authOptions: AuthOptions = {
 
             const userData = credentials;
             const fullName = credentials.username;
+            // console.log('User Data:', userData);
 
             return {
               id: userData?.userId || credentials.userId || 'unknown',
@@ -226,6 +231,7 @@ export const authOptions: AuthOptions = {
               id_twitter: userData.id_twitter,
               wallet: credentials.address,
               access_token: credentials?.jwt,
+              _id: userData._id,
             } as unknown as User;
           }
 
@@ -250,6 +256,7 @@ export const authOptions: AuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       try {
+        // console.log('user', user);
         if (user) {
           // Store user data in token on first sign in
           return {
@@ -264,6 +271,7 @@ export const authOptions: AuthOptions = {
             wallet: user.wallet,
             crossmint_user_id: user.crossmint_user_id,
             crossmint_jwt: user.crossmint_jwt,
+            _id: user._id,
           };
         }
 
@@ -276,7 +284,6 @@ export const authOptions: AuthOptions = {
     async session({ session, token }) {
       try {
         // console.log('token', token);
-
         // Parse data safely using helper function
         // const userData = safeJsonParse(token.user);
         // const buyerData = safeJsonParse(token.buyer);
@@ -301,6 +308,7 @@ export const authOptions: AuthOptions = {
             wallet: token.wallet,
             crossmint_user_id: token.crossmint_user_id,
             crossmint_jwt: token.crossmint_jwt,
+            _id: token._id,
           },
         };
       } catch (error) {

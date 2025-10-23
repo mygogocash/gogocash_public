@@ -1,14 +1,18 @@
 export const MenuHeader = [
   {
-    title: 'Merchants',
-    link: '#',
+    title: 'Home',
+    link: '/',
+  },
+  {
+    title: 'Shops',
+    link: '/shop',
   },
   {
     title: 'About',
-    link: '#',
+    link: 'https://gogocash.co/',
   },
-  {
-    title: 'Contact',
-    link: '#',
-  },
+  // {
+  //   title: 'Contact',
+  //   link: '#',
+  // },
 ];
