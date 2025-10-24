@@ -1,11 +1,11 @@
-# 🌐 GoGoCash Web Frontend
+# 🌐 GoGoCash
 
 Modern cashback application frontend built with Next.js, TypeScript, and Tailwind CSS.
 
 ## 🚀 Features
 
 - **Next.js 13+**: App Router, Server Components
-- **TypeScript**: Type-safe development  
+- **TypeScript**: Type-safe development
 - **Tailwind CSS**: Utility-first styling
 - **Responsive Design**: Mobile-first approach
 - **PWA Ready**: Progressive Web App capabilities
@@ -16,12 +16,14 @@ Modern cashback application frontend built with Next.js, TypeScript, and Tailwin
 ## 🛠 Development
 
 ### Prerequisites
+
 ```bash
 node >= 20.0.0
 yarn or npm
 ```
 
 ### Quick Start
+
 ```bash
 # Install dependencies
 yarn install
@@ -37,6 +39,7 @@ yarn start
 ```
 
 ### Available Scripts
+
 ```bash
 yarn dev          # Development server
 yarn build        # Production build
@@ -50,6 +53,7 @@ yarn test:watch   # Watch mode tests
 ## 🔧 Configuration
 
 ### Environment Variables
+
 ```bash
 NEXT_PUBLIC_API_URL=http://localhost:8080
 NEXT_PUBLIC_APP_NAME=GoGoCash
@@ -57,6 +61,7 @@ NEXT_PUBLIC_ENV=development
 ```
 
 ### API Integration
+
 - REST API endpoints
 - Real-time cashback updates
 - User authentication
@@ -65,6 +70,7 @@ NEXT_PUBLIC_ENV=development
 ## 📱 Features
 
 ### User Interface
+
 - Dashboard with cashback overview
 - Transaction history
 - Merchant directory
@@ -72,6 +78,7 @@ NEXT_PUBLIC_ENV=development
 - Profile management
 
 ### Performance
+
 - Server-side rendering (SSR)
 - Static site generation (SSG)
 - Image optimization
