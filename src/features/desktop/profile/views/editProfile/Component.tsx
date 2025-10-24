@@ -21,7 +21,7 @@ const Component = () => {
           <div
             className="w-[100px] h-[100px] md:w-[200px] md:h-[200px] relative rounded-full overflow-hidden md:mx-auto"
             onClick={() => {
-              setIsOpenModal(true);
+              // setIsOpenModal(true);
             }}
           >
             <Image

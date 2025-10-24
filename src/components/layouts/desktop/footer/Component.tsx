@@ -13,7 +13,7 @@ const Component = () => {
             <Image src="/logoBlack.svg" alt="logo" width={150} height={93} />
           </div>
           <div className="grow">
-            <div className="flex items-center justify-between flex-wrap md:mt-0 mt-5 space-y-[24px] md:space-y-0">
+            <div className="flex items-center justify-end flex-wrap md:mt-0 mt-5 space-y-[24px] md:space-y-0 gap-5">
               {FooterList1.map((item, index) => (
                 <div key={index}>
                   <p className="font-bold text-[20px] text-black-5 mb-[16px]">
@@ -46,7 +46,9 @@ const Component = () => {
                 key={index}
                 icon={<item.icon />}
                 onClick={function (): void {
-                  //
+                  if (item.link) {
+                    window.open(item.link, '_blank');
+                  }
                 }}
                 radius="rounded-full"
               />

@@ -31,6 +31,14 @@ const Component = () => {
             <DropdownMenu.Item
               className="flex items-center gap-2 p-2 hover:bg-gray-100 cursor-pointer"
               onClick={() => {
+                router.push('/wallet');
+              }}
+            >
+              Wallet
+            </DropdownMenu.Item>
+            <DropdownMenu.Item
+              className="flex items-center gap-2 p-2 hover:bg-gray-100 cursor-pointer"
+              onClick={() => {
                 router.push('/history');
               }}
             >

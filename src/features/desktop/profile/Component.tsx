@@ -1,5 +1,4 @@
 import React from 'react';
-import MethodPayment from '../wallet/views/methodPayment';
 import Drawer from '@/components/common/drawer';
 import Payment from '../wallet/views/payment';
 import TitleBar from '../home/views/TitleBar';
@@ -12,7 +11,7 @@ import { ResponseGetMyOffers } from './interface';
 import { fetcherPost } from '@/lib/client';
 const Component = () => {
   const [isOpenAddWithdraw, setIsOpenAddWithdraw] = React.useState(false);
-  const [isOpenEditWithdraw, setIsOpenEditWithdraw] = React.useState(false);
+  // const [isOpenEditWithdraw, setIsOpenEditWithdraw] = React.useState(false);
   const router = useRouter();
   const data = [`/offer/my-offers`, { limit: 10, page: 1 }];
   const { data: dataMyOffers } = useSWR<ResponseGetMyOffers[]>(
@@ -86,12 +85,12 @@ const Component = () => {
           );
         })}
       </div>
-      <MethodPayment
+      {/* <MethodPayment
         setIsOpenAddWithdraw={setIsOpenAddWithdraw}
         isOpenAddWithdraw={isOpenAddWithdraw}
         isOpenEditWithdraw={isOpenEditWithdraw}
         setIsOpenEditWithdraw={setIsOpenEditWithdraw}
-      />
+      /> */}
       <Social />
     </div>
   );

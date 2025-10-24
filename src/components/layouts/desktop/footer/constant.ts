@@ -1,81 +1,91 @@
 import ByBitIcon from '@/components/icons/ByBitIcon';
 import DiscordIcon from '@/components/icons/DiscordIcon';
+// import DiscordIcon from '@/components/icons/DiscordIcon';
 import FacebookIcon from '@/components/icons/FacebookIcon';
 import GPayIcon from '@/components/icons/GPayIcon';
-import IGIcon from '@/components/icons/IGIcon';
+// import IGIcon from '@/components/icons/IGIcon';
 import LinkedInIcon from '@/components/icons/LinkedInIcon';
 import MetamaskIcon from '@/components/icons/MetamaskIcon';
 import PaypalIcon from '@/components/icons/PaypalIcon';
 import TelegramIcon from '@/components/icons/TelegramIcon';
 import TrustIcon from '@/components/icons/TrustIcon';
 import XIcon from '@/components/icons/XIcon';
+import { MessageCircle } from 'lucide-react';
 
 export const FooterList1 = [
   {
-    title: 'Shortcuts',
+    title: 'Need Help?',
     list: [
       {
-        title: 'How GoGoCash Works?',
-        link: '#',
+        title: 'Business Inquiries',
+        link: 'https://gogocash.co/',
       },
       {
-        title: 'Merchants',
-        link: '#',
+        title: 'How it works?',
+        link: 'https://gogocash.co/#how-it-works',
+      },
+      {
+        title: 'Careers',
+        link: 'https://gogocash.gitbook.io/doc/careers',
       },
     ],
   },
   {
-    title: 'Shortcuts',
+    title: 'Resources',
     list: [
       {
-        title: 'How GoGoCash Works?',
-        link: '#',
+        title: 'FAQ',
+        link: 'https://hello@gogocash.co/#faqs',
       },
       {
-        title: 'Merchants',
-        link: '#',
+        title: 'Learn Center',
+        link: 'https://gogocash.gitbook.io/doc/',
+      },
+      {
+        title: 'Help Center',
+        link: 'https://discord.com/invite/T9aydr2yFd',
       },
     ],
   },
-  {
-    title: 'Shortcuts',
-    list: [
-      {
-        title: 'How GoGoCash Works?',
-        link: '#',
-      },
-      {
-        title: 'Merchants',
-        link: '#',
-      },
-    ],
-  },
+  // {
+  //   title: 'Shortcuts',
+  //   list: [
+  //     {
+  //       title: 'How GoGoCash Works?',
+  //       link: '#',
+  //     },
+  //     {
+  //       title: 'Merchants',
+  //       link: '#',
+  //     },
+  //   ],
+  // },
 ];
 
 export const Socail = [
   {
     icon: FacebookIcon,
-    link: '#',
+    link: 'https://web.facebook.com/gogocashofficial',
   },
   {
     icon: LinkedInIcon,
-    link: '#',
+    link: 'https://www.linkedin.com/company/gogocash',
   },
   {
-    icon: IGIcon,
-    link: '#',
+    icon: MessageCircle,
+    link: 'https://line.me/R/ti/p/@255bjnsc?ts=09181910&oat_content=url',
   },
   {
     icon: XIcon,
-    link: '#',
+    link: 'https://x.com/mygogocash',
   },
   {
     icon: TelegramIcon,
-    link: '#',
+    link: 'https://t.me/GoGoCashOfficialChannel',
   },
   {
     icon: DiscordIcon,
-    link: '#',
+    link: 'https://discord.com/invite/T9aydr2yFd',
   },
 ];
 
@@ -107,12 +117,12 @@ export const Content = [
     title: 'Terms and Conditions',
     link: '#',
   },
-  {
-    title: 'Terms and Conditions',
-    link: '#',
-  },
-  {
-    title: 'Terms and Conditions',
-    link: '#',
-  },
+  // {
+  //   title: 'Terms and Conditions',
+  //   link: '#',
+  // },
+  // {
+  //   title: 'Terms and Conditions',
+  //   link: '#',
+  // },
 ];

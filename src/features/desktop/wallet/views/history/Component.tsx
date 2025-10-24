@@ -1,6 +1,4 @@
-import Select from '@/components/common/select';
-import Search from '@/features/desktop/search';
-import * as Form from '@radix-ui/react-form';
+// import * as Form from '@radix-ui/react-form';
 import { memo, useMemo, useState } from 'react';
 import {
   useReactTable,
@@ -10,43 +8,53 @@ import {
 import Pagination from '@/components/common/pagination';
 import Badge from '@/components/common/badge';
 import { Status } from '@/components/common/badge/interface';
+import { ResponseWithdrawCheck } from '@/features/desktop/withdraw/interface';
 
-const data = [
-  { name: 'Alice', age: 25, country: 'USA', status: 'info' },
-  { name: 'Bob', age: 30, country: 'UK', status: 'warning' },
-  { name: 'Charlie', age: 28, country: 'Canada', status: 'success' },
-  { name: 'David', age: 35, country: 'Germany', status: 'error' },
-  { name: 'Alice', age: 25, country: 'USA', status: 'info' },
-  { name: 'Bob', age: 30, country: 'UK', status: 'warning' },
-  { name: 'Charlie', age: 28, country: 'Canada', status: 'success' },
-  { name: 'David', age: 35, country: 'Germany', status: 'error' },
-  { name: 'Alice', age: 25, country: 'USA', status: 'info' },
-  { name: 'Bob', age: 30, country: 'UK', status: 'warning' },
-  { name: 'Charlie', age: 28, country: 'Canada', status: 'success' },
-  { name: 'David', age: 35, country: 'Germany', status: 'error' },
-  { name: 'Alice', age: 25, country: 'USA', status: 'info' },
-  { name: 'Bob', age: 30, country: 'UK', status: 'warning' },
-  { name: 'Charlie', age: 28, country: 'Canada', status: 'success' },
-  { name: 'David', age: 35, country: 'Germany', status: 'error' },
-];
+// const data = [
+//   { name: 'Alice', age: 25, country: 'USA', status: 'info' },
+//   { name: 'Bob', age: 30, country: 'UK', status: 'warning' },
+//   { name: 'Charlie', age: 28, country: 'Canada', status: 'success' },
+//   { name: 'David', age: 35, country: 'Germany', status: 'error' },
+//   { name: 'Alice', age: 25, country: 'USA', status: 'info' },
+//   { name: 'Bob', age: 30, country: 'UK', status: 'warning' },
+//   { name: 'Charlie', age: 28, country: 'Canada', status: 'success' },
+//   { name: 'David', age: 35, country: 'Germany', status: 'error' },
+//   { name: 'Alice', age: 25, country: 'USA', status: 'info' },
+//   { name: 'Bob', age: 30, country: 'UK', status: 'warning' },
+//   { name: 'Charlie', age: 28, country: 'Canada', status: 'success' },
+//   { name: 'David', age: 35, country: 'Germany', status: 'error' },
+//   { name: 'Alice', age: 25, country: 'USA', status: 'info' },
+//   { name: 'Bob', age: 30, country: 'UK', status: 'warning' },
+//   { name: 'Charlie', age: 28, country: 'Canada', status: 'success' },
+//   { name: 'David', age: 35, country: 'Germany', status: 'error' },
+// ];
 
 const columns = [
-  { accessorKey: 'name', header: 'Name' },
-  { accessorKey: 'age', header: 'Age' },
-  { accessorKey: 'status', header: 'Status' },
-  { accessorKey: 'country', header: 'Country' },
+  { accessorKey: 'adv_sub2', header: 'Name' },
+  { accessorKey: 'offer_name', header: 'Offer Name' },
+  { accessorKey: 'sale_amount', header: 'Sale Amount' },
+  { accessorKey: 'payout', header: 'Payout' },
+  { accessorKey: 'currency', header: 'Currency' },
+  { accessorKey: 'conversion_status', header: 'Status' },
 ];
-const Component = () => {
-  const [openOption, setOpenOption] = useState(false);
-  const [openCurrency, setOpenCurrency] = useState(false);
+const Component = ({
+  dataConversion,
+}: {
+  dataConversion: ResponseWithdrawCheck;
+}) => {
+  // const [openOption, setOpenOption] = useState(false);
+  // const [openCurrency, setOpenCurrency] = useState(false);
   const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
 
-  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const totalPages = Math.ceil(dataConversion?.data?.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentData = useMemo(
-    () => data.slice(startIndex, startIndex + itemsPerPage),
-    [startIndex]
+    () =>
+      dataConversion?.data?.length > 0
+        ? dataConversion?.data?.slice(startIndex, startIndex + itemsPerPage)
+        : [],
+    [dataConversion?.data, startIndex]
   );
 
   // 🔹 use React Table
@@ -55,7 +63,6 @@ const Component = () => {
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
-  // console.log('table', table.getRowModel());
 
   return (
     <div
@@ -65,7 +72,7 @@ const Component = () => {
       <h1 className="text-black-5 text-[36px] font-medium">
         Financial History
       </h1>
-      <div className="flex items-center gap-3 flex-wrap">
+      {/* <div className="flex items-center gap-3 flex-wrap">
         <div className="w-[260px] h-[123px] rounded-[8px] bg-[#E8F7FF] flex items-center justify-center flex-col">
           <h1 className="text-[24px] text-[#5D87FF] font-medium">0</h1>
           <p className="text-[16px] text-[#5D87FF] font-normal">
@@ -93,9 +100,9 @@ const Component = () => {
             Withdraw Transactions
           </p>
         </div>
-      </div>
+      </div> */}
       <div className="flex items-center justify-end gap-3 md:flex-row flex-col ">
-        <Form.Root
+        {/* <Form.Root
           className="w-full flex items-center justify-end gap-3 md:flex-row flex-col "
           onSubmit={(event) => {
             event.preventDefault();
@@ -134,33 +141,34 @@ const Component = () => {
               ]}
             />
           </div>
-        </Form.Root>
-        <div className="max-w-[300px] w-full">
+        </Form.Root> */}
+        {/* <div className="max-w-[300px] w-full">
           <Search />
-        </div>
+        </div> */}
       </div>
       {/* Table */}
       <div>
         <table className="w-full  ">
           <thead className="">
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr
-                key={headerGroup.id}
-                className="h-[66px] border-b border-grey-1"
-              >
-                {headerGroup.headers.map((header) => (
-                  <th
-                    key={header.id}
-                    className="px-4  text-left text-black-5 text-[14px] font-bold"
-                  >
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext()
-                    )}
-                  </th>
-                ))}
-              </tr>
-            ))}
+            {table &&
+              table?.getHeaderGroups().map((headerGroup) => (
+                <tr
+                  key={headerGroup.id}
+                  className="h-[66px] border-b border-grey-1"
+                >
+                  {headerGroup.headers.map((header) => (
+                    <th
+                      key={header.id}
+                      className="px-4  text-left text-black-5 text-[14px] font-bold"
+                    >
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                    </th>
+                  ))}
+                </tr>
+              ))}
           </thead>
 
           <tbody>
@@ -171,7 +179,7 @@ const Component = () => {
                   className={`hover:bg-grey-1 border-b border-grey-1 h-[66px]`}
                 >
                   {row.getVisibleCells().map((cell) =>
-                    cell.column.id === 'status' ? (
+                    cell.column.id === 'conversion_status' ? (
                       <td
                         key={cell.id}
                         className="px-4 text-black-5 text-[14px] font-medium"

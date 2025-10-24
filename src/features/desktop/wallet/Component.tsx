@@ -1,5 +1,4 @@
 import Button from '@/components/common/button';
-import Search from '../search';
 import WalletBigIcon from '@/components/icons/WalletBigIcon';
 import Tab from '@/components/common/tab';
 import { list } from './constant';
@@ -9,21 +8,38 @@ import Drawer from '@/components/common/drawer';
 import Withdraw from './views/withdraw';
 import Payment from './views/payment';
 import MethodPayment from './views/methodPayment';
+import { ResponseWithdrawCheck } from '../withdraw/interface';
+import useSWR from 'swr';
+import { fetcherPost } from '@/lib/client';
+import { formatNumber } from '@/lib/utils';
+import { useRouter } from 'next/navigation';
 const Component = () => {
   const [isOpenWithdraw, setIsOpenWithdraw] = React.useState(false);
   const [isOpenAddWithdraw, setIsOpenAddWithdraw] = React.useState(false);
   const [isOpenEditWithdraw, setIsOpenEditWithdraw] = React.useState(false);
+  const router = useRouter();
 
+  const data = [`/withdraw/check`];
+  const { data: dataConversion } = useSWR<ResponseWithdrawCheck>(
+    data,
+    fetcherPost,
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+      revalidateIfStale: false,
+      // use cache
+    }
+  );
   return (
-    <div className="container-inner md:space-y-20 space-y-3 md:my-[88px] my-[10px]">
-      <div className="hidden md:flex-row flex-col md:flex items-center justify-between">
+    <div className="container-inner md:space-y-20 space-y-3 md:mb-[88px] md:mt-[40px] my-[10px]">
+      {/* <div className="hidden md:flex-row flex-col md:flex items-center justify-between">
         <h1 className="text-black-5 font-bold text-[24px] md:text-[36px]">
           Picked for You
         </h1>
         <div className="max-w-[400px] w-full">
           <Search />
         </div>
-      </div>
+      </div> */}
       <h1 className="flex md:hidden text-black-5 font-bold text-[24px] md:text-[36px]">
         Wallet
       </h1>
@@ -46,10 +62,10 @@ const Component = () => {
             backgroundColor={
               'bg-primary-4 rounded-full text-white h-[44px] absolute right-[29px] top-[32px]'
             }
-            onClick={() => setIsOpenWithdraw(true)}
+            onClick={() => router.push('/withdraw')}
           />
           <h1 className="text-black-5 font-bold text-[24px] md:text-[36px]">
-            $50.00
+            ${formatNumber(dataConversion?.netAmount || 0)}
           </h1>
         </div>
       </div>
@@ -58,7 +74,7 @@ const Component = () => {
         list={list.map((item) => ({
           ...item,
           content:
-            item.id === 4 ? (
+            item.id === 2 ? (
               <MethodPayment
                 setIsOpenAddWithdraw={setIsOpenAddWithdraw}
                 isOpenAddWithdraw={isOpenAddWithdraw}
@@ -66,7 +82,9 @@ const Component = () => {
                 setIsOpenEditWithdraw={setIsOpenEditWithdraw}
               />
             ) : (
-              <History />
+              <History
+                dataConversion={dataConversion as ResponseWithdrawCheck}
+              />
             ),
         }))}
       />

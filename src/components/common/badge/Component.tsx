@@ -5,11 +5,11 @@ const Component = ({ status, text }: IProps) => {
   return (
     <div
       className={`capitalize rounded-full px-2 py-1 w-fit ${
-        status === 'warning'
+        status === 'info'
           ? 'bg-[#FFFBE8] text-[#FBD300]'
-          : status === 'info'
+          : status === 'pending'
           ? 'bg-[#E8F7FF] text-[#5D87FF]'
-          : status === 'success'
+          : status === 'approved'
           ? 'bg-[#E7F9EF] text-[#00B14F]'
           : 'bg-[#FFEDED] text-[#E60E0E]'
       }`}

@@ -3,6 +3,7 @@ import { HeaderMobile } from '@/components/layouts/mobile/header';
 import { History } from '@/features/mobile/history';
 import { CircleHelp } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import React from 'react';
 // import dynamic from 'next/dynamic';
 // const History = dynamic(() => import('@/features/desktop/history'), {
 //   ssr: false, // This enables SSR (default behavior)

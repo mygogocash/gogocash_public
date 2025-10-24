@@ -4,7 +4,7 @@ export const MenuHeader = [
     link: '/',
   },
   {
-    title: 'Shops',
+    title: 'Merchants',
     link: '/shop',
   },
   {

@@ -9,11 +9,11 @@ const Component = () => {
       <div>
         <TitleBar title={'Connect with GoGoCash'} />
 
-        <div className="flex gap-5  md:flex-row flex-col">
+        <div className="flex gap-5 md:flex-row flex-col my-4">
           <div className="w-full">
-            <p className="text-[20px] md:text-[24px] font-medium text-black-4 my-4">
+            {/* <p className="text-[20px] md:text-[24px] font-medium text-black-4 my-4">
               Link Social Medias
-            </p>
+            </p> */}
             <div className="space-y-3 ">
               {Social.map((ele, index) => {
                 return (
@@ -40,9 +40,9 @@ const Component = () => {
           </div>
 
           <div className="w-full">
-            <p className="text-[20px] md:text-[24px] font-medium text-black-4 my-4">
+            {/* <p className="text-[20px] md:text-[24px] font-medium text-black-4 my-4">
               Link Social Medias
-            </p>
+            </p> */}
             <div className="space-y-3 ">
               {Community.map((ele, index) => {
                 return (

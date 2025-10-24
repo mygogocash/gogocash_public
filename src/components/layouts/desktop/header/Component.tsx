@@ -3,7 +3,6 @@ import InfoIcon from '../../../icons/InfoIcon';
 import Button from '@/components/common/button';
 import React, { useCallback } from 'react';
 import { MenuHeader } from './constants';
-import WalletIcon from '@/components/icons/WalletIcon';
 import IconButton from '@/components/common/IconButton';
 import Link from 'next/link';
 import Drawer from '@/components/common/drawer';
@@ -12,7 +11,6 @@ import { AlignJustifyIcon, Loader2 } from 'lucide-react';
 import MenuProfile from '@/features/desktop/profile/views/menuProfile';
 import { useSession } from 'next-auth/react';
 import { Notification } from '@/features/desktop/notification';
-import NotificationIcon from '@/components/icons/NotificationIcon';
 import Help from '@/features/desktop/help';
 import { useCrossmintLoginContext } from '@/providers/CrossmintLoginContext';
 import toast from 'react-hot-toast';
@@ -131,7 +129,7 @@ const Component = () => {
                 <Loader2 className="h-4 w-4 animate-spin text-blue-500" />
               )}
             </div>
-            <IconButton
+            {/* <IconButton
               onClick={() => {
                 // Future: Implement wallet connection functionality
                 console.log('Wallet button clicked');
@@ -149,7 +147,7 @@ const Component = () => {
                 setIsOpenHelpCenter(true);
               }}
               icon={<InfoIcon />}
-            />
+            /> */}
             <MenuProfile />
           </div>
         ) : (
