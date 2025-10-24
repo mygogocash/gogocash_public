@@ -1,4 +1,4 @@
-# 🌐 GoGoCash Web Frontend
+# 🌐 GoGoCash
 
 Modern cashback application frontend built with Next.js, TypeScript, and Tailwind CSS.
 
