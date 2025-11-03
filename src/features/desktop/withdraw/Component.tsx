@@ -8,9 +8,8 @@ import toast from 'react-hot-toast';
 import { ResponseWithdrawCheck } from './interface';
 import useSWR from 'swr';
 import { fetcherPost } from '@/lib/client';
-import Select from '@/components/common/select';
-import * as Form from '@radix-ui/react-form';
 import React from 'react';
+import SelectNotForm from '@/components/common/selectNotForm';
 
 const Component = () => {
   const router = useRouter();
@@ -42,9 +41,15 @@ const Component = () => {
     accessToken: string;
     user: { _id: string };
   };
+
   const handleWithdraw = async () => {
     try {
       setLoading(true);
+      if (chainId != chainIdSelect) {
+        await switchNetwork();
+        setLoading(false);
+        return;
+      }
       fetcherPost('/withdraw/check')
         .then(async (res: ResponseWithdrawCheck) => {
           if (res) {
@@ -204,34 +209,24 @@ const Component = () => {
               </div>
             )}
             <div>
-              <Form.Root
-                className="w-full mb-3"
-                onSubmit={(event) => {
-                  event.preventDefault();
-                  const formData = new FormData(event.currentTarget);
-                  console.log('Submitted:', Object.fromEntries(formData));
-                  // setIsOpenModal(true);
+              <SelectNotForm
+                open={isOpenModal}
+                onOpenChange={() => {
+                  setIsOpenModal(!isOpenModal);
                 }}
-              >
-                <Select
-                  open={isOpenModal}
-                  onOpenChange={() => {
-                    setIsOpenModal(!isOpenModal);
-                  }}
-                  value={chainIdSelect || chainAll?.[0]?.value}
-                  onClick={(value: number) => {
-                    setChainIdSelect(Number(value));
-                  }}
-                  options={chainAll}
-                  name="network"
-                />
-              </Form.Root>
+                value={chainIdSelect || chainAll?.[0]?.value}
+                onClick={(value: number) => {
+                  setChainIdSelect(Number(value));
+                }}
+                options={chainAll}
+                name="network"
+              />
               <button
                 disabled={loading}
                 onClick={() => {
                   handleWithdraw();
                 }}
-                className="cursor-pointer text-[10px] bg-primary-1 rounded-[8px] py-[4px] px-[8px] text-primary-6 flex items-center gap-1"
+                className="mt-3 cursor-pointer text-[10px] bg-primary-1 rounded-[8px] py-[4px] px-[8px] text-primary-6 flex items-center gap-1"
               >
                 {loading ? (
                   <Loader2 className="h-4 w-4 animate-spin text-blue-500" />

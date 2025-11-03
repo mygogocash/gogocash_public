@@ -28,6 +28,7 @@ export default function Component({
           {value && options.find((opt) => opt.value == value) ? (
             <p>{options.find((opt) => opt.value == value)?.label}</p>
           ) : (
+            //
             <Select.Value placeholder="Select an option" />
           )}
           <Select.Icon>
