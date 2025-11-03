@@ -8,7 +8,12 @@
         "name": "_stableCoinAddress",
         "type": "address"
       },
-      { "internalType": "address", "name": "_signerAddress", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "_signerAddress",
+        "type": "address"
+      },
+      { "internalType": "address", "name": "_worker", "type": "address" }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
@@ -23,7 +28,7 @@
     "type": "error"
   },
   { "inputs": [], "name": "BadSigner", "type": "error" },
-  { "inputs": [], "name": "DupConversion", "type": "error" },
+  { "inputs": [], "name": "DuplicateConversionId", "type": "error" },
   { "inputs": [], "name": "ECDSAInvalidSignature", "type": "error" },
   {
     "inputs": [
@@ -37,12 +42,13 @@
     "name": "ECDSAInvalidSignatureS",
     "type": "error"
   },
+  { "inputs": [], "name": "EnforcedPause", "type": "error" },
+  { "inputs": [], "name": "ExpectedPause", "type": "error" },
   { "inputs": [], "name": "Expired", "type": "error" },
   { "inputs": [], "name": "HashMismatch", "type": "error" },
-  { "inputs": [], "name": "IdsMismatch", "type": "error" },
   { "inputs": [], "name": "InvalidShortString", "type": "error" },
-  { "inputs": [], "name": "ReplayBatch", "type": "error" },
-  { "inputs": [], "name": "ReplaySingle", "type": "error" },
+  { "inputs": [], "name": "ReentrancyGuardReentrantCall", "type": "error" },
+  { "inputs": [], "name": "ReplayMsg", "type": "error" },
   {
     "inputs": [
       { "internalType": "address", "name": "token", "type": "address" }
@@ -57,6 +63,7 @@
   },
   { "inputs": [], "name": "WalletMismatch", "type": "error" },
   { "inputs": [], "name": "ZeroAddress", "type": "error" },
+  { "inputs": [], "name": "ZeroAmount", "type": "error" },
   {
     "anonymous": false,
     "inputs": [
@@ -102,6 +109,12 @@
         "internalType": "uint256",
         "name": "amount",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256[]",
+        "name": "conversionIds",
+        "type": "uint256[]"
       }
     ],
     "name": "CashbackWithdrawn",
@@ -117,19 +130,44 @@
         "type": "string"
       },
       {
+        "indexed": true,
+        "internalType": "address",
+        "name": "userWallet",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "conversionId",
+        "type": "uint256"
+      }
+    ],
+    "name": "CashbackWithdrawnSingle",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
         "indexed": false,
         "internalType": "string",
-        "name": "conversionId",
+        "name": "userid",
         "type": "string"
       },
       {
         "indexed": false,
-        "internalType": "bytes32",
-        "name": "hash",
-        "type": "bytes32"
+        "internalType": "uint256[]",
+        "name": "conversionIds",
+        "type": "uint256[]"
       }
     ],
-    "name": "ConversionRecorded",
+    "name": "ConversionRecordedBatch",
     "type": "event"
   },
   {
@@ -253,12 +291,6 @@
         "internalType": "uint256",
         "name": "amount",
         "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "newBalance",
-        "type": "uint256"
       }
     ],
     "name": "StableCoinAdded",
@@ -277,12 +309,6 @@
         "indexed": false,
         "internalType": "uint256",
         "name": "amount",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "newBalance",
         "type": "uint256"
       }
     ],
@@ -303,12 +329,6 @@
         "internalType": "uint256",
         "name": "amount",
         "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "newBalance",
-        "type": "uint256"
       }
     ],
     "name": "TokenAdded",
@@ -328,12 +348,6 @@
         "internalType": "uint256",
         "name": "amount",
         "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "newBalance",
-        "type": "uint256"
       }
     ],
     "name": "TokenWithdrawn",
@@ -350,6 +364,25 @@
       }
     ],
     "name": "Unpaused",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "worker",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "enabled",
+        "type": "bool"
+      }
+    ],
+    "name": "WorkerSet",
     "type": "event"
   },
   {
@@ -375,14 +408,21 @@
   },
   {
     "inputs": [],
-    "name": "WITHDRAW_BATCH_TYPEHASH",
+    "name": "WITHDRAW_AUTH_BATCH_TYPEHASH",
     "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
-    "name": "WITHDRAW_SINGLE_TYPEHASH",
+    "name": "WITHDRAW_AUTH_SINGLE_TYPEHASH",
+    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "WORKER_ROLE",
     "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
     "stateMutability": "view",
     "type": "function"
@@ -454,29 +494,11 @@
   },
   {
     "inputs": [
-      { "internalType": "bytes32", "name": "conversionHash", "type": "bytes32" }
-    ],
-    "name": "getConversionIdStringByHash",
-    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "string", "name": "userid", "type": "string" }
-    ],
-    "name": "getConversionIdStringsByUserId",
-    "outputs": [{ "internalType": "string[]", "name": "", "type": "string[]" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
       { "internalType": "string", "name": "userid", "type": "string" }
     ],
     "name": "getConversionIdsByUserId",
     "outputs": [
-      { "internalType": "bytes32[]", "name": "", "type": "bytes32[]" }
+      { "internalType": "uint256[]", "name": "", "type": "uint256[]" }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -511,6 +533,15 @@
     "type": "function"
   },
   {
+    "inputs": [
+      { "internalType": "uint256", "name": "conversionId", "type": "uint256" }
+    ],
+    "name": "isRecorded",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "pause",
     "outputs": [],
@@ -522,6 +553,20 @@
     "name": "paused",
     "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "userid", "type": "string" },
+      {
+        "internalType": "uint256[]",
+        "name": "conversionIds",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "recordConversionId",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -558,16 +603,19 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "signerAddress",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
+    "inputs": [
+      { "internalType": "address", "name": "worker", "type": "address" },
+      { "internalType": "bool", "name": "enabled", "type": "bool" }
+    ],
+    "name": "setWorker",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [],
-    "name": "stableBalance",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "name": "signerAddress",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -600,41 +648,6 @@
   },
   {
     "inputs": [],
-    "name": "tokenBalance",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "totalAirdropOps",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "totalAirdropped",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "totalCashbackPaid",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "totalWithdrawOps",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "unpause",
     "outputs": [],
     "stateMutability": "nonpayable",
@@ -642,21 +655,7 @@
   },
   {
     "inputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
-    "name": "usedBatchMessage",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
-    "name": "usedConversionHash",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
-    "name": "usedSingleMessage",
+    "name": "usedWithdrawMsg",
     "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "stateMutability": "view",
     "type": "function"
@@ -671,26 +670,22 @@
             "name": "userAddress",
             "type": "address"
           },
+          { "internalType": "uint256", "name": "amount", "type": "uint256" },
+          { "internalType": "uint64", "name": "expireAt", "type": "uint64" },
           {
-            "internalType": "uint256",
-            "name": "totalCashbackAmount",
-            "type": "uint256"
-          },
-          {
-            "internalType": "bytes32[]",
-            "name": "conversionIdHashes",
-            "type": "bytes32[]"
-          },
-          { "internalType": "uint64", "name": "expireAt", "type": "uint64" }
+            "internalType": "bytes32",
+            "name": "conversionIdsHash",
+            "type": "bytes32"
+          }
         ],
-        "internalType": "struct CashbackLedger.WithdrawCashbackMessage",
+        "internalType": "struct CashbackLedger.WithdrawAuthBatch",
         "name": "msg_",
         "type": "tuple"
       },
       {
-        "internalType": "string[]",
+        "internalType": "uint256[]",
         "name": "conversionIds",
-        "type": "string[]"
+        "type": "uint256[]"
       },
       { "internalType": "bytes", "name": "signature", "type": "bytes" }
     ],
@@ -709,23 +704,18 @@
             "name": "userAddress",
             "type": "address"
           },
+          { "internalType": "uint256", "name": "amount", "type": "uint256" },
+          { "internalType": "uint64", "name": "expireAt", "type": "uint64" },
           {
             "internalType": "uint256",
-            "name": "cashbackAmount",
+            "name": "conversionId",
             "type": "uint256"
-          },
-          {
-            "internalType": "bytes32",
-            "name": "conversionIdHash",
-            "type": "bytes32"
-          },
-          { "internalType": "uint64", "name": "expireAt", "type": "uint64" }
+          }
         ],
-        "internalType": "struct CashbackLedger.WithdrawSingleMessage",
+        "internalType": "struct CashbackLedger.WithdrawAuthSingle",
         "name": "msg_",
         "type": "tuple"
       },
-      { "internalType": "string", "name": "conversionId", "type": "string" },
       { "internalType": "bytes", "name": "signature", "type": "bytes" }
     ],
     "name": "withdrawCashbackSingle",

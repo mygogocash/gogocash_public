@@ -1,5 +1,7 @@
-import { ethers, keccak256, toUtf8Bytes } from 'ethers';
-import contractAbi from '@/constants/abi/CashbackLedgerAbi.json';
+import { ethers, keccak256, solidityPacked } from 'ethers';
+import contractPolygonAbi from '@/constants/abi/CashbackLedgerPolygonAbi.json';
+import contractBNBAbi from '@/constants/abi/CashbackLedgerBNBAbi.json';
+import contractSonicAbi from '@/constants/abi/CashbackLedgerSonicAbi.json';
 import { useEffect, useState } from 'react';
 import client from '@/lib/client';
 import toast from 'react-hot-toast';
@@ -11,7 +13,20 @@ declare global {
     ethereum?: any;
   }
 }
-
+export const chainAll = [
+  {
+    label: 'Sonic',
+    value: Number(process.env.NEXT_PUBLIC_CHAIN_ID_WITHDRAW_SONIC),
+  },
+  {
+    label: 'Polygon',
+    value: Number(process.env.NEXT_PUBLIC_CHAIN_ID_WITHDRAW_POLYGON),
+  },
+  {
+    label: 'BNB',
+    value: Number(process.env.NEXT_PUBLIC_CHAIN_ID_WITHDRAW_BNB),
+  },
+];
 export class CreateWithdrawDto {
   tx_hash?: string;
   address?: string;
@@ -24,11 +39,15 @@ export class CreateWithdrawDto {
   amount_net?: number;
   method?: string;
   currency?: string;
+  chain?: number;
 }
 
 const useWithdrawWeb3 = () => {
   const [account, setAccount] = useState<string | null>(null);
   const [chainId, setChainId] = useState<number | null>(null);
+  const [chainIdSelect, setChainIdSelect] = useState<number | null>(
+    chainAll?.[0]?.value
+  ); //14601 80002 97
   const [loading, setLoading] = useState<boolean>(false);
   const checkAccount = async () => {
     try {
@@ -84,8 +103,9 @@ const useWithdrawWeb3 = () => {
     userid: string;
     userAddress: string;
     totalCashbackAmount: string;
-    conversionIdHashes: string[];
+    conversionIdHashes: number[];
     expireAt: number;
+    chain: number;
   }) => {
     try {
       const signature = await client.post(`/withdraw/signature`, { ...msg });
@@ -121,7 +141,13 @@ const useWithdrawWeb3 = () => {
         params: [
           {
             chainId: `0x${Number(
-              process.env.NEXT_PUBLIC_CHAIN_ID_WITHDRAW
+              chainIdSelect ===
+                Number(process.env.NEXT_PUBLIC_CHAIN_ID_WITHDRAW_POLYGON)
+                ? process.env.NEXT_PUBLIC_CHAIN_ID_WITHDRAW_POLYGON
+                : chainIdSelect ===
+                  Number(process.env.NEXT_PUBLIC_CHAIN_ID_WITHDRAW_BNB)
+                ? process.env.NEXT_PUBLIC_CHAIN_ID_WITHDRAW_BNB
+                : process.env.NEXT_PUBLIC_CHAIN_ID_WITHDRAW_SONIC
             ).toString(16)}`,
           },
         ],
@@ -144,7 +170,7 @@ const useWithdrawWeb3 = () => {
     userid: string;
     userAddress: string;
     totalCashbackAmount: string;
-    conversionIdHashes: string[];
+    conversionIdHashes: number[];
     expireAt: number;
     info: ResponseWithdrawCheck;
   }) {
@@ -158,12 +184,28 @@ const useWithdrawWeb3 = () => {
         toast.error('Please connect wallet first.');
         throw new Error('Wallet not connected');
       }
-      if (chainId !== Number(process.env.NEXT_PUBLIC_CHAIN_ID_WITHDRAW)) {
-        //   await switchNetwork();
+      const chainIdCheck =
+        chainIdSelect ===
+        Number(process.env.NEXT_PUBLIC_CHAIN_ID_WITHDRAW_POLYGON)
+          ? Number(process.env.NEXT_PUBLIC_CHAIN_ID_WITHDRAW_POLYGON)
+          : chainIdSelect ===
+            Number(process.env.NEXT_PUBLIC_CHAIN_ID_WITHDRAW_BNB)
+          ? Number(process.env.NEXT_PUBLIC_CHAIN_ID_WITHDRAW_BNB)
+          : Number(process.env.NEXT_PUBLIC_CHAIN_ID_WITHDRAW_SONIC);
+      if (chainIdSelect !== chainIdCheck) {
+        // await switchNetwork();
         toast.error('Please connect to the correct network.');
         throw new Error('Incorrect network');
       }
-      const signature = await singnatureForWithdraw(msg_);
+      const msgForSign = {
+        userid: msg_.userid,
+        userAddress: msg_.userAddress,
+        totalCashbackAmount: msg_.totalCashbackAmount,
+        conversionIdHashes: msg_.conversionIdHashes.map((id) => id),
+        expireAt: msg_.expireAt,
+        chain: chainIdSelect!,
+      };
+      const signature = await singnatureForWithdraw(msgForSign);
 
       if (!signature) {
         toast.error('Failed to get signature for withdrawal.');
@@ -176,32 +218,49 @@ const useWithdrawWeb3 = () => {
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
       // สร้าง instance ของ contract
-      const contract = new ethers.Contract(
-        process.env.NEXT_PUBLIC_CONTRACT_WITHDRAW_ADDRESS!,
-        contractAbi,
-        signer
-      );
+      const contractAddress =
+        chainIdSelect ===
+        Number(process.env.NEXT_PUBLIC_CHAIN_ID_WITHDRAW_POLYGON)
+          ? process.env.NEXT_PUBLIC_CONTRACT_WITHDRAW_ADDRESS_POLYGON!
+          : chainIdSelect ===
+            Number(process.env.NEXT_PUBLIC_CHAIN_ID_WITHDRAW_BNB)
+          ? process.env.NEXT_PUBLIC_CONTRACT_WITHDRAW_ADDRESS_BNB!
+          : process.env.NEXT_PUBLIC_CONTRACT_WITHDRAW_ADDRESS_SONIC!;
 
-      //   console.log('Preparing to withdraw cashback with message:', msg_);
-      //   console.log('Using signature:', signature);
-      const conversionIdHashes: `0x${string}`[] = msg_.conversionIdHashes.map(
-        (id) => keccak256(toUtf8Bytes(id)) as `0x${string}`
-      );
-      //   console.log('conversionIdHashes', conversionIdHashes);
+      const abi =
+        chainIdSelect ===
+        Number(process.env.NEXT_PUBLIC_CHAIN_ID_WITHDRAW_POLYGON)
+          ? contractPolygonAbi
+          : chainIdSelect ===
+            Number(process.env.NEXT_PUBLIC_CHAIN_ID_WITHDRAW_BNB)
+          ? contractBNBAbi
+          : contractSonicAbi;
+      const contract = new ethers.Contract(contractAddress, abi, signer);
+
+      let rolling = ethers.ZeroHash;
+      for (const id of msg_.conversionIdHashes) {
+        rolling = keccak256(
+          solidityPacked(['bytes32', 'uint256'], [rolling, id])
+        );
+      }
+      const conversionIdsHash = rolling;
+
+      const decimal =
+        chainIdSelect === Number(process.env.NEXT_PUBLIC_CHAIN_ID_WITHDRAW_BNB)
+          ? 18
+          : 6;
 
       const dt = {
         userid: msg_.userid,
         userAddress: msg_.userAddress,
-        totalCashbackAmount: ethers
-          .parseUnits(msg_.totalCashbackAmount, 6)
-          .toString(),
-        conversionIdHashes: conversionIdHashes,
+        amount: ethers.parseUnits(msg_.totalCashbackAmount, decimal).toString(),
         expireAt: BigInt(msg_.expireAt),
+        conversionIdsHash: conversionIdsHash,
       };
-      //   console.log('dt', dt);
+      console.log('dt', dt);
 
       //   const tx = await signer.sendTransaction({
-      //     to: process.env.NEXT_PUBLIC_CONTRACT_WITHDRAW_ADDRESS!,
+      //     to: process.env.NEXT_PUBLIC_CONTRACT_WITHDRAW_ADDRESS_POLYGON!,
       //     from: account,
       //     data: contract.interface.encodeFunctionData('withdrawCashback', [
       //       dt,
@@ -223,16 +282,19 @@ const useWithdrawWeb3 = () => {
           tx_hash: receipt.hash,
           address: account,
           method: 'web3',
-          currency: 'USDT',
+          currency:
+            chainIdSelect ===
+            Number(process.env.NEXT_PUBLIC_CHAIN_ID_WITHDRAW_SONIC)
+              ? 'USDC'
+              : 'USDT',
           account_name: '',
           bank_name: '',
           account_number: '',
           percent_fee: msg_.info?.feePercentage || 0,
           amount_total: msg_.info?.totalUSDAmount || 0,
           amount_net: msg_.info?.netAmount || 0,
-          conversion_ids: msg_?.info?.data
-            ? msg_.info.data?.map((ele) => Number(ele.conversion_id))
-            : [],
+          conversion_ids: msg_.conversionIdHashes,
+          chain: chainIdSelect,
         });
       }
 
@@ -240,6 +302,7 @@ const useWithdrawWeb3 = () => {
     } catch (err) {
       console.error('❌ Withdraw failed:', err);
       toast.error('Withdrawal failed. Please try again.');
+      throw new Error('Withdrawal failed. Please try again.');
     }
   }
   return {
@@ -250,6 +313,8 @@ const useWithdrawWeb3 = () => {
     switchNetwork,
     loading,
     setLoading,
+    chainIdSelect,
+    setChainIdSelect,
   };
 };
 

@@ -4,6 +4,8 @@ export interface IProp {
   onOpenChange?(open: boolean): void;
   options: IOptions[];
   _optionInModal?: boolean;
+  value?: string | number;
+  onClick?(value: string | number): void;
   // onClick?:() => boolean;
 }
 
