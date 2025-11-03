@@ -1,7 +1,7 @@
 import { ethers, keccak256, solidityPacked } from 'ethers';
 import contractPolygonAbi from '@/constants/abi/CashbackLedgerPolygonAbi.json';
 import contractBNBAbi from '@/constants/abi/CashbackLedgerBNBAbi.json';
-import contractSonicAbi from '@/constants/abi/CashbackLedgerSonicAbi.json';
+import contractSonicAbi from '@/constants/abi/CashbackLedgerSONICAbi.json';
 import { useEffect, useState } from 'react';
 import client from '@/lib/client';
 import toast from 'react-hot-toast';
