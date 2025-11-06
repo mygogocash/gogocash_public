@@ -66,6 +66,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'th-live-01.slatic.net',
       },
+      {
+        protocol: 'https',
+        hostname: 'img.involve.asia',
+      },
     ],
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 60,
