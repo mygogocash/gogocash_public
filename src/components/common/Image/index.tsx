@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 // import ImageNext from 'next/image';
+import Images from 'next/image';
 import { useEffect, useState } from 'react';
 
 interface IProp {
@@ -13,15 +13,15 @@ const ImageComponent = ({ src, alt, width, height, className }: IProp) => {
   const [isValid, setIsValid] = useState<boolean | null>(null);
 
   useEffect(() => {
-    const img = new Image();
-    img.onload = () => setIsValid(true); // Image exists
-    img.onerror = () => setIsValid(false); // 404 or other error
-    img.src = src;
+    const imgs = new Image();
+    imgs.onload = () => setIsValid(true); // Image exists
+    imgs.onerror = () => setIsValid(false); // 404 or other error
+    imgs.src = src;
   }, [src]);
 
   if (isValid === null)
     return (
-      <img
+      <Images
         src={'/no_image.jpg'}
         alt={'preview image'}
         width={width}
@@ -31,7 +31,7 @@ const ImageComponent = ({ src, alt, width, height, className }: IProp) => {
     );
   if (!isValid)
     return (
-      <img
+      <Images
         src={'/no_image.jpg'}
         alt={'preview image'}
         width={width}
@@ -40,7 +40,7 @@ const ImageComponent = ({ src, alt, width, height, className }: IProp) => {
       />
     );
   return (
-    <img
+    <Images
       src={src}
       alt={alt}
       width={width}

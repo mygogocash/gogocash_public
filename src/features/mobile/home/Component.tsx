@@ -13,6 +13,10 @@ import { HeaderMobile } from '@/components/layouts/mobile/header';
 import ListFilter from './views/ListFilter';
 // import { CardProductMobile } from '@/components/mobile/cardProductMobile';
 import { useHomeContext } from '@/providers/HomeContext';
+import { fetcherPost } from '@/lib/client';
+import useSWR from 'swr';
+import { ResponseWithdrawCheck } from '@/features/desktop/withdraw/interface';
+import { formatNumber } from '@/lib/utils';
 
 const Component = () => {
   const router = useRouter();
@@ -20,8 +24,19 @@ const Component = () => {
   const { data } = useSession();
   const {
     formatTime: { hours, minutes, seconds, days },
-  } = useCountdown('2025-07-30:15:00:00');
+  } = useCountdown('2025-12-31:23:59:59');
   const { merchants } = useHomeContext();
+  const dataCheck = [`/withdraw/check`];
+  const { data: dataConversion } = useSWR<ResponseWithdrawCheck>(
+    dataCheck,
+    fetcherPost,
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+      revalidateIfStale: false,
+      // use cache
+    }
+  );
   // const merchants = [];
 
   // const products: any[] = [];
@@ -60,7 +75,9 @@ const Component = () => {
                 />
               </div>
               <div className="flex items-center justify-between  gap-2">
-                <h1 className="text-white font-bold text-[32px]">฿ 50.00 </h1>
+                <h1 className="text-white font-bold text-[32px]">
+                  ${formatNumber(dataConversion?.netAmount || 0)}{' '}
+                </h1>
                 <div className="flex items-center gap-1 h-auto w-fit px-2 py-1 rounded-[100px] bg-[#FFFBE8] shadow drop-shadow-[0px_4px_25px_0px_#00000040]">
                   {/* <Star /> */}
                   <Image

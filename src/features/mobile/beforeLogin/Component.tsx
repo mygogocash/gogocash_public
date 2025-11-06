@@ -6,17 +6,19 @@ import { useAuth } from '@crossmint/client-sdk-react-ui';
 import { ArrowLeftIcon, Mail, Wallet } from 'lucide-react';
 // import { signIn } from 'next-auth/react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 const Component = () => {
   const { login } = useAuth();
   const router = useRouter();
+  const pathname = usePathname();
+
   return (
     <div className="bg-primary-4 min-h-screen">
       <div className="w-full">
         <div className="relative  h-full w-full p-[16px]">
           <div className="flex items-center justify-between">
-            <ArrowLeftIcon stroke="white" />
+            <ArrowLeftIcon stroke="white" onClick={() => router.back()} />
           </div>
           <Image
             src={`/logoWhite.svg`}
@@ -34,7 +36,7 @@ const Component = () => {
         <Button
           icon={<GoogleIcon />}
           backgroundColor="bg-white text-black border-grey-2 border"
-          text={`Login with Google`}
+          text={`${pathname === '/sign-up' ? 'Sign up' : 'Login'} with Google`}
           onClick={function (): void {
             login();
             // signIn('google', { redirect: true, callbackUrl: '/' });
@@ -53,9 +55,10 @@ const Component = () => {
         <Button
           icon={<Mail />}
           backgroundColor="bg-white text-black border-grey-2 border"
-          text={`Login with E-mail`}
+          text={`${pathname === '/sign-up' ? 'Sign up' : 'Login'} with E-mail`}
           onClick={function (): void {
-            router.push(`/login`);
+            // router.push(`/login`);
+            login();
           }}
           fullWidth
         />

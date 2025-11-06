@@ -1,6 +1,5 @@
 'use client';
-import { SignUp } from '@/features/desktop/profile/views/form/signUp';
-import { SignUpMobile } from '@/features/mobile/register';
+import { BeforeLoginMobile } from '@/features/mobile/beforeLogin';
 
 export default function Index() {
   /*
@@ -10,14 +9,16 @@ export default function Index() {
    */
   return (
     <>
-      <div className={`w-full hidden md:block`}>
+      <BeforeLoginMobile />
+
+      {/* <div className={`w-full hidden md:block`}>
         <SignUp />
       </div>
       <div
-        className={`w-full md:hidden block flex flex-col items-center justify-center`}
+        className={`w-full md:hidden flex flex-col items-center justify-center`}
       >
         <SignUpMobile />
-      </div>
+      </div> */}
     </>
   );
 }
