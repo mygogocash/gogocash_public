@@ -1,0 +1,15 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+
+# Workflow rules
+
+ai generate steps
+- make a feature and comment if is api write swagger comment
+- test
+- refactor
+- imporve
+- write markdown and d2 docs to Google style (in Thai) into ./docs/*
+- test again

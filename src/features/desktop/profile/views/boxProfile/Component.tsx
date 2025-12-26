@@ -1,0 +1,43 @@
+import IconButton from '@/components/common/IconButton';
+import ArrowIcon from '@/components/icons/ArrowIcon';
+import { IProp } from './interface';
+import Image from 'next/image';
+
+const Component = ({ src, open }: IProp) => {
+  // const { data } = useSession();
+  return (
+    <div className="flex items-center gap-2">
+      <div className="w-[24px] h-[24px] rounded-full flex items-center justify-center">
+        {/* <Image
+          src={src}
+          alt="profile"
+          className="rounded-full w-full h-auto"
+          width={24}
+          height={24}
+        /> */}
+        <Image
+          src={`/avatar/profile_1.png`}
+          alt={`profile_${src}`}
+          className="rounded-full w-full h-auto"
+          width={24}
+          height={24}
+        />
+      </div>
+      {/* <p className="text-black-5 text-[14px]">
+        {data?.user?.username && data?.user?.username !== 'undefined'
+          ? data?.user.username
+          : ''}
+      </p> */}
+      <IconButton
+        icon={
+          <ArrowIcon
+            className={` transition-all duration-100 ${
+              open ? 'rotate-180' : ''
+            }`}
+          />
+        }
+      />
+    </div>
+  );
+};
+export { Component };

@@ -1,0 +1,37 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# NextJS 15 Rules
+## General
+- **Architecture**: App Router, server components default, feature-based structure
+- **TypeScript**: Strict types, explicit interfaces, discriminated unions
+- **Data**: Server components with cached fetch, React Query for client
+- **Styling**: Tailwind CSS, consistent patterns, CSS variables
+- **State**: Context for simple, Redux Toolkit for complex
+- **Performance**: Code splitting, memoize strategically, optimize images
+- **Routing**: File-based, loading/error states, parallel routes
+- **SEO**: Metadata exports, structured data, dynamic generation
+- **Errors**: Try/catch, error boundaries, monitoring
+- **Testing**: Jest, RTL, Cypress for E2E
+- **Docs**: JSDoc, README per directory
+- **Quality**: ESLint, Prettier, pre-commit hooks
+- **Env**: Type-checked variables, feature flags
+- **Security**: Validate inputs, CSRF protection, auth middleware
+- **A11y**: WCAG standards, semantic HTML, keyboard nav
+- **Components**: Focused, typed props, custom hooks
+- **API**: Validation, proper status codes, consistent responses
+- **Patterns**: Forms with validation, modals, infinite scroll
+- **i18n**: Built-in routing, translations, RTL support
+## Spcific Directors
+- **app**: pages app route
+- **app/api**: all api
+- **module**: featues of project have components , data, hooks and usecase
+- **components**: is global components or shared components
+- **Hook**: dictory is ./hooks or modules/{feature name}/hooks
+
+## Follow
+- naming best practice of nodejs, react, nextjs
+- Always verify the accuracy
+- Always write comments and Markdown file

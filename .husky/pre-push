@@ -1,0 +1,28 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Add PATH
+# export PATH="/usr/local/bin:$PATH"
+
+# Set git config
+git config --local user.name "jaibun"
+git config --local user.email "jaibun.s89@gmail.com"
+
+# Lint the project
+yarn lint
+
+# Run tests
+# yarn test
+
+# Build the project
+yarn build
+
+# Bump patch version
+echo "Bumping patch version..."
+yarn version --patch --no-git-tag-version
+
+# Stage package.json
+git add package.json
+
+# Commit the version bump
+git commit -m "chore: bump version [skip ci]"
