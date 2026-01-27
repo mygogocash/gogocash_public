@@ -4,6 +4,12 @@ const nextConfig = {
   reactStrictMode: true,
   // swcMinify: false,
   output: 'standalone',
+
+  // Enable instrumentation hook for server-side initialization (PostHog logging)
+  experimental: {
+    instrumentationHook: true,
+  },
+
   // Development optimizations for hot reload
   ...(process.env.NODE_ENV === 'development' && {
     // Fast Refresh configuration
