@@ -108,3 +108,12 @@ When in doubt, search the codebase for an existing pattern before introducing a 
 - Product Discovery tiles and terms flow live under `src/features/discover/`; outbound “Shop now” URL resolution and card imagery reuse `src/lib/offer/offerCardVisuals.ts` (unit tests in `offerCardVisuals.test.ts`).
 - Wallet list filtering by date uses inclusive day bounds when both start and end are set; withdraw rows filter on `created_at`, earning/all modes on `conversionDate` (see `WalletTransaction.tsx`).
 - `PdpaDataRightsSection` is owned for layout/copy in `src/components/pdpa/`; account settings is the integration surface (`AccountSettingsView.tsx`).
+
+## Cursor Cloud specific instructions
+
+- **Node 22.x** is pre-installed. Dependencies are refreshed on startup via `npm install --legacy-peer-deps`.
+- **Mock API mode:** `.env.local` is pre-configured with `NEXT_PUBLIC_MOCK_API=1`, so the dev server works without a real backend. Shops, categories, and mock user data are served from `src/mocks/`.
+- **Dev server:** `npm run dev` starts on port 3000. Pages require the locale prefix (e.g. `http://localhost:3000/en`). First request compiles on demand (~30 s); subsequent requests are fast.
+- **`next-intl` timeZone:** Server and client use `Asia/Bangkok` in `src/i18n/request.ts` and `NextIntlClientProviderWithFallback` to avoid `ENVIRONMENT_FALLBACK` / hydration mismatches; keep those aligned if you touch i18n wiring.
+- **Validation / checks:** `npm run validate` runs lint + format:check + i18n:check + test. Build: `npm run build` (uses `--webpack`; Turbopack is not supported for this project). TypeScript: `npx tsc --noEmit`.
+- **No external services required** for local dev in mock mode. Firebase, Stripe, Crossmint, and analytics integrations are all optional and disabled by default.
