@@ -67,6 +67,19 @@ const getInternalApiConfig = () => ({
   },
 });
 
+const secureRandomHex = (byteLength = 16): string => {
+  const cryptoApi = globalThis.crypto;
+  if (!cryptoApi?.getRandomValues) {
+    throw new Error('Secure random generation is unavailable');
+  }
+
+  const bytes = new Uint8Array(byteLength);
+  cryptoApi.getRandomValues(bytes);
+  return Array.from(bytes, (byte) => byte.toString(16).padStart(2, '0')).join(
+    ''
+  );
+};
+
 /**
  * Crossmint Authentication Service
  * Based on: https://docs.crossmint.com/authentication/introduction
@@ -411,9 +424,7 @@ export class CrossmintAuthService {
       const userData = {
         username,
         email,
-        password: `temp_${Date.now()}_${Math.random()
-          .toString(36)
-          .substring(7)}`,
+        password: `temp_${Date.now()}_${secureRandomHex()}`,
         firstName: firstName || 'User',
         lastName: lastName || '',
         phoneNumber: '',
